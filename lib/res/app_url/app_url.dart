@@ -13,9 +13,19 @@ class AppUrl {
   static const String createpasswordapi='${baseurl} ';
 
 
-  static const String homescreenapi='${baseurl}';
+  static const String homescreenapi='${baseurl}home_page-api';
   static const String partymenuapi='${baseurl}party_menu-api';
   static const String startersapi='${baseurl}party_menu_single-api';
+
+
+
+  static const String photogalleryapi = '${baseurl}photos_gallery-api';
+  static const String followusapi = '${baseurl}follow_us-api';
+  static const String  contactusapi ='${baseurl}contact_page-api';
+
+
+
+
 
 
 
