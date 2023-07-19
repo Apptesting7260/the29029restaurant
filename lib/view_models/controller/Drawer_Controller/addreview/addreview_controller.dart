@@ -6,7 +6,7 @@ import 'package:the29029restaurant/utils/utils.dart';
 import 'package:the29029restaurant/view/login.dart';
 import 'package:the29029restaurant/view_models/controller/user_preference/user_prefrence_view_model.dart';
 
-class Contactus_controller extends GetxController {
+class Addreview_controller extends GetxController {
 
 
   final _api = AuthRepository();
@@ -15,42 +15,42 @@ class Contactus_controller extends GetxController {
   final lastname = TextEditingController().obs;
   final email = TextEditingController().obs;
   final phonenumber = TextEditingController().obs;
-  final message = TextEditingController().obs;
+  final review = TextEditingController().obs;
 
-  final emailFocusNode = FocusNode().obs;
- final passwordFocusNode = FocusNode().obs;
+  // final emailFocusNode = FocusNode().obs;
+  // final passwordFocusNode = FocusNode().obs;
 
   RxBool loading = false.obs;
 
 
-  void contactus_apihit(){
+  void addreview_apihit(){
     loading.value = true ;
     Map data = {
-      'contact_page': 'contact_page_api',
+      'add_review': 'add_review_api',
       'first_name' : firstname.value.text ,
       'last_name' : lastname.value.text,
       'email' : email.value.text,
       'phone_number':phonenumber.value.text,
-      'message':message.value.text
+      'review':review.value.text
 
     };
     //print(data);
-    _api.Contactususapi(data).then((value){
+    _api.Addreviewapi(data).then((value){
       loading.value = false ;
       firstname.value.clear();
       lastname.value.clear();
       email.value.clear();
       phonenumber.value.clear();
-      message.value.clear();
+      review.value.clear();
 
-     // Get.to(LoginPage());
+      // Get.to(LoginPage());
 
-      Utils.snackBar('contactus', 'contactus successfully');
+      Utils.snackBar('add review', ' successfully');
 
 
     }).onError((error, stackTrace){
       loading.value = false ;
-      Utils.snackBar('Error', error.toString());
+      Utils.snackBar('retry', error.toString());
     });
   }
 }

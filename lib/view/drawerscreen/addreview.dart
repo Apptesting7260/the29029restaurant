@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:the29029restaurant/view_models/controller/Drawer_Controller/addreview/addreview_controller.dart';
 import 'package:the29029restaurant/widgets/my_button.dart';
 import 'package:the29029restaurant/widgets/my_textform_field_widget.dart';
 
@@ -11,11 +13,15 @@ class AddReview extends StatefulWidget {
 }
 
 class _AddReviewState extends State<AddReview> {
-  TextEditingController firstname = TextEditingController();
-  TextEditingController lastname = TextEditingController();
-  TextEditingController email = TextEditingController();
-  TextEditingController phonenumber = TextEditingController();
-  TextEditingController review = TextEditingController();
+
+  Addreview_controller addreview_controller=Get.put(Addreview_controller());
+
+
+  // TextEditingController firstname = TextEditingController();
+  // TextEditingController lastname = TextEditingController();
+  // TextEditingController email = TextEditingController();
+  // TextEditingController phonenumber = TextEditingController();
+  // TextEditingController review = TextEditingController();
 
 
   var _formKey = GlobalKey<FormState>();
@@ -24,6 +30,7 @@ class _AddReviewState extends State<AddReview> {
     if (!isValid) {
       return;
     }
+    addreview_controller.addreview_apihit();
     _formKey.currentState!.save();
   }
   @override
@@ -66,7 +73,7 @@ class _AddReviewState extends State<AddReview> {
                   ),
                   SizedBox(height: height*0.005),
                   TextFormField(
-                    controller: firstname,
+                    controller:addreview_controller.firstname.value,
                     keyboardType: TextInputType.name,
                     decoration: InputDecoration(
                         filled: true,
@@ -106,7 +113,8 @@ class _AddReviewState extends State<AddReview> {
                   ),
                   SizedBox(height: height*0.005),
                   TextFormField(
-                    controller: lastname,
+                    controller:addreview_controller.lastname.value,
+                    //lastname,
                     keyboardType: TextInputType.name,
                     decoration: InputDecoration(
                         filled: true,
@@ -146,7 +154,8 @@ class _AddReviewState extends State<AddReview> {
                   ),
                   SizedBox(height: height*0.005),
                   TextFormField(
-                    controller: email,
+                    controller:addreview_controller.email.value,
+                    //email,
                     keyboardType: TextInputType.emailAddress,
                     decoration: InputDecoration(
                         filled: true,
@@ -188,7 +197,8 @@ class _AddReviewState extends State<AddReview> {
                   ),
                   SizedBox(height: height*0.005),
                   TextFormField(
-                    controller: phonenumber,
+                    controller:addreview_controller.phonenumber.value,
+                    //phonenumber,
                     keyboardType: TextInputType.phone,
                     decoration: InputDecoration(
                         filled: true,
@@ -228,7 +238,8 @@ class _AddReviewState extends State<AddReview> {
                   SizedBox(height: height*0.005),
                   TextFormField(
                     maxLines: 4,
-                    controller: review,
+                    controller:addreview_controller.review.value,
+                    //review,
                     keyboardType: TextInputType.text,
                     decoration: InputDecoration(
                         filled: true,

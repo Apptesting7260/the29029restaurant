@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:the29029restaurant/view/login.dart';
 import 'package:the29029restaurant/view/verificationcode.dart';
+import 'package:the29029restaurant/view_models/controller/reserpassword/resetpassword_controller.dart';
 import 'package:the29029restaurant/widgets/my_button.dart';
 
 class ResetPassword extends StatefulWidget {
@@ -12,18 +14,15 @@ class ResetPassword extends StatefulWidget {
 }
 
 class _ResetPasswordState extends State<ResetPassword> {
-  TextEditingController emailController = TextEditingController();
+
+ // TextEditingController emailController = TextEditingController();
+
+  Resetpassword_controller resetpassword_controller = Get.put(Resetpassword_controller());
 
   var _formKey = GlobalKey<FormState>();
   var isLoading = false;
 
-  void _submit() {
-    final isValid = _formKey.currentState!.validate();
-    if (!isValid) {
-      return;
-    }
-    _formKey.currentState!.save();
-  }
+
 
   @override
   Widget build(BuildContext context) {
@@ -76,6 +75,7 @@ class _ResetPasswordState extends State<ResetPassword> {
                 ),
                 SizedBox(height: height * 0.005),
                 TextFormField(
+                  controller: resetpassword_controller .emailController.value,
                   keyboardType: TextInputType.emailAddress,
                   decoration: InputDecoration(
                       filled: true,
@@ -127,11 +127,11 @@ class _ResetPasswordState extends State<ResetPassword> {
                         if (_formKey.currentState!.validate()) {
                           _formKey.currentState!.save();
                           _submit();
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => VerificationCode(),
-                              ));
+                          // Navigator.push(
+                          //     context,
+                          //     MaterialPageRoute(
+                          //       builder: (context) => VerificationCode(),
+                          //     ));
                         }
                       },
                       height: 50,
@@ -143,5 +143,14 @@ class _ResetPasswordState extends State<ResetPassword> {
         ),
       ),
     );
+  }
+  void _submit() {
+    final isValid = _formKey.currentState!.validate();
+    if (!isValid) {
+      return;
+    }
+    resetpassword_controller.Resetpassword_apihit();
+
+    _formKey.currentState!.save();
   }
 }

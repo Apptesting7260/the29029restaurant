@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:the29029restaurant/view/login.dart';
 import 'package:the29029restaurant/view/verificationcode.dart';
+import 'package:the29029restaurant/view_models/controller/createpass/createpass_controller.dart';
 import 'package:the29029restaurant/widgets/my_button.dart';
 
 
@@ -13,8 +15,12 @@ class CreatePassword extends StatefulWidget {
 }
 
 class _CreatePasswordState extends State<CreatePassword> {
-  TextEditingController passwordController = TextEditingController();
-  TextEditingController confirmpasswordController = TextEditingController();
+
+  Createpass_controller createpass_controller=Get.put(Createpass_controller());
+
+
+  // TextEditingController passwordController = TextEditingController();
+  // TextEditingController confirmpasswordController = TextEditingController();
 
   var _formKey = GlobalKey<FormState>();
 
@@ -23,6 +29,7 @@ class _CreatePasswordState extends State<CreatePassword> {
     if (!isValid) {
       return;
     }
+    createpass_controller.Createpass_apihit();
     _formKey.currentState!.save();
   }
 
@@ -82,7 +89,8 @@ class _CreatePasswordState extends State<CreatePassword> {
                 ),
                 SizedBox(height: height * 0.005),
                 TextFormField(
-                  controller: passwordController,
+                  controller:createpass_controller.passwordController.value,
+                  //passwordController,
                   obscureText: passwordVisible,
                   decoration: InputDecoration(
                       filled: true,
@@ -142,7 +150,7 @@ class _CreatePasswordState extends State<CreatePassword> {
                 ),
                 SizedBox(height: height * 0.005),
                 TextFormField(
-                  controller: confirmpasswordController,
+                  controller: createpass_controller.confirmpasswordController.value,
                   obscureText: confirmpasswordVisible,
                   decoration: InputDecoration(
                       filled: true,
@@ -188,8 +196,8 @@ class _CreatePasswordState extends State<CreatePassword> {
                     if (value!.isEmpty) {
                       return 'enter the confirm valid password';
                     }
-                    if (passwordController.text !=
-                        confirmpasswordController.text) {
+                    if (createpass_controller.passwordController.value.text !=
+                        createpass_controller.confirmpasswordController.value.text) {
                       return 'password do not match';
                     }
                     return null;
@@ -214,11 +222,11 @@ class _CreatePasswordState extends State<CreatePassword> {
                         if (_formKey.currentState!.validate()) {
                           _formKey.currentState!.save();
                           _submit();
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => LoginPage(),
-                              ));
+                          // Navigator.push(
+                          //     context,
+                          //     MaterialPageRoute(
+                          //       builder: (context) => LoginPage(),
+                          //     ));
                         }
                       },
                       height: 50,

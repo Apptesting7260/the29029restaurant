@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:the29029restaurant/view/login.dart';
 
@@ -102,12 +103,7 @@ class _WelcomeState extends State<Welcome> {
                     Center(
                       child: ElevatedButton(
                           onPressed: () {
-                           // Get.to(() => LoginPage());
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => LoginPage(),
-                                ));
+                            Get.to(()=>LoginPage() );
                           },
                           style: ElevatedButton.styleFrom(
                             side:

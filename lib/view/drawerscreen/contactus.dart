@@ -1,5 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:the29029restaurant/data/response/status.dart';
+import 'package:the29029restaurant/res/components/general_exception.dart';
+import 'package:the29029restaurant/res/components/internet_exceptions_widget.dart';
+import 'package:the29029restaurant/view_models/controller/Drawer_Controller/contactus/contactdeatils_controller.dart';
+import 'package:the29029restaurant/view_models/controller/Drawer_Controller/contactus/contactus_controller.dart';
 import 'package:the29029restaurant/widgets/my_button.dart';
 
 class contactus extends StatefulWidget {
@@ -10,11 +16,12 @@ class contactus extends StatefulWidget {
 }
 
 class _contactusState extends State<contactus> {
-  TextEditingController firstname = TextEditingController();
-  TextEditingController lastname = TextEditingController();
-  TextEditingController email = TextEditingController();
-  TextEditingController phonenumber = TextEditingController();
-  TextEditingController message = TextEditingController();
+  Contactus_controller contactus_controller= Get.put(Contactus_controller());
+
+  Contactdeatils_controller contactdeatils_controller=Get.put(Contactdeatils_controller());
+
+
+
 
 
   var _formKey = GlobalKey<FormState>();
@@ -23,9 +30,19 @@ class _contactusState extends State<contactus> {
     if (!isValid) {
       return;
     }
+
+    contactus_controller.contactus_apihit();
     _formKey.currentState!.save();
   }
+
   @override
+  void initState() {
+    contactdeatils_controller.contactdeatilsapihit();
+    // TODO: implement initState
+    super.initState();
+  }
+  @override
+
   Widget build(BuildContext context) {
     final height = MediaQuery.of(context).size.height;
     final width = MediaQuery.of(context).size.width;
@@ -48,7 +65,8 @@ class _contactusState extends State<contactus> {
         ),
         centerTitle: true,
       ),
-      body: Form(
+      body:
+      Form(
         key: _formKey,
         child: SingleChildScrollView(
           child: SafeArea(
@@ -65,7 +83,7 @@ class _contactusState extends State<contactus> {
                   ),
                   SizedBox(height: height*0.005),
                   TextFormField(
-                    controller: firstname,
+                    controller:contactus_controller.firstname.value,
                     keyboardType: TextInputType.name,
                     decoration: InputDecoration(
                         filled: true,
@@ -105,7 +123,7 @@ class _contactusState extends State<contactus> {
                   ),
                   SizedBox(height: height*0.005),
                   TextFormField(
-                    controller: lastname,
+                    controller:contactus_controller.lastname.value,
                     keyboardType: TextInputType.name,
                     decoration: InputDecoration(
                         filled: true,
@@ -145,7 +163,7 @@ class _contactusState extends State<contactus> {
                   ),
                   SizedBox(height: height*0.005),
                   TextFormField(
-                    controller: phonenumber,
+                    controller:contactus_controller.phonenumber.value,
                     keyboardType: TextInputType.phone,
                     decoration: InputDecoration(
                         filled: true,
@@ -185,7 +203,7 @@ class _contactusState extends State<contactus> {
                   ),
                   SizedBox(height: height*0.005),
                   TextFormField(
-                    controller: email,
+                    controller: contactus_controller.email.value,
                     keyboardType: TextInputType.emailAddress,
                     decoration: InputDecoration(
                         filled: true,
@@ -228,7 +246,7 @@ class _contactusState extends State<contactus> {
                   SizedBox(height: height*0.005),
                   TextFormField(
                     maxLines: 3,
-                    controller: message,
+                    controller: contactus_controller.message.value,
                     keyboardType: TextInputType.text,
                     decoration: InputDecoration(
                         filled: true,
@@ -275,24 +293,47 @@ class _contactusState extends State<contactus> {
                             fontFamily: GoogleFonts.outfit().fontFamily),
                         onTap: () {
                           _submit();
+
                         },
                         height: 50,
                         width: 200),
                   ),
                  // SizedBox(height: height*0.1),
                   SizedBox(height: height * 0.05),
+                         Obx(
+                           () {
+                         switch (contactdeatils_controller.rxRequestStatus.value) {
+                            case Status.LOADING:
+                           return const Center(child: CircularProgressIndicator());
+                              case Status.ERROR:
+                           if (contactdeatils_controller.error.value == 'No internet') {
+                         return InterNetExceptionWidget(
+                       onPress: () {},
+                      );
+                      } else {
+                          return GeneralExceptionWidget(onPress: () {});
+                           }
+                             case Status.COMPLETED:
+                            return
                  Center(
                    child: Column(
                    crossAxisAlignment: CrossAxisAlignment.center,
                      children: [
-                       Text("Opening Hours",
+                       Text(
+                         "Opening Hours",
                          style: Theme.of(context).textTheme
                          .titleLarge?.copyWith(fontWeight: FontWeight.w600,
                            fontSize: 18),
 
                        ),
                        SizedBox(height: height*0.03),
-                       Text("Mon - Sun",style:
+                       Text(
+                           contactdeatils_controller.userList.value
+                               .contactDetails![0].Lable
+                               .toString(),
+
+                          // "Mon - Sun",
+                           style:
                          Theme.of(context).
                          textTheme.
                          bodyLarge?.
@@ -300,7 +341,13 @@ class _contactusState extends State<contactus> {
                            fontWeight: FontWeight.w500)
                          ),
                        SizedBox(height: height*0.003),
-                       Text("10.00 Am - 02.30 Pm",style:
+                       Text(
+                           contactdeatils_controller.userList.value
+                               .contactDetails![0].name
+                               .toString(),
+
+                          // "10.00 Am - 02.30 Pm",
+                           style:
                        Theme.of(context).
                        textTheme.
                        bodyLarge?.
@@ -309,7 +356,13 @@ class _contactusState extends State<contactus> {
                            fontWeight: FontWeight.w300)
                        ),
                        SizedBox(height: height*0.03),
-                       Text("Christmas Day",style:
+                       Text(
+                         contactdeatils_controller.userList.value
+                             .contactDetails![1].Lable
+                             .toString(),
+
+                          // "Christmas Day",
+                           style:
                        Theme.of(context).
                        textTheme.
                        bodyLarge?.
@@ -317,7 +370,12 @@ class _contactusState extends State<contactus> {
                            fontWeight: FontWeight.w500)
                        ),
                        SizedBox(height: height*0.003),
-                       Text("10.00 Am - 02.30 Pm",style:
+                       Text(
+                         contactdeatils_controller.userList.value
+                             .contactDetails![1].name
+                             .toString(),
+                           //"10.00 Am - 02.30 Pm",
+                           style:
                        Theme.of(context).
                        textTheme.
                        bodyLarge?.
@@ -326,7 +384,12 @@ class _contactusState extends State<contactus> {
                            fontWeight: FontWeight.w300)
                        ),
                        SizedBox(height: height*0.03),
-                       Text("New Year",style:
+                       Text(
+                         contactdeatils_controller.userList.value
+                             .contactDetails![2].Lable
+                             .toString(),
+                         //  "New Year",
+                           style:
                        Theme.of(context).
                        textTheme.
                        bodyLarge?.
@@ -334,7 +397,13 @@ class _contactusState extends State<contactus> {
                            fontWeight: FontWeight.w500)
                        ),
                        SizedBox(height: height*0.003),
-                       Text("10.00 Am - 02.30 Pm",style:
+                       Text(
+                         contactdeatils_controller.userList.value
+                             .contactDetails![2].Lable
+                             .toString(),
+
+                           //"10.00 Am - 02.30 Pm",
+                           style:
                        Theme.of(context).
                        textTheme.
                        bodyLarge?.
@@ -345,14 +414,19 @@ class _contactusState extends State<contactus> {
 
                      ],
                    ),
-                 ),
+                 );
+                  }
+               },
+                  ),
+
                  SizedBox(height: height*0.1)
                 ],
               ),
             ),
           ),
         ),
-      ),
+      )
     );
+
   }
 }

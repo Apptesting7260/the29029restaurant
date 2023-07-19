@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:date_time_picker/date_time_picker.dart';
 import 'package:the29029restaurant/view/bottombarscreen/bookatablepage/schedulereservation.dart';
 import 'package:the29029restaurant/view/bottombarscreen/bookatablepage/schedulereservation3.dart';
+import 'package:the29029restaurant/view_models/controller/bookatable/bookatable_controller.dart';
 import 'package:the29029restaurant/widgets/my_button.dart';
 
 class ScheduleReservation2 extends StatefulWidget {
@@ -13,6 +15,10 @@ class ScheduleReservation2 extends StatefulWidget {
 }
 
 class _ScheduleReservation2State extends State<ScheduleReservation2> {
+
+  //Bookatable_controller bookatable_controller = Get.put(Bookatable_controller());
+
+
   List<Map<String, String>> time = [
     {'': '6:00 PM'},
     {'': '6:30 PM'},
@@ -27,16 +33,16 @@ class _ScheduleReservation2State extends State<ScheduleReservation2> {
   ];
 
   List<Map<String, String>> people = [
-    {'': '1-2'},
-    {'': '2-3'},
-    {'': '3-4'},
-    {'': '4-5'},
-    {'': '5-6'},
-    {'': '6-7'},
-    {'': '7-8'},
-    {'': '8-9'},
-    {'': '9-10'},
-    {'': '10-11'}
+    {'': '1'},
+    {'': '2'},
+    {'': '3'},
+    {'': '4'},
+    {'': '5'},
+    {'': '6'},
+    {'': '7'},
+    {'': '8'},
+    {'': '9'},
+    {'': '10'}
   ];
 
   var _formKey = GlobalKey<FormState>();
@@ -48,11 +54,30 @@ class _ScheduleReservation2State extends State<ScheduleReservation2> {
   var choosetime = 2;
   var choosepeople = 2;
 
-  late TextEditingController dateController =
-      TextEditingController(text: DateTime.now().toString());
+ //  late TextEditingController dateController =
+ //  TextEditingController(text:"DD/MM/YYYY"
+ //
+ //
+ // // DateTime.now().toString()
+ //  );
   String _valueChanged1 = '';
   String _valueToValidate1 = '';
   String _valueSaved1 = '';
+
+
+
+
+
+
+ @override
+  void initState() {
+   // bookatable_controller.bookatable_apihit();
+    // TODO: implement initState
+    super.initState();
+  }
+
+
+
 
   @override
   Widget build(BuildContext context) {
@@ -111,7 +136,8 @@ class _ScheduleReservation2State extends State<ScheduleReservation2> {
                 DateTimePicker(
                   type: DateTimePickerType.date,
                   dateMask: 'dd, MM, yyyy',
-                  controller: dateController,
+                  //controller: bookatable_controller.dateController.value,
+
                   decoration: InputDecoration(
                       suffixIcon: Icon(Icons.event, color: Color(0xff911FDA)),
                       contentPadding: EdgeInsets.fromLTRB(20, 15, 20, 15),
@@ -203,7 +229,6 @@ class _ScheduleReservation2State extends State<ScheduleReservation2> {
                 SizedBox(height: height * 0.01),
                 Container(
                   height: height * 0.05,
-                  // width: 340,
                   child: ListView.builder(
                       scrollDirection: Axis.horizontal,
                       itemCount: 10,

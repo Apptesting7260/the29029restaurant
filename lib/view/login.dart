@@ -8,7 +8,7 @@ import 'package:get/get.dart';
 import 'package:the29029restaurant/view/bottomnavigationbar/tab_screen.dart';
 import 'package:the29029restaurant/view/resetpassword.dart';
 import 'package:the29029restaurant/view/signup.dart';
-import 'package:the29029restaurant/view_models/controller/login/login_view_model.dart';
+import 'package:the29029restaurant/view_models/controller/login/login_view_controller.dart';
 import 'package:the29029restaurant/widgets/my_button.dart';
 
 
@@ -19,8 +19,8 @@ class LoginPage extends StatefulWidget {
   @override
   State<LoginPage> createState() => _LoginPageState();
 }
-TextEditingController emailController = TextEditingController();
-TextEditingController passwordController = TextEditingController();
+// TextEditingController emailController = TextEditingController();
+// TextEditingController passwordController = TextEditingController();
 
 class _LoginPageState extends State<LoginPage> {
 

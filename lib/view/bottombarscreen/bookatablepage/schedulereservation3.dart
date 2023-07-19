@@ -2,10 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:the29029restaurant/view/bottombarscreen/bookatablepage/schedulereservation2.dart';
 import 'package:the29029restaurant/view/bottomnavigationbar/bottomnavigation.dart';
+import 'package:the29029restaurant/view_models/controller/bookatable/bookatable_controller.dart';
 import 'package:the29029restaurant/widgets/my_button.dart';
 import 'package:get/get.dart';
-
-
 
 class ScheduleReservation3 extends StatefulWidget {
   const ScheduleReservation3({super.key});
@@ -15,18 +14,21 @@ class ScheduleReservation3 extends StatefulWidget {
 }
 
 class _ScheduleReservation3State extends State<ScheduleReservation3> {
-  TextEditingController fullname = TextEditingController();
-  TextEditingController email = TextEditingController();
-  TextEditingController phonenumber = TextEditingController();
-  TextEditingController message = TextEditingController();
+  // TextEditingController fullname = TextEditingController();
+  // TextEditingController email = TextEditingController();
+  // TextEditingController phonenumber = TextEditingController();
+  // TextEditingController message = TextEditingController();
+
+  Bookatable_controller bookatable_controller =
+      Get.put(Bookatable_controller());
 
   var _formKey = GlobalKey<FormState>();
-
   void _submit() {
     final isValid = _formKey.currentState!.validate();
     if (!isValid) {
       return;
     }
+    bookatable_controller.bookatable_apihit();
     _formKey.currentState!.save();
   }
 
@@ -61,28 +63,30 @@ class _ScheduleReservation3State extends State<ScheduleReservation3> {
         child: SingleChildScrollView(
           child: SafeArea(
             child: Padding(
-              padding: const EdgeInsets.only(right: 20,left: 20),
+              padding: const EdgeInsets.only(right: 20, left: 20),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Center(
                     child: Text("Contact",
-                        style: Theme.of(context).textTheme.displayMedium?.copyWith(
-                            color: Colors.black,
-                            fontSize: 22,
-                            fontWeight: FontWeight.w600,
-                            fontFamily: GoogleFonts.outfit().fontFamily)),
+                        style: Theme.of(context)
+                            .textTheme
+                            .displayMedium
+                            ?.copyWith(
+                                color: Colors.black,
+                                fontSize: 22,
+                                fontWeight: FontWeight.w600,
+                                fontFamily: GoogleFonts.outfit().fontFamily)),
                   ),
                   SizedBox(height: height * 0.02),
                   Text("Full name",
                       style: Theme.of(context)
-                          .textTheme.
-                  titleMedium?.copyWith(
-                          fontWeight: FontWeight.w500)
-                  ),
-                  SizedBox(height: height*0.005),
+                          .textTheme
+                          .titleMedium
+                          ?.copyWith(fontWeight: FontWeight.w500)),
+                  SizedBox(height: height * 0.005),
                   TextFormField(
-                    controller: fullname,
+                    controller: bookatable_controller.fullnameController.value,
                     keyboardType: TextInputType.name,
                     decoration: InputDecoration(
                         filled: true,
@@ -105,21 +109,20 @@ class _ScheduleReservation3State extends State<ScheduleReservation3> {
                             borderSide: BorderSide(color: Color(0xffDCDCDC)))),
                     onFieldSubmitted: (value) {},
                     validator: (value) {
-                      if (value!.isEmpty){
+                      if (value!.isEmpty) {
                         return 'enter the phone number';
-                      }
-                      return null;
+                      } return null;
                     },
                   ),
-                  SizedBox(height:height*0.03),
+                  SizedBox(height: height * 0.03),
                   Text("Email",
-                      style: Theme.of(context).
-                      textTheme.
-                      titleMedium?.copyWith(fontWeight: FontWeight.w500)
-                  ),
-                  SizedBox(height: height*0.005),
+                      style: Theme.of(context)
+                          .textTheme
+                          .titleMedium
+                          ?.copyWith(fontWeight: FontWeight.w500)),
+                  SizedBox(height: height * 0.005),
                   TextFormField(
-                    controller: email,
+                    controller: bookatable_controller.emailController.value,
                     keyboardType: TextInputType.emailAddress,
                     decoration: InputDecoration(
                         filled: true,
@@ -129,9 +132,10 @@ class _ScheduleReservation3State extends State<ScheduleReservation3> {
                           fontWeight: FontWeight.w300,
                           color: Color(0xff9796A1),
                           fontSize: 14,
-                          fontFamily:GoogleFonts.outfit().fontFamily,),
+                          fontFamily: GoogleFonts.outfit().fontFamily,
+                        ),
                         contentPadding: EdgeInsets.fromLTRB(20, 10, 20, 10),
-                         enabledBorder: OutlineInputBorder(
+                        enabledBorder: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(30),
                             borderSide: BorderSide(color: Color(0xffDCDCDC))),
                         focusedBorder: OutlineInputBorder(
@@ -150,15 +154,16 @@ class _ScheduleReservation3State extends State<ScheduleReservation3> {
                       return null;
                     },
                   ),
-                  SizedBox(height:height*0.03),
+                  SizedBox(height: height * 0.03),
                   Text("Phone Number",
-                      style: Theme.of(context).
-                      textTheme.
-                      titleMedium?.copyWith(fontWeight: FontWeight.w500)
-                  ),
-                  SizedBox(height: height*0.005),
+                      style: Theme.of(context)
+                          .textTheme
+                          .titleMedium
+                          ?.copyWith(fontWeight: FontWeight.w500)),
+                  SizedBox(height: height * 0.005),
                   TextFormField(
-                    controller: phonenumber,
+                    controller:
+                        bookatable_controller.phonenumberController.value,
                     keyboardType: TextInputType.phone,
                     decoration: InputDecoration(
                         filled: true,
@@ -181,23 +186,23 @@ class _ScheduleReservation3State extends State<ScheduleReservation3> {
                             borderSide: BorderSide(color: Color(0xffDCDCDC)))),
                     onFieldSubmitted: (value) {},
                     validator: (value) {
-                      if (value!.isEmpty){
+                      if (value!.isEmpty) {
                         return 'enter the phone number';
                       }
                       return null;
                     },
                   ),
-                  SizedBox(height:height*0.03),
+                  SizedBox(height: height * 0.03),
                   Text("Message",
-                      style: Theme.of(context).
-                      textTheme.
-                      titleMedium?.copyWith(fontWeight: FontWeight.w500)
-                  ),
-                  SizedBox(height: height*0.005),
+                      style: Theme.of(context)
+                          .textTheme
+                          .titleMedium
+                          ?.copyWith(fontWeight: FontWeight.w500)),
+                  SizedBox(height: height * 0.005),
                   TextFormField(
                     //textAlign: TextAlign.start,
                     maxLines: 4,
-                    controller: message,
+                    controller: bookatable_controller.messageController.value,
                     keyboardType: TextInputType.text,
                     decoration: InputDecoration(
                         filled: true,
@@ -208,7 +213,6 @@ class _ScheduleReservation3State extends State<ScheduleReservation3> {
                             fontSize: 14,
                             fontWeight: FontWeight.w300,
                             fontFamily: GoogleFonts.outfit().fontFamily),
-                       // contentPadding: EdgeInsets.fromLTRB(20, 10, 20, 10),
                         enabledBorder: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(15),
                             borderSide: BorderSide(color: Color(0xffDCDCDC))),
@@ -220,7 +224,7 @@ class _ScheduleReservation3State extends State<ScheduleReservation3> {
                             borderSide: BorderSide(color: Color(0xffDCDCDC)))),
                     onFieldSubmitted: (value) {},
                     validator: (value) {
-                      if (value!.isEmpty){
+                      if (value!.isEmpty) {
                         return 'enter the message';
                       }
                       return null;
@@ -228,92 +232,101 @@ class _ScheduleReservation3State extends State<ScheduleReservation3> {
                   ),
                   SizedBox(height: height * 0.05),
                   Center(
-                    child: MyButton( bgColor: Color(0xff41004C),
+                    child: MyButton(
+                        bgColor: Color(0xff41004C),
                         title: "Request Booking",
                         txtStyle: Theme.of(context)
                             .textTheme
                             .titleMedium
                             ?.copyWith(
-                            fontSize: 15,
-                            fontWeight: FontWeight.w600,
-                            color: Colors.white,
-                            fontFamily: GoogleFonts.outfit().fontFamily),
+                                fontSize: 15,
+                                fontWeight: FontWeight.w600,
+                                color: Colors.white,
+                                fontFamily: GoogleFonts.outfit().fontFamily),
                         onTap: () {
-                          if(  _formKey.currentState!.validate()) {
+                          if (_formKey.currentState!.validate()) {
                             _formKey.currentState!.save();
                             _submit();
 
-                             Get.back();
-                             // Navigator.push(
-                            //     context,
-                            //     MaterialPageRoute(
-                            //       builder: (context) =>
-                            //           BottomNavigation(),
-                            //     ));
-                          } },
+                            //   Get.back();
+                          }
+                        },
                         height: height * 0.06,
                         width: width * 0.5),
                   ),
                   // SizedBox(height: height*0.1),
                   SizedBox(height: height * 0.05),
                   Center(
-                    child: Text("By Phone Please Call Us on",
+                    child: Text(
+                      "By Phone Please Call Us on",
                       style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                      color: Color(0xff9796A1),fontSize: 14,fontWeight: FontWeight.w300,
-                        fontFamily: GoogleFonts.outfit().fontFamily
-                    ),),
+                          color: Color(0xff9796A1),
+                          fontSize: 14,
+                          fontWeight: FontWeight.w300,
+                          fontFamily: GoogleFonts.outfit().fontFamily),
+                    ),
                   ),
-                  SizedBox(height: height*0.005),
+                  SizedBox(height: height * 0.005),
                   Center(
                     child: RichText(
                       text: TextSpan(
                         children: [
                           WidgetSpan(
-                            child: Icon(Icons.call, size:15,color: Color(0xff911FDA),),
+                            child: Icon(
+                              Icons.call,
+                              size: 15,
+                              color: Color(0xff911FDA),
+                            ),
                           ),
                           TextSpan(
-                            text:"01929556959",
-                            style: Theme.of(context).
-                            textTheme.
-                            bodyLarge?.copyWith(fontWeight:FontWeight.w400,
-                            //    color: Color(0xff9796A1)
-                            ),
+                            text: "01929556959",
+                            style:
+                                Theme.of(context).textTheme.bodyLarge?.copyWith(
+                                      fontWeight: FontWeight.w400,
+                                      //    color: Color(0xff9796A1)
+                                    ),
                           ),
                         ],
                       ),
                     ),
                   ),
-                  SizedBox(height: height*0.05),
+                  SizedBox(height: height * 0.05),
                   Center(
-                    child: Text("Email Us at:",
+                    child: Text(
+                      "Email Us at:",
                       style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                          color: Color(0xff9796A1),fontSize: 14,fontWeight: FontWeight.w300,
-                          fontFamily: GoogleFonts.outfit().fontFamily
-                      ),),
+                          color: Color(0xff9796A1),
+                          fontSize: 14,
+                          fontWeight: FontWeight.w300,
+                          fontFamily: GoogleFonts.outfit().fontFamily),
+                    ),
                   ),
-                  SizedBox(height: height*0.005),
+                  SizedBox(height: height * 0.005),
                   Center(
                     child: RichText(
                       text: TextSpan(
                         children: [
                           WidgetSpan(
-                            child: Icon(Icons.email, size:15,color: Color(0xff911FDA),),
+                            child: Icon(
+                              Icons.email,
+                              size: 15,
+                              color: Color(0xff911FDA),
+                            ),
                           ),
                           TextSpan(
-                            text:"info@the29029restaurant.co.uk",
-                            style: Theme.of(context).
-                            textTheme.
-                            bodyLarge?.copyWith(fontWeight:FontWeight.w400,
-                            //    color: Color(0xff9796A1)
-                            ),
+                            text: "info@the29029restaurant.co.uk",
+                            style:
+                                Theme.of(context).textTheme.bodyLarge?.copyWith(
+                                      fontWeight: FontWeight.w400,
+                                      //    color: Color(0xff9796A1)
+                                    ),
                           ),
                         ],
                       ),
                     ),
                   ),
 
-                  SizedBox(height: height*0.05),
-
+                  SizedBox(height: height * 0.05),
                 ],
               ),
             ),

@@ -5,6 +5,7 @@ import 'package:the29029restaurant/res/components/general_exception.dart';
 import 'package:the29029restaurant/res/components/internet_exceptions_widget.dart';
 import 'package:the29029restaurant/view_models/controller/Drawer_Controller/photogallery/photogallery_controller.dart';
 
+String ?Imagestring;
 class PhotoGallery extends StatefulWidget {
   const PhotoGallery({super.key});
 
@@ -20,6 +21,43 @@ class _PhotoGalleryState extends State<PhotoGallery> {
     photoGallery_controller.photogalleryapihit();
     super.initState();
   }
+
+
+  Future<void> showOptionsDialog(BuildContext context)  {
+    return showDialog(
+        context: context,
+        barrierDismissible: true,
+        builder: (BuildContext context)
+        {
+          final height = MediaQuery.of(context).size.height;
+          final width = MediaQuery.of(context).size.width;
+          return AlertDialog(
+              content:
+                  // Container(
+                  //   // height: height,
+                  //    width: width,
+                  //   color: Colors.white,
+                  //   child: PhotoView(imageProvider:
+                  //       NetworkImage(
+                  //         Imagestring.toString()
+                  //       )
+                  //
+                  //   ),
+              InteractiveViewer(
+                maxScale: 5.0,
+                  minScale: 0.01,
+                  child:
+                  Image.network(
+                      Imagestring
+                          .toString()),
+
+              )
+
+              );
+       }
+    );
+  }
+
 
   Widget build(BuildContext context) {
     final height = MediaQuery.of(context).size.height;
@@ -78,19 +116,36 @@ class _PhotoGalleryState extends State<PhotoGallery> {
                               itemCount: photoGallery_controller
                                   .userList.value.photosGallery!.length,
                               itemBuilder: (context, index) {
-                                return Container(
-                                  decoration: BoxDecoration(
-                                    image: DecorationImage(
-                                        image: NetworkImage(
+                                return
+                                    Container(
+                                      decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(10)
+                                      ),
+                                      child: GestureDetector(onTap: (){
+
+                                        Imagestring=
                                             photoGallery_controller
-                                                .userList
-                                                .value
-                                                .photosGallery![index]
-                                                .images
-                                                .toString())),
-                                    borderRadius: BorderRadius.circular(10),
-                                  ),
-                                );
+                                            .userList
+                                            .value
+                                            .photosGallery![index]
+                                            .images
+                                            .toString();
+                                        setState(() {
+                                          Imagestring;
+                                        });
+                                        showOptionsDialog(context);
+                                      },
+                                      child:
+
+                                      Image.network(
+                                          photoGallery_controller
+                                              .userList
+                                              .value
+                                              .photosGallery![index]
+                                              .images
+                                              .toString())
+                                      ),
+                                      );
                               })
                         ],
                       ),
@@ -99,6 +154,6 @@ class _PhotoGalleryState extends State<PhotoGallery> {
                 );
             }
           },
-        ));
+        ),);
   }
 }

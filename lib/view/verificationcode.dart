@@ -1,9 +1,11 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:new_pinput/new_pinput.dart';
 import 'package:the29029restaurant/view/createpassword.dart';
 import 'package:the29029restaurant/view/resetpassword.dart';
+import 'package:the29029restaurant/view_models/controller/resetpassotp/resetpasswordotp_controller.dart';
 import 'package:the29029restaurant/widgets/my_button.dart';
 
 class VerificationCode extends StatefulWidget {
@@ -14,13 +16,22 @@ class VerificationCode extends StatefulWidget {
 }
 
 class _VerificationCodeState extends State<VerificationCode> {
-  final pinController = TextEditingController();
+
+  ResetpasswordOTP_controller resetpasswordOTP_controller = Get.put(ResetpasswordOTP_controller());
+
+
+  //final pinController = TextEditingController();
+
+
+
   final focusNode = FocusNode();
   final formKey = GlobalKey<FormState>();
 
   @override
   void dispose() {
-    pinController.dispose();
+    resetpasswordOTP_controller.ResetpasswordOTP_apihit();
+    resetpasswordOTP_controller.pinController.value.dispose();
+    // pinController.dispose();
     focusNode.dispose();
     super.dispose();
   }
@@ -73,15 +84,17 @@ class _VerificationCodeState extends State<VerificationCode> {
                         textDirection: TextDirection.ltr,
                         child: Pinput(
                           length: 6,
-                          controller: pinController,
+                          controller: resetpasswordOTP_controller.pinController.value,
                           focusNode: focusNode,
                           androidSmsAutofillMethod:
                               AndroidSmsAutofillMethod.smsUserConsentApi,
                           listenForMultipleSmsOnAndroid: true,
+
                           validator: (value) {
-                            return value == '222222'
-                                ? null
-                                : 'Pin is incorrect';
+                            if (value!.isEmpty){
+                              return 'enter the first name';
+                            }
+                            return null;
                           },
                           hapticFeedbackType: HapticFeedbackType.lightImpact,
                           onCompleted: (pin) {
@@ -160,11 +173,7 @@ class _VerificationCodeState extends State<VerificationCode> {
                         formKey.currentState!.save();
                         focusNode.unfocus();
                         formKey.currentState!.validate();
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => CreatePassword(),
-                            ));
+                        resetpasswordOTP_controller.ResetpasswordOTP_apihit();
                       }
                     },
                     height: 50,

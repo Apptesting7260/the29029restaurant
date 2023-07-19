@@ -7,7 +7,7 @@ import 'package:the29029restaurant/res/components/general_exception.dart';
 import 'package:the29029restaurant/res/components/internet_exceptions_widget.dart';
 import 'package:the29029restaurant/view/bottombarscreen/menu/ourpartymenu/starters.dart';
 import 'package:the29029restaurant/view/bottomnavigationbar/tab_screen.dart';
-import 'package:the29029restaurant/view_models/controller/partymenu/partymenu.dart';
+import 'package:the29029restaurant/view_models/controller/partymenu/partymenu_controller.dart';
 
 class PartyMenu extends StatefulWidget {
   const PartyMenu({super.key});
