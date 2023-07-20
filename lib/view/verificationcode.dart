@@ -174,6 +174,9 @@ class _VerificationCodeState extends State<VerificationCode> {
                         focusNode.unfocus();
                         formKey.currentState!.validate();
                         resetpasswordOTP_controller.ResetpasswordOTP_apihit();
+
+
+                        resetpasswordOTP_controller.pinController.value.clear();
                       }
                     },
                     height: 50,

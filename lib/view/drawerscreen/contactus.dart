@@ -20,17 +20,12 @@ class _contactusState extends State<contactus> {
 
   Contactdeatils_controller contactdeatils_controller=Get.put(Contactdeatils_controller());
 
-
-
-
-
   var _formKey = GlobalKey<FormState>();
   void _submit() {
     final isValid = _formKey.currentState!.validate();
     if (!isValid) {
       return;
     }
-
     contactus_controller.contactus_apihit();
     _formKey.currentState!.save();
   }
@@ -294,11 +289,15 @@ class _contactusState extends State<contactus> {
                         onTap: () {
                           _submit();
 
+                          contactus_controller.firstname.value.clear();
+                          contactus_controller.lastname.value.clear();
+                          contactus_controller.phonenumber.value.clear();
+                          contactus_controller.email.value.clear();
+                          contactus_controller.message.value.clear();
                         },
                         height: 50,
                         width: 200),
                   ),
-                 // SizedBox(height: height*0.1),
                   SizedBox(height: height * 0.05),
                          Obx(
                            () {
@@ -312,8 +311,7 @@ class _contactusState extends State<contactus> {
                       );
                       } else {
                           return GeneralExceptionWidget(onPress: () {});
-                           }
-                             case Status.COMPLETED:
+                           }case Status.COMPLETED:
                             return
                  Center(
                    child: Column(
@@ -324,101 +322,61 @@ class _contactusState extends State<contactus> {
                          style: Theme.of(context).textTheme
                          .titleLarge?.copyWith(fontWeight: FontWeight.w600,
                            fontSize: 18),
-
                        ),
                        SizedBox(height: height*0.03),
-                       Text(
-                           contactdeatils_controller.userList.value
-                               .contactDetails![0].Lable
-                               .toString(),
-
+                       Text(contactdeatils_controller.userList.value
+                               .contactDetails![0].Lable.toString(),
                           // "Mon - Sun",
-                           style:
-                         Theme.of(context).
-                         textTheme.
-                         bodyLarge?.
-                         copyWith(
-                           fontWeight: FontWeight.w500)
+                           style: Theme.of(context).
+                         textTheme.bodyLarge?.
+                         copyWith(fontWeight: FontWeight.w500)
                          ),
                        SizedBox(height: height*0.003),
-                       Text(
-                           contactdeatils_controller.userList.value
-                               .contactDetails![0].name
-                               .toString(),
-
+                       Text(contactdeatils_controller.userList.value
+                               .contactDetails![0].name.toString(),
                           // "10.00 Am - 02.30 Pm",
                            style:
-                       Theme.of(context).
-                       textTheme.
-                       bodyLarge?.
-                       copyWith(
-                         color: Color(0xff777777),
-                           fontWeight: FontWeight.w300)
+                       Theme.of(context).textTheme.bodyLarge?.
+                       copyWith(color: Color(0xff777777), fontWeight: FontWeight.w300)
                        ),
                        SizedBox(height: height*0.03),
-                       Text(
-                         contactdeatils_controller.userList.value
-                             .contactDetails![1].Lable
-                             .toString(),
-
+                       Text(contactdeatils_controller.userList.value
+                             .contactDetails![1].Lable.toString(),
                           // "Christmas Day",
-                           style:
-                       Theme.of(context).
-                       textTheme.
-                       bodyLarge?.
-                       copyWith(
-                           fontWeight: FontWeight.w500)
+                           style: Theme.of(context).textTheme.
+                       bodyLarge?.copyWith(fontWeight: FontWeight.w500)
                        ),
                        SizedBox(height: height*0.003),
-                       Text(
-                         contactdeatils_controller.userList.value
-                             .contactDetails![1].name
-                             .toString(),
+                       Text(contactdeatils_controller.userList.value
+                             .contactDetails![1].name.toString(),
                            //"10.00 Am - 02.30 Pm",
                            style:
-                       Theme.of(context).
-                       textTheme.
-                       bodyLarge?.
-                       copyWith(
-                           color: Color(0xff777777),
+                       Theme.of(context).textTheme.bodyLarge?.
+                       copyWith(color: Color(0xff777777),
                            fontWeight: FontWeight.w300)
                        ),
                        SizedBox(height: height*0.03),
-                       Text(
-                         contactdeatils_controller.userList.value
-                             .contactDetails![2].Lable
-                             .toString(),
+                       Text(contactdeatils_controller.userList.value
+                             .contactDetails![2].Lable.toString(),
                          //  "New Year",
                            style:
-                       Theme.of(context).
-                       textTheme.
-                       bodyLarge?.
-                       copyWith(
-                           fontWeight: FontWeight.w500)
+                       Theme.of(context).textTheme.bodyLarge?.
+                       copyWith(fontWeight: FontWeight.w500)
                        ),
                        SizedBox(height: height*0.003),
-                       Text(
-                         contactdeatils_controller.userList.value
+                       Text(contactdeatils_controller.userList.value
                              .contactDetails![2].Lable
                              .toString(),
-
                            //"10.00 Am - 02.30 Pm",
                            style:
-                       Theme.of(context).
-                       textTheme.
-                       bodyLarge?.
-                       copyWith(
-                           color: Color(0xff777777),
-                           fontWeight: FontWeight.w300)
-                       )
-
-                     ],
+                       Theme.of(context).textTheme.bodyLarge?.
+                       copyWith(color: Color(0xff777777), fontWeight: FontWeight.w300)
+                       )],
                    ),
                  );
                   }
                },
                   ),
-
                  SizedBox(height: height*0.1)
                 ],
               ),
@@ -427,6 +385,5 @@ class _contactusState extends State<contactus> {
         ),
       )
     );
-
   }
 }

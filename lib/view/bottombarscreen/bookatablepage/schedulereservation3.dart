@@ -14,13 +14,8 @@ class ScheduleReservation3 extends StatefulWidget {
 }
 
 class _ScheduleReservation3State extends State<ScheduleReservation3> {
-  // TextEditingController fullname = TextEditingController();
-  // TextEditingController email = TextEditingController();
-  // TextEditingController phonenumber = TextEditingController();
-  // TextEditingController message = TextEditingController();
 
-  Bookatable_controller bookatable_controller =
-      Get.put(Bookatable_controller());
+  Bookatable_controller bookatable_controller = Get.put(Bookatable_controller());
 
   var _formKey = GlobalKey<FormState>();
   void _submit() {
@@ -247,6 +242,11 @@ class _ScheduleReservation3State extends State<ScheduleReservation3> {
                           if (_formKey.currentState!.validate()) {
                             _formKey.currentState!.save();
                             _submit();
+                            bookatable_controller.fullnameController.value.clear();
+                            bookatable_controller.emailController.value.clear();
+                            bookatable_controller.phonenumberController.value.clear();
+                            bookatable_controller.messageController.value.clear();
+                            bookatable_controller.dateController.value.clear();
 
                             //   Get.back();
                           }

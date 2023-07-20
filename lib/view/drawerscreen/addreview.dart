@@ -286,6 +286,12 @@ class _AddReviewState extends State<AddReview> {
                             fontFamily: GoogleFonts.outfit().fontFamily),
                         onTap: () {
                           _submit();
+
+                          addreview_controller.firstname.value.clear();
+                          addreview_controller.lastname.value.clear();
+                          addreview_controller.email.value.clear();
+                          addreview_controller.phonenumber.value.clear();
+                          addreview_controller.review.value.clear();
                         },
                         height: 50,
                         width: 200),

@@ -55,6 +55,7 @@ class _SignUpState extends State<SignUp> {
     }
     signup_controller.signup_apihit();
     _formKey.currentState!.save();
+
   }
   bool passwordVisible = true;
   @override
@@ -238,6 +239,12 @@ class _SignUpState extends State<SignUp> {
                           //     MaterialPageRoute(
                           //       builder: (context) => BottomNavigation(),
                           //     ));
+
+
+
+                          signup_controller.usernameController.value.clear();
+                          signup_controller.emailController.value.clear();
+                          signup_controller.passwordController.value.clear();
                         }
                       },
                       height: 50,

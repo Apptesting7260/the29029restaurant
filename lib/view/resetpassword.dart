@@ -132,6 +132,9 @@ class _ResetPasswordState extends State<ResetPassword> {
                           //     MaterialPageRoute(
                           //       builder: (context) => VerificationCode(),
                           //     ));
+
+                          resetpassword_controller .emailController.value.clear();
+
                         }
                       },
                       height: 50,

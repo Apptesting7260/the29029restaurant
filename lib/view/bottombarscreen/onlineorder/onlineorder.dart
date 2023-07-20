@@ -3,6 +3,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:the29029restaurant/view/bottombarscreen/onlineorder/account.dart';
 import 'package:the29029restaurant/view/bottombarscreen/onlineorder/onlinelocation.dart';
 import 'package:the29029restaurant/view/bottomnavigationbar/bottomnavigation.dart';
+import 'package:the29029restaurant/view/bottomnavigationbar/tab_screen.dart';
 import 'package:the29029restaurant/widgets/my_button.dart';
 import 'package:get/get.dart';
 import '../menu/onlineorder2.dart';
@@ -27,7 +28,9 @@ class _OnlineOrderState extends State<OnlineOrder> {
         backgroundColor: Colors.white,
         leading: GestureDetector(
           onTap: () {
-            Get.back();
+            Get.to(TabScreen(index:1));
+           // TabScreen(index: 1)
+           // Get.back();
             // Navigator.push(
             //     context,
             //     MaterialPageRoute(

@@ -19,10 +19,12 @@ class Bookatable_controller extends GetxController {
   final messageController = TextEditingController().obs ;
 
   final dateController=TextEditingController().obs;
+  final timeController=TextEditingController().obs;
+  final peopleController=TextEditingController().obs;
 
 
-  final emailFocusNode = FocusNode().obs;
-  final passwordFocusNode = FocusNode().obs;
+  // final emailFocusNode = FocusNode().obs;
+  // final passwordFocusNode = FocusNode().obs;
 
   RxBool loading = false.obs;
 
@@ -35,14 +37,14 @@ class Bookatable_controller extends GetxController {
       'email' : emailController.value.text,
       'phone_number' : phonenumberController.value.text,
       'message' : messageController.value.text,
-      'booking_table_date':'2023-07-15',                       //,
-      'booking_table_time': '21:30',
-      'booking_party_people' : '2',
+      'booking_table_date': dateController.value.text,                  //'2023-07-15',
+      'booking_table_time':timeController.value.text,                     // '21:30',
+      'booking_party_people' :peopleController.value.text,                // '2',
       'REMOTE_ADDR' : '49.36.234.97',
 
     };
     print(data);
-    _api.Signupapi(data).then((value){
+    _api.Bookatableapiusapi(data).then((value){
       loading.value = false ;
 
       //Get.to(LoginPage());

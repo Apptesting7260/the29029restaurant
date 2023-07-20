@@ -19,9 +19,6 @@ class _CreatePasswordState extends State<CreatePassword> {
   Createpass_controller createpass_controller=Get.put(Createpass_controller());
 
 
-  // TextEditingController passwordController = TextEditingController();
-  // TextEditingController confirmpasswordController = TextEditingController();
-
   var _formKey = GlobalKey<FormState>();
 
   void _submit() {
@@ -227,6 +224,9 @@ class _CreatePasswordState extends State<CreatePassword> {
                           //     MaterialPageRoute(
                           //       builder: (context) => LoginPage(),
                           //     ));
+
+                          createpass_controller.passwordController.value.clear();
+                          createpass_controller.confirmpasswordController.value.clear();
                         }
                       },
                       height: 50,

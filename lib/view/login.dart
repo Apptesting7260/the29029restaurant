@@ -211,6 +211,9 @@ class _LoginPageState extends State<LoginPage> {
                           //     MaterialPageRoute(
                           //       builder: (context) => BottomNavigation(),
                           //     ));
+
+                          login_controller.emailController.value.clear();
+                          login_controller.passwordController.value.clear();
                         }
                       },
                       height: 50,

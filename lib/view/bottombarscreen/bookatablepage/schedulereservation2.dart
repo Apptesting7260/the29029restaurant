@@ -16,20 +16,58 @@ class ScheduleReservation2 extends StatefulWidget {
 
 class _ScheduleReservation2State extends State<ScheduleReservation2> {
 
-  //Bookatable_controller bookatable_controller = Get.put(Bookatable_controller());
+  Bookatable_controller bookatable_controller = Get.put(Bookatable_controller());
 
 
   List<Map<String, String>> time = [
-    {'': '6:00 PM'},
-    {'': '6:30 PM'},
-    {'': '7:00 PM'},
-    {'': '7:30 PM'},
-    {'': '8:00 PM'},
-    {'': '8:30 PM'},
-    {'': '9:00 PM'},
-    {'': '9:30 PM'},
-    {'': '10:00 PM'},
-    {'': '10:30 PM'}
+    {'': '1:00 '},
+    {'': '1:30 '},
+    {'': '2:00 '},
+    {'': '2:30 '},
+    {'': '3:00 '},
+    {'': '3:30 '},
+    {'': '4:00 '},
+    {'': '4:30 '},
+    {'': '5:00 '},
+    {'': '5:30 '},
+    {'': '6:00 '},
+    {'': '6:30 '},
+    {'': '7:00 '},
+    {'': '7:30 '},
+    {'': '8:00 '},
+    {'': '8:30 '},
+    {'': '9:00' },
+    {'': '9:30 '},
+    {'': '10:00 '},
+    {'': '10:30 '},
+    {'': '11:00 '},
+    {'': '11:30 '},
+    {'': '12:00'},
+    {'': '12:30 '},
+    {'': '13:00 '},
+    {'': '13:30 '},
+    {'': '14:00 '},
+    {'': '14:30 '},
+    {'': '15:00'},
+    {'': '15:30 '},
+    {'': '16:00 '},
+    {'': '16:30 '},
+    {'': '17:00 '},
+    {'': '17:30 '},
+    {'': '18:00'},
+    {'': '18:30 '},
+    {'': '19:00 '},
+    {'': '19:30 '},
+    {'': '20:00 '},
+    {'': '20:30 '},
+    {'': '21:00'},
+    {'': '21:30 '},
+    {'': '22:00 '},
+    {'': '22:30 '},
+    {'': '23:00 '},
+    {'': '23:30 '},
+    {'': '24:00'},
+    {'': '24:30 '},
   ];
 
   List<Map<String, String>> people = [
@@ -51,15 +89,10 @@ class _ScheduleReservation2State extends State<ScheduleReservation2> {
   List<int> tappedtime = [];
   List<int> tapped = [];
 
-  var choosetime = 2;
-  var choosepeople = 2;
 
- //  late TextEditingController dateController =
- //  TextEditingController(text:"DD/MM/YYYY"
- //
- //
- // // DateTime.now().toString()
- //  );
+  int selected = 0;
+  int selectedpeople = 0;
+
   String _valueChanged1 = '';
   String _valueToValidate1 = '';
   String _valueSaved1 = '';
@@ -69,12 +102,12 @@ class _ScheduleReservation2State extends State<ScheduleReservation2> {
 
 
 
- @override
-  void initState() {
-   // bookatable_controller.bookatable_apihit();
-    // TODO: implement initState
-    super.initState();
-  }
+ // @override
+ //  void initState() {
+ //    bookatable_controller.bookatable_apihit();
+ //    // TODO: implement initState
+ //    super.initState();
+ //  }
 
 
 
@@ -113,6 +146,7 @@ class _ScheduleReservation2State extends State<ScheduleReservation2> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
+                SizedBox(height: height * 0.02),
                 Center(
                   child: Text(
                     "Book A Table",
@@ -123,21 +157,20 @@ class _ScheduleReservation2State extends State<ScheduleReservation2> {
                         fontFamily: GoogleFonts.outfit().fontFamily),
                   ),
                 ),
-                SizedBox(height: height * 0.01),
+                SizedBox(height: height * 0.03),
                 Text(
                   "Date",
                   style: Theme.of(context).textTheme.titleMedium?.copyWith(
                       color: Colors.black,
                       fontSize: 16,
-                      fontWeight: FontWeight.w500,
+                      fontWeight: FontWeight.w600,
                       fontFamily: GoogleFonts.outfit().fontFamily),
                 ),
                 SizedBox(height: height * 0.005),
                 DateTimePicker(
+                  controller: bookatable_controller.dateController.value,
                   type: DateTimePickerType.date,
                   dateMask: 'dd, MM, yyyy',
-                  //controller: bookatable_controller.dateController.value,
-
                   decoration: InputDecoration(
                       suffixIcon: Icon(Icons.event, color: Color(0xff911FDA)),
                       contentPadding: EdgeInsets.fromLTRB(20, 15, 20, 15),
@@ -165,7 +198,7 @@ class _ScheduleReservation2State extends State<ScheduleReservation2> {
                   style: Theme.of(context).textTheme.titleMedium?.copyWith(
                       color: Colors.black,
                       fontSize: 16,
-                      fontWeight: FontWeight.w500,
+                      fontWeight: FontWeight.w600,
                       fontFamily: GoogleFonts.outfit().fontFamily),
                 ),
                 SizedBox(height: height * 0.01),
@@ -178,37 +211,31 @@ class _ScheduleReservation2State extends State<ScheduleReservation2> {
                         return Padding(
                           padding: const EdgeInsets.only(right: 5),
                           child: SizedBox(
-                            // width: 85,
                             height: 30,
                             child: ElevatedButton(
                               style: ElevatedButton.styleFrom(
-                                  backgroundColor: tappedtime.contains(index)
+                                  backgroundColor: selected ==index
                                       ? Color(0xff911FDA)
                                       : Colors.white,
                                   shape: RoundedRectangleBorder(
                                       borderRadius: BorderRadius.circular(30),
                                       side: BorderSide(
-                                          color: tappedtime.contains(index)
+                                          color: selected ==index
                                               ? Color(0xff911FDA)
                                               : Color(0xff9796A1)))),
                               onPressed: () {
-                                choosetime = 2;
                                 setState(() {
-                                  if (tappedtime.contains(index)) {
-                                    this.setState(() {
-                                      tappedtime.remove(index);
-                                    });
-                                  } else {
-                                    this.setState(() {
-                                      tappedtime.add(index);
-                                    });
+                                  selected=index;
+                                  bookatable_controller.timeController.value.text = time[selected]['']??'' ;
                                   }
-                                });
+
+                                );
                               },
                               child: Text(
                                 time[index][''] ?? '',
+
                                 style: TextStyle(
-                                    color: tappedtime.contains(index)
+                                    color: selected ==index
                                         ? Colors.white
                                         : Color(0xff9796A1)),
                               ),
@@ -217,57 +244,48 @@ class _ScheduleReservation2State extends State<ScheduleReservation2> {
                         );
                       }),
                 ),
-                SizedBox(height: height * 0.01),
+                SizedBox(height: height * 0.03),
                 Text(
                   "How Many People",
                   style: Theme.of(context).textTheme.titleMedium?.copyWith(
                       color: Colors.black,
                       fontSize: 16,
-                      fontWeight: FontWeight.w500,
+                      fontWeight: FontWeight.w600,
                       fontFamily: GoogleFonts.outfit().fontFamily),
                 ),
                 SizedBox(height: height * 0.01),
                 Container(
                   height: height * 0.05,
                   child: ListView.builder(
-                      scrollDirection: Axis.horizontal,
-                      itemCount: 10,
+                      scrollDirection:Axis.horizontal,
+                      itemCount:people.length,
                       itemBuilder: (BuildContext context, int index) {
                         return Padding(
                           padding: const EdgeInsets.only(right: 5),
                           child: SizedBox(
                             height: 30,
-                            //width: 60,
                             child: ElevatedButton(
                               onPressed: () {
                                 setState(() {
-                                  choosepeople == 2;
-                                  if (tapped.contains(index)) {
-                                    this.setState(() {
-                                      tapped.remove(index);
-                                    });
-                                  } else {
-                                    this.setState(() {
-                                      tapped.add(index);
-                                    });
-                                  }
+                                  selectedpeople=index;
+                                  bookatable_controller.peopleController.value.text = people[selectedpeople]['']??'' ;
                                 });
                               },
                               child: Text(
                                 people[index][''] ?? '',
                                 style: TextStyle(
-                                    color: tapped.contains(index)
+                                    color: selectedpeople ==index
                                         ? Colors.white
                                         : Color(0xff9796A1)),
                               ),
                               style: ElevatedButton.styleFrom(
-                                  backgroundColor: tapped.contains(index)
+                                  backgroundColor: selectedpeople ==index
                                       ? Color(0xff911FDA)
                                       : Colors.white,
                                   shape: RoundedRectangleBorder(
                                       borderRadius: BorderRadius.circular(25),
                                       side: BorderSide(
-                                          color: tapped.contains(index)
+                                          color: selectedpeople ==index
                                               ? Color(0xff911FDA)
                                               : Color(0xff9796A1)))),
                             ),
@@ -290,11 +308,12 @@ class _ScheduleReservation2State extends State<ScheduleReservation2> {
                         onTap: () {
                           if (_formKey.currentState!.validate()) {
                             _formKey.currentState!.save();
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => ScheduleReservation3(),
-                                ));
+                          //  bookatable_controller.bookatable_apihit();
+                            Get.to(  ScheduleReservation3() );
+
+
+
+
                           }
                         },
                         height: height * 0.06,
