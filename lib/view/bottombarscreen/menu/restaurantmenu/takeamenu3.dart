@@ -1,5 +1,7 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:the29029restaurant/view/bottombarscreen/menu/restaurantmenu/takeawaymenu2.dart';
 
@@ -20,44 +22,60 @@ class _OpenUiState extends State<OpenUi> {
     return Scaffold(
 
       backgroundColor: Color(0xffFFFFFF),
-      appBar: PreferredSize(
-        preferredSize: Size.fromHeight(width / 7),
-        child: AppBar(
-          automaticallyImplyLeading: false,
-          // primary: false,
-          //   title
-          backgroundColor: Colors.transparent,
-          elevation: 0,
-          centerTitle: true,
-          title: Padding(
-            padding: EdgeInsets.symmetric(
-              vertical: width / 10,
-            ),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                InkWell(
-                    onTap: (){
-                      Navigator.push(context, MaterialPageRoute(builder: (context)=>CourseUi()));
-                    },
-                    child: Container(child: Image.asset("assets/drawericon/Group 17955.png"))),
-
-                Center(
-                  child: Container(
-                    // color: Colors.red,
-                      child: Center(
-                          child: Text(
-                            "Take Away Menu",
-                            style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                                color: Color(0xff323643), fontWeight: FontWeight.w600),
-                          ))),
-                ),
-                Container()
-              ],
-            ),
-          ),
+      appBar: AppBar(
+        elevation: 0,
+        backgroundColor: Colors.white,
+        leading: GestureDetector(
+          onTap: () {
+            Get.to(() => CourseUi(),);
+          },
+          child: Image.asset("assets/images/backbutton.png"),
         ),
+        title: Text("Take Away Menu",
+            style: Theme.of(context)
+                .textTheme
+                .titleLarge
+                ?.copyWith(fontSize: 18, fontWeight: FontWeight.w600)),
+        centerTitle: true,
       ),
+      // appBar: PreferredSize(
+      //   preferredSize: Size.fromHeight(width / 7),
+      //   child: AppBar(
+      //     automaticallyImplyLeading: false,
+      //     // primary: false,
+      //     //   title
+      //     backgroundColor: Colors.transparent,
+      //     elevation: 0,
+      //     centerTitle: true,
+      //     title: Padding(
+      //       padding: EdgeInsets.symmetric(
+      //         vertical: width / 10,
+      //       ),
+      //       child: Row(
+      //         mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      //         children: [
+      //           InkWell(
+      //               onTap: (){
+      //                 Navigator.push(context, MaterialPageRoute(builder: (context)=>CourseUi()));
+      //               },
+      //               child: Container(child: Image.asset("assets/drawericon/Group 17955.png"))),
+      //
+      //           Center(
+      //             child: Container(
+      //               // color: Colors.red,
+      //                 child: Center(
+      //                     child: Text(
+      //                       "Take Away Menu",
+      //                       style: Theme.of(context).textTheme.titleLarge?.copyWith(
+      //                           color: Color(0xff323643), fontWeight: FontWeight.w600),
+      //                     ))),
+      //           ),
+      //           Container()
+      //         ],
+      //       ),
+      //     ),
+      //   ),
+      // ),
       body: SafeArea(
           child: Column(
             children: [

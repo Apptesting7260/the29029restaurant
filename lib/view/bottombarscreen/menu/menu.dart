@@ -59,7 +59,8 @@ class _MenuState extends State<Menu> {
                   ),
                   itemCount: 2,
                   itemBuilder: (context, index) {
-                    return InkWell(
+                    return
+                      InkWell(
                       onTap: (){
                         Navigator.push(
                             context,

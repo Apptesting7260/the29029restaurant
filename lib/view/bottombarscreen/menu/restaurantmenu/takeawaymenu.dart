@@ -1,16 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:the29029restaurant/view/bottombarscreen/menu/onlineorder2.dart';
 import 'package:the29029restaurant/view/bottombarscreen/menu/restaurantmenu/takeawaymenu2.dart';
-import 'package:the29029restaurant/view/bottombarscreen/onlineorder/onlineorder.dart';
-
 class MenuUi extends StatefulWidget {
   const MenuUi({super.key});
-
   @override
   State<MenuUi> createState() => _MenuUiState();
 }
-
 class _MenuUiState extends State<MenuUi> {
   bool _hasBeenPressed = false;
   bool c2 = false;
@@ -22,65 +20,45 @@ class _MenuUiState extends State<MenuUi> {
     "Variety food",
     "Side",
   ];
-
   @override
   Widget build(BuildContext context) {
-    size = MediaQuery.of(context).size;
-    height = size.height;
-    width = size.width;
+    final height = MediaQuery.of(context).size.height;
+    final width = MediaQuery.of(context).size.width;
     return SafeArea(
       child: Scaffold(
         backgroundColor: Color(0xffFFFFFF),
-        appBar: PreferredSize(
-          preferredSize: Size.fromHeight(width / 7),
-          child: AppBar(
-            automaticallyImplyLeading: false,
-
-            // primary: false,
-            //   title
-            backgroundColor: Colors.transparent,
-            elevation: 0,
-            centerTitle: true,
-            title: Padding(
-              padding: EdgeInsets.symmetric(
-                vertical: width / 10,
-              ),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  InkWell(
-                      onTap: () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => OnlineOrder2(),
-                            ));
-                      },
-                      child: Image.asset("assets/drawericon/Group 17955.png")),
-                  Center(
-                    child: Container(
-                        // color: Colors.red,
-                        child: Center(
-                            child: Text(
-                      "Take Away Menu",
-                      style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                          color: Color(0xff32324D),
-                          fontWeight: FontWeight.w600),
-                    ))),
-                  ),
-                  Icon(
-                    Icons.search,
-                    size: width / 12,
-                    color: Color(0XFF911fda),
-                  )
-                ],
-              ),
-            ),
+        appBar: AppBar(
+          elevation: 0,
+          backgroundColor: Colors.white,
+          leading: GestureDetector(
+            onTap: () {
+              Get.to(
+                () => OnlineOrder2(),
+              );
+            },
+            child: Image.asset("assets/images/backbutton.png"),
           ),
+          title: Text("Take Away Menu",
+              style: Theme.of(context)
+                  .textTheme
+                  .titleLarge
+                  ?.copyWith(fontSize: 18, fontWeight: FontWeight.w600)),
+          centerTitle: true,
+          actions: [
+            Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 10),
+                child: Icon(
+                  Icons.search,
+                  size: height * 0.04,
+                  weight: width,
+                  color: Color(0XFF911fda),
+                ))
+          ],
         ),
         body: SafeArea(
           child: SingleChildScrollView(
             child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 SizedBox(
                   height: height / 25,
@@ -105,10 +83,15 @@ class _MenuUiState extends State<MenuUi> {
                             decoration: BoxDecoration(
                               color: choice == 1
                                   ? Color(0xff911FDA)
-                                  : Color(0xffffff),
+                                  :Colors.white,
+                              //Color(0xffffff),
                               borderRadius: BorderRadius.circular(20),
                               border: Border.all(
-                                  width: 1, color: Color(0xff9796A1)),
+                                  width: 1,
+                                  color: choice==1
+                                  ?Color(0xff911FDA)
+                                      :Color(0xff9796A1)
+                              ),
                             ),
                             child: Center(
                                 child: Text("Starters",
@@ -143,9 +126,13 @@ class _MenuUiState extends State<MenuUi> {
                               borderRadius: BorderRadius.circular(20),
                               color: choice == 2
                                   ? Color(0xff911FDA)
-                                  : Color(0xffffff),
+                                  :Colors.white,
                               border: Border.all(
-                                  width: 1, color: Color(0xff9796A1)),
+                                  width: 1,
+                                  color: choice==2
+                                      ?Color(0xff911FDA)
+                                      :Color(0xff9796A1)
+                              ),
                             ),
                             child: Center(
                                 child: Text("Main Course",
@@ -167,10 +154,6 @@ class _MenuUiState extends State<MenuUi> {
                             left: MediaQuery.of(context).size.width / 45),
                         child: InkWell(
                           onTap: () {
-                            // Navigator.push(
-                            //     context,
-                            //     MaterialPageRoute(
-                            //         builder: (context) => BotUi()));
                             choice = 3;
                             setState(() {});
                           },
@@ -178,10 +161,14 @@ class _MenuUiState extends State<MenuUi> {
                             decoration: BoxDecoration(
                               color: choice == 3
                                   ? Color(0xff911FDA)
-                                  : Color(0xffffff),
+                                  :Colors.white,
                               borderRadius: BorderRadius.circular(20),
                               border: Border.all(
-                                  width: 1, color: Color(0xff9796A1)),
+                                  width: 1,
+                                  color:choice ==3
+                                  ?Color(0xff911FDA)
+                                  :Color(0xff9796A1)
+                              ),
                             ),
                             child: Center(
                                 child: Text(
@@ -212,10 +199,13 @@ class _MenuUiState extends State<MenuUi> {
                             decoration: BoxDecoration(
                               color: choice == 4
                                   ? Color(0xff911FDA)
-                                  : Color(0xffffff),
+                                  :Colors.white,
                               borderRadius: BorderRadius.circular(20),
                               border: Border.all(
-                                  width: 1, color: Color(0xff9796A1)),
+                                  width: 1,
+                                  color:choice==4
+                                  ?Color(0xff911FDA)
+                                  :Color(0xff9796A1)),
                             ),
                             child: Center(
                                 child: Text("Side",
@@ -235,12 +225,10 @@ class _MenuUiState extends State<MenuUi> {
                     ],
                   ),
                 ),
-                SizedBox(
-                  height: height / 25,
-                ),
+                SizedBox(height: height*0.03),
                 Padding(
-                  padding: EdgeInsets.only(
-                      left: MediaQuery.of(context).size.width / 30),
+                  padding: EdgeInsets.only(right: 20, left: 20
+                      ),
                   child: Align(
                       alignment: Alignment.topLeft,
                       child: Text(
@@ -252,36 +240,39 @@ class _MenuUiState extends State<MenuUi> {
                         ),
                       )),
                 ),
-                SizedBox(
-                  height: height / 40,
-                ),
+                SizedBox(height: height * 0.02
+                    ),
                 Padding(
-                  padding: EdgeInsets.only(
-                      left: MediaQuery.of(context).size.width / 30),
-                  child: Row(
-                    children: [
-                      Container(
-                        height: height / 3,
-                        width: width / 2.2,
-                        decoration: BoxDecoration(
-                            color: Color(0xffF5F5F5),
-                            borderRadius: BorderRadius.circular(30)),
-                        child: Column(
-                          // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          children: [
-                            SizedBox(
-                              height: height / 140,
-                            ),
-                            Center(
-                                child: Image.asset(
-                                    'assets/drawericon/avocado sandwich.png')),
-                            SizedBox(
-                              height: height / 80,
-                            ),
-                            Column(
+                    padding: EdgeInsets.only(right: 20, left: 20),
+                    child: GridView.builder(
+                        physics: const NeverScrollableScrollPhysics(),
+                        shrinkWrap: true,
+                        gridDelegate:
+                            const SliverGridDelegateWithFixedCrossAxisCount(
+                          crossAxisCount: 2,
+                          childAspectRatio: .6,
+                          crossAxisSpacing: 11,
+                          mainAxisSpacing: 11,
+                          mainAxisExtent: 270,
+                        ),
+                        itemCount: 6,
+                        itemBuilder: (context, index) {
+                          return Container(
+                            height: height * 0.3,
+                            width: width * 0.4,
+                            decoration: BoxDecoration(
+                                color: Color(0xffF5F5F5),
+                                borderRadius: BorderRadius.circular(25)),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.center,
                               children: [
+                                SizedBox(height: height * 0.02),
+                                Center(
+                                    child: Image.asset(
+                                        'assets/drawericon/avocado sandwich.png')),
                                 Text(
-                                  "Mixed Platter:(ideal",
+                                  "Mixed Platter:(ideal\nFor Two People ",
+                                  textAlign: TextAlign.center,
                                   style: Theme.of(context)
                                       .textTheme
                                       .bodySmall
@@ -289,660 +280,32 @@ class _MenuUiState extends State<MenuUi> {
                                           color: Color(0xff32324D),
                                           fontWeight: FontWeight.w500),
                                 ),
-                                // SizedBox(
-                                //   height: height / 100,
-                                // ),
-                                Center(
-                                  child: Text(
-                                    "For Two People",
-                                    style: Theme.of(context)
-                                        .textTheme
-                                        .bodySmall
-                                        ?.copyWith(
-                                            color: Color(0xff32324D),
-                                            fontWeight: FontWeight.w500),
-                                    // style: TextStyle(
-                                    //     fontSize: 12,
-                                    //     fontWeight: FontWeight.w700,
-                                    //   fontFamily:GoogleFonts.outfit().fontFamily,
-                                    // ),
-                                  ),
+                                SizedBox(
+                                  height: height * 0.01,
                                 ),
-                              ],
-                            ),
-                            SizedBox(
-                              height: height / 100,
-                            ),
-                            Text(
-                              "Garlic chicken Tikka...",
-                              style: Theme.of(context)
-                                  .textTheme
-                                  .bodySmall
-                                  ?.copyWith(
-                                      color: Color(0xff9796A1),
-                                      fontWeight: FontWeight.w300),
-                            ),
-                            SizedBox(
-                              height: height / 100,
-                            ),
-                            Center(
-                              child: Text(
-                                "£12.95",
-                                style: Theme.of(context)
-                                    .textTheme
-                                    .bodySmall
-                                    ?.copyWith(
-                                        color: Color(0xff911FDA),
-                                        fontWeight: FontWeight.w700),
-                              ),
-                            )
-                          ],
-                        ),
-                      ),
-                      SizedBox(
-                        width: width / 35,
-                      ),
-                      Container(
-                        height: height / 3,
-                        width: width / 2.2,
-                        decoration: BoxDecoration(
-                            color: Color(0xffF5F5F5),
-                            borderRadius: BorderRadius.circular(30)),
-                        child: Column(
-                          // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          children: [
-                            SizedBox(
-                              height: height / 140,
-                            ),
-                            Center(
-                                child: Image.asset(
-                                    'assets/drawericon/avocado sandwich.png')),
-                            SizedBox(
-                              height: height / 80,
-                            ),
-                            Column(
-                              children: [
                                 Text(
-                                  "Mixed Platter:(ideal",
+                                  "Garlic chicken Tikka...",
                                   style: Theme.of(context)
                                       .textTheme
                                       .bodySmall
                                       ?.copyWith(
-                                          color: Color(0xff32324D),
-                                          fontWeight: FontWeight.w500),
+                                          color: Color(0xff9796A1),
+                                          fontWeight: FontWeight.w300),
                                 ),
-                                // SizedBox(
-                                //   height: height / 100,
-                                // ),
-                                Center(
-                                  child: Text(
-                                    "For Two People",
-                                    style: Theme.of(context)
-                                        .textTheme
-                                        .bodySmall
-                                        ?.copyWith(
-                                            color: Color(0xff32324D),
-                                            fontWeight: FontWeight.w500),
-                                    // style: TextStyle(
-                                    //     fontSize: 12,
-                                    //     fontWeight: FontWeight.w700,
-                                    //   fontFamily:GoogleFonts.outfit().fontFamily,
-                                    // ),
-                                  ),
-                                ),
-                              ],
-                            ),
-                            SizedBox(
-                              height: height / 100,
-                            ),
-                            Text(
-                              "Garlic chicken Tikka...",
-                              style: Theme.of(context)
-                                  .textTheme
-                                  .bodySmall
-                                  ?.copyWith(
-                                      color: Color(0xff9796A1),
-                                      fontWeight: FontWeight.w300),
-                            ),
-                            SizedBox(
-                              height: height / 100,
-                            ),
-                            Center(
-                              child: Text(
-                                "£12.95",
-                                style: Theme.of(context)
-                                    .textTheme
-                                    .bodySmall
-                                    ?.copyWith(
-                                        color: Color(0xff911FDA),
-                                        fontWeight: FontWeight.w700),
-                              ),
-                            )
-                          ],
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-                SizedBox(
-                  height: height / 40,
-                ),
-                Padding(
-                  padding: EdgeInsets.only(
-                      left: MediaQuery.of(context).size.width / 30),
-                  child: Row(
-                    children: [
-                      Container(
-                        height: height / 3,
-                        width: width / 2.2,
-                        decoration: BoxDecoration(
-                            color: Color(0xffF5F5F5),
-                            borderRadius: BorderRadius.circular(30)),
-                        child: Column(
-                          // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          children: [
-                            SizedBox(
-                              height: height / 140,
-                            ),
-                            Center(
-                                child: Image.asset(
-                                    'assets/drawericon/avocado sandwich.png')),
-                            SizedBox(
-                              height: height / 80,
-                            ),
-                            Column(
-                              children: [
+                                SizedBox(height: height * 0.01),
                                 Text(
-                                  "Mixed Platter:(ideal",
+                                  "£12.95",
                                   style: Theme.of(context)
                                       .textTheme
                                       .bodySmall
                                       ?.copyWith(
-                                          color: Color(0xff32324D),
-                                          fontWeight: FontWeight.w500),
-                                ),
-                                // SizedBox(
-                                //   height: height / 100,
-                                // ),
-                                Center(
-                                  child: Text(
-                                    "For Two People",
-                                    style: Theme.of(context)
-                                        .textTheme
-                                        .bodySmall
-                                        ?.copyWith(
-                                            color: Color(0xff32324D),
-                                            fontWeight: FontWeight.w500),
-                                    // style: TextStyle(
-                                    //     fontSize: 12,
-                                    //     fontWeight: FontWeight.w700,
-                                    //   fontFamily:GoogleFonts.outfit().fontFamily,
-                                    // ),
-                                  ),
+                                          color: Color(0xff911FDA),
+                                          fontWeight: FontWeight.w700),
                                 ),
                               ],
                             ),
-                            SizedBox(
-                              height: height / 100,
-                            ),
-                            Text(
-                              "Garlic chicken Tikka...",
-                              style: Theme.of(context)
-                                  .textTheme
-                                  .bodySmall
-                                  ?.copyWith(
-                                      color: Color(0xff9796A1),
-                                      fontWeight: FontWeight.w300),
-                            ),
-                            SizedBox(
-                              height: height / 100,
-                            ),
-                            Center(
-                              child: Text(
-                                "£12.95",
-                                style: Theme.of(context)
-                                    .textTheme
-                                    .bodySmall
-                                    ?.copyWith(
-                                        color: Color(0xff911FDA),
-                                        fontWeight: FontWeight.w700),
-                              ),
-                            )
-                          ],
-                        ),
-                      ),
-                      SizedBox(
-                        width: width / 35,
-                      ),
-                      Container(
-                        height: height / 3,
-                        width: width / 2.2,
-                        decoration: BoxDecoration(
-                            color: Color(0xffF5F5F5),
-                            borderRadius: BorderRadius.circular(30)),
-                        child: Column(
-                          // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          children: [
-                            SizedBox(
-                              height: height / 140,
-                            ),
-                            Center(
-                                child: Image.asset(
-                                    'assets/drawericon/avocado sandwich.png')),
-                            SizedBox(
-                              height: height / 80,
-                            ),
-                            Column(
-                              children: [
-                                Text(
-                                  "Mixed Platter:(ideal",
-                                  style: Theme.of(context)
-                                      .textTheme
-                                      .bodySmall
-                                      ?.copyWith(
-                                          color: Color(0xff32324D),
-                                          fontWeight: FontWeight.w500),
-                                ),
-                                // SizedBox(
-                                //   height: height / 100,
-                                // ),
-                                Center(
-                                  child: Text(
-                                    "For Two People",
-                                    style: Theme.of(context)
-                                        .textTheme
-                                        .bodySmall
-                                        ?.copyWith(
-                                            color: Color(0xff32324D),
-                                            fontWeight: FontWeight.w500),
-                                    // style: TextStyle(
-                                    //     fontSize: 12,
-                                    //     fontWeight: FontWeight.w700,
-                                    //   fontFamily:GoogleFonts.outfit().fontFamily,
-                                    // ),
-                                  ),
-                                ),
-                              ],
-                            ),
-                            SizedBox(
-                              height: height / 100,
-                            ),
-                            Text(
-                              "Garlic chicken Tikka...",
-                              style: Theme.of(context)
-                                  .textTheme
-                                  .bodySmall
-                                  ?.copyWith(
-                                      color: Color(0xff9796A1),
-                                      fontWeight: FontWeight.w300),
-                            ),
-                            SizedBox(
-                              height: height / 100,
-                            ),
-                            Center(
-                              child: Text(
-                                "£12.95",
-                                style: Theme.of(context)
-                                    .textTheme
-                                    .bodySmall
-                                    ?.copyWith(
-                                        color: Color(0xff911FDA),
-                                        fontWeight: FontWeight.w700),
-                              ),
-                            )
-                          ],
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-                SizedBox(
-                  height: height / 40,
-                ),
-                Padding(
-                  padding: EdgeInsets.only(
-                      left: MediaQuery.of(context).size.width / 30),
-                  child: Row(
-                    children: [
-                      Container(
-                        height: height / 3,
-                        width: width / 2.2,
-                        decoration: BoxDecoration(
-                            color: Color(0xffF5F5F5),
-                            borderRadius: BorderRadius.circular(30)),
-                        child: Column(
-                          // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          children: [
-                            SizedBox(
-                              height: height / 140,
-                            ),
-                            Center(
-                                child: Image.asset(
-                                    'assets/drawericon/avocado sandwich.png')),
-                            SizedBox(
-                              height: height / 80,
-                            ),
-                            Column(
-                              children: [
-                                Text(
-                                  "Mixed Platter:(ideal",
-                                  style: Theme.of(context)
-                                      .textTheme
-                                      .bodySmall
-                                      ?.copyWith(
-                                          color: Color(0xff32324D),
-                                          fontWeight: FontWeight.w500),
-                                ),
-                                // SizedBox(
-                                //   height: height / 100,
-                                // ),
-                                Center(
-                                  child: Text(
-                                    "For Two People",
-                                    style: Theme.of(context)
-                                        .textTheme
-                                        .bodySmall
-                                        ?.copyWith(
-                                            color: Color(0xff32324D),
-                                            fontWeight: FontWeight.w500),
-                                    // style: TextStyle(
-                                    //     fontSize: 12,
-                                    //     fontWeight: FontWeight.w700,
-                                    //   fontFamily:GoogleFonts.outfit().fontFamily,
-                                    // ),
-                                  ),
-                                ),
-                              ],
-                            ),
-                            SizedBox(
-                              height: height / 100,
-                            ),
-                            Text(
-                              "Garlic chicken Tikka...",
-                              style: Theme.of(context)
-                                  .textTheme
-                                  .bodySmall
-                                  ?.copyWith(
-                                      color: Color(0xff9796A1),
-                                      fontWeight: FontWeight.w300),
-                            ),
-                            SizedBox(
-                              height: height / 100,
-                            ),
-                            Center(
-                              child: Text(
-                                "£12.95",
-                                style: Theme.of(context)
-                                    .textTheme
-                                    .bodySmall
-                                    ?.copyWith(
-                                        color: Color(0xff911FDA),
-                                        fontWeight: FontWeight.w700),
-                              ),
-                            )
-                          ],
-                        ),
-                      ),
-                      SizedBox(
-                        width: width / 35,
-                      ),
-                      Container(
-                        height: height / 3,
-                        width: width / 2.2,
-                        decoration: BoxDecoration(
-                            color: Color(0xffF5F5F5),
-                            borderRadius: BorderRadius.circular(30)),
-                        child: Column(
-                          // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          children: [
-                            SizedBox(
-                              height: height / 140,
-                            ),
-                            Center(
-                                child: Image.asset(
-                                    'assets/drawericon/avocado sandwich.png')),
-                            SizedBox(
-                              height: height / 80,
-                            ),
-                            Column(
-                              children: [
-                                Text(
-                                  "Mixed Platter:(ideal",
-                                  style: Theme.of(context)
-                                      .textTheme
-                                      .bodySmall
-                                      ?.copyWith(
-                                          color: Color(0xff32324D),
-                                          fontWeight: FontWeight.w500),
-                                ),
-                                // SizedBox(
-                                //   height: height / 100,
-                                // ),
-                                Center(
-                                  child: Text(
-                                    "For Two People",
-                                    style: Theme.of(context)
-                                        .textTheme
-                                        .bodySmall
-                                        ?.copyWith(
-                                            color: Color(0xff32324D),
-                                            fontWeight: FontWeight.w500),
-                                    // style: TextStyle(
-                                    //     fontSize: 12,
-                                    //     fontWeight: FontWeight.w700,
-                                    //   fontFamily:GoogleFonts.outfit().fontFamily,
-                                    // ),
-                                  ),
-                                ),
-                              ],
-                            ),
-                            SizedBox(
-                              height: height / 100,
-                            ),
-                            Text(
-                              "Garlic chicken Tikka...",
-                              style: Theme.of(context)
-                                  .textTheme
-                                  .bodySmall
-                                  ?.copyWith(
-                                      color: Color(0xff9796A1),
-                                      fontWeight: FontWeight.w300),
-                            ),
-                            SizedBox(
-                              height: height / 100,
-                            ),
-                            Center(
-                              child: Text(
-                                "£12.95",
-                                style: Theme.of(context)
-                                    .textTheme
-                                    .bodySmall
-                                    ?.copyWith(
-                                        color: Color(0xff911FDA),
-                                        fontWeight: FontWeight.w700),
-                              ),
-                            )
-                          ],
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-                SizedBox(
-                  height: height / 40,
-                ),
-                Padding(
-                  padding: EdgeInsets.only(
-                      left: MediaQuery.of(context).size.width / 30),
-                  child: Row(
-                    children: [
-                      Container(
-                        height: height / 3,
-                        width: width / 2.2,
-                        decoration: BoxDecoration(
-                            color: Color(0xffF5F5F5),
-                            borderRadius: BorderRadius.circular(30)),
-                        child: Column(
-                          // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          children: [
-                            SizedBox(
-                              height: height / 140,
-                            ),
-                            Center(
-                                child: Image.asset(
-                                    'assets/drawericon/avocado sandwich.png')),
-                            SizedBox(
-                              height: height / 80,
-                            ),
-                            Column(
-                              children: [
-                                Text(
-                                  "Mixed Platter:(ideal",
-                                  style: Theme.of(context)
-                                      .textTheme
-                                      .bodySmall
-                                      ?.copyWith(
-                                          color: Color(0xff32324D),
-                                          fontWeight: FontWeight.w500),
-                                ),
-                                // SizedBox(
-                                //   height: height / 100,
-                                // ),
-                                Center(
-                                  child: Text(
-                                    "For Two People",
-                                    style: Theme.of(context)
-                                        .textTheme
-                                        .bodySmall
-                                        ?.copyWith(
-                                            color: Color(0xff32324D),
-                                            fontWeight: FontWeight.w500),
-                                    // style: TextStyle(
-                                    //     fontSize: 12,
-                                    //     fontWeight: FontWeight.w700,
-                                    //   fontFamily:GoogleFonts.outfit().fontFamily,
-                                    // ),
-                                  ),
-                                ),
-                              ],
-                            ),
-                            SizedBox(
-                              height: height / 100,
-                            ),
-                            Text(
-                              "Garlic chicken Tikka...",
-                              style: Theme.of(context)
-                                  .textTheme
-                                  .bodySmall
-                                  ?.copyWith(
-                                      color: Color(0xff9796A1),
-                                      fontWeight: FontWeight.w300),
-                            ),
-                            SizedBox(
-                              height: height / 100,
-                            ),
-                            Center(
-                              child: Text(
-                                "£12.95",
-                                style: Theme.of(context)
-                                    .textTheme
-                                    .bodySmall
-                                    ?.copyWith(
-                                        color: Color(0xff911FDA),
-                                        fontWeight: FontWeight.w700),
-                              ),
-                            )
-                          ],
-                        ),
-                      ),
-                      SizedBox(
-                        width: width / 35,
-                      ),
-                      Container(
-                        height: height / 3,
-                        width: width / 2.2,
-                        decoration: BoxDecoration(
-                            color: Color(0xffF5F5F5),
-                            borderRadius: BorderRadius.circular(30)),
-                        child: Column(
-                          // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          children: [
-                            SizedBox(
-                              height: height / 140,
-                            ),
-                            Center(
-                                child: Image.asset(
-                                    'assets/drawericon/avocado sandwich.png')),
-                            SizedBox(
-                              height: height / 80,
-                            ),
-                            Column(
-                              children: [
-                                Text(
-                                  "Mixed Platter:(ideal",
-                                  style: Theme.of(context)
-                                      .textTheme
-                                      .bodySmall
-                                      ?.copyWith(
-                                          color: Color(0xff32324D),
-                                          fontWeight: FontWeight.w500),
-                                ),
-                                // SizedBox(
-                                //   height: height / 100,
-                                // ),
-                                Center(
-                                  child: Text(
-                                    "For Two People",
-                                    style: Theme.of(context)
-                                        .textTheme
-                                        .bodySmall
-                                        ?.copyWith(
-                                            color: Color(0xff32324D),
-                                            fontWeight: FontWeight.w500),
-                                    // style: TextStyle(
-                                    //     fontSize: 12,
-                                    //     fontWeight: FontWeight.w700,
-                                    //   fontFamily:GoogleFonts.outfit().fontFamily,
-                                    // ),
-                                  ),
-                                ),
-                              ],
-                            ),
-                            SizedBox(
-                              height: height / 100,
-                            ),
-                            Text(
-                              "Garlic chicken Tikka...",
-                              style: Theme.of(context)
-                                  .textTheme
-                                  .bodySmall
-                                  ?.copyWith(
-                                      color: Color(0xff9796A1),
-                                      fontWeight: FontWeight.w300),
-                            ),
-                            SizedBox(
-                              height: height / 100,
-                            ),
-                            Center(
-                              child: Text(
-                                "£12.95",
-                                style: Theme.of(context)
-                                    .textTheme
-                                    .bodySmall
-                                    ?.copyWith(
-                                        color: Color(0xff911FDA),
-                                        fontWeight: FontWeight.w700),
-                              ),
-                            )
-                          ],
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-                SizedBox(
-                  height: height / 40,
-                ),
+                          );
+                        })),
               ],
             ),
           ),
