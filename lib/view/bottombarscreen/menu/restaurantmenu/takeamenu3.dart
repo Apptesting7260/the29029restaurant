@@ -1,26 +1,22 @@
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:the29029restaurant/view/bottombarscreen/menu/restaurantmenu/takeawaymenu2.dart';
 
-class OpenUi extends StatefulWidget {
-  const OpenUi({super.key});
+class Takeawaymenu3 extends StatefulWidget {
+  const Takeawaymenu3({super.key});
 
   @override
-  State<OpenUi> createState() => _OpenUiState();
+  State<Takeawaymenu3> createState() => _Takeawaymenu3State();
 }
 
-class _OpenUiState extends State<OpenUi> {
+class _Takeawaymenu3State extends State<Takeawaymenu3> {
   var size, height, width;
   @override
   Widget build(BuildContext context) {
-    size = MediaQuery.of(context).size;
-    height = size.height;
-    width = size.width;
+    final height = MediaQuery.of(context).size.height;
+    final width = MediaQuery.of(context).size.width;
     return Scaffold(
-
       backgroundColor: Color(0xffFFFFFF),
       appBar: AppBar(
         elevation: 0,
@@ -38,122 +34,81 @@ class _OpenUiState extends State<OpenUi> {
                 ?.copyWith(fontSize: 18, fontWeight: FontWeight.w600)),
         centerTitle: true,
       ),
-      // appBar: PreferredSize(
-      //   preferredSize: Size.fromHeight(width / 7),
-      //   child: AppBar(
-      //     automaticallyImplyLeading: false,
-      //     // primary: false,
-      //     //   title
-      //     backgroundColor: Colors.transparent,
-      //     elevation: 0,
-      //     centerTitle: true,
-      //     title: Padding(
-      //       padding: EdgeInsets.symmetric(
-      //         vertical: width / 10,
-      //       ),
-      //       child: Row(
-      //         mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      //         children: [
-      //           InkWell(
-      //               onTap: (){
-      //                 Navigator.push(context, MaterialPageRoute(builder: (context)=>CourseUi()));
-      //               },
-      //               child: Container(child: Image.asset("assets/drawericon/Group 17955.png"))),
-      //
-      //           Center(
-      //             child: Container(
-      //               // color: Colors.red,
-      //                 child: Center(
-      //                     child: Text(
-      //                       "Take Away Menu",
-      //                       style: Theme.of(context).textTheme.titleLarge?.copyWith(
-      //                           color: Color(0xff323643), fontWeight: FontWeight.w600),
-      //                     ))),
-      //           ),
-      //           Container()
-      //         ],
-      //       ),
-      //     ),
-      //   ),
-      // ),
       body: SafeArea(
-          child: Column(
-            children: [
-              SizedBox(
 
-                height: height/20,
-              ),
-              Center(
-                child: InkWell(
-                  onTap: (){
-                   // Navigator.push(context, MaterialPageRoute(builder: (Context)=>LocationUi()));
-                  },
-                  child: Container(
-                      height: height / 1.4,
-                      width: width / 1.2,
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(30),
-                          color: Color(0xffF5F5F5)),
-                      child: Column(
-                        // mainAxisAlignment: MainAxisAlignment.spaceAround,
-                        children: [
-                          SizedBox(
+          child:
+          Center(
+            child:
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                SizedBox(height: height*0.05),
+                Padding(padding: EdgeInsets.only(
+                    right: 20,left: 20
+                ),
+                  child:
+                  InkWell(
+                    onTap: (){
+                      // Navigator.push(context, MaterialPageRoute(builder: (Context)=>LocationUi()));
+                    },
+                    child:
+                    Container(
+                        height: height*0.6,
+                        width: width*0.8,
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(25),
+                            color: Color(0xffF5F5F5)),
+                        child: Column(
+                          // mainAxisAlignment: MainAxisAlignment.spaceAround,
+                          children: [
+                            SizedBox(
 
-                            height: height/30,
-                          ),
-                          Container(
-                            height: height / 2.8,
-                            width: width / 1.55,
-                            // color: Colors.red,
-                            child: Image.asset(
-                              "assets/drawericon/iii.png",
-                              fit: BoxFit.fill,
+                              height: height/30,
                             ),
-                          ),
-                          SizedBox(height: height/80,),
-                          Center(
-                            child: Center(
-                                child: Text(
-                                  "Piyaza Chicken",
-                                  style: Theme.of(context).textTheme.displaySmall?.copyWith(
-                                      color: Color(
-                                        0xff32324D,
-                                      ),
-                                      fontSize: 22,
-                                      fontWeight: FontWeight.w500),
-                                )),
-                          ),
-                          SizedBox(height: height/80,),
-
-                          Padding(
-                            padding: EdgeInsets.symmetric(horizontal: width / 20),
-                            child: Center(
-                                child: Text(
-                                  "Strips of Corn Fed Chicken breast cooked \nin a jalifrasiee style sauce with onion and \n    green chilies, accompanied with light\n         "
-                                      "                   herbed rice.",
-                                  style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                                      color: Color(0xff9796A1), fontWeight: FontWeight.w300),
-                                )),
-                          ),
-                          SizedBox(
-
-                            height: height/55,
-                          ),
-                          Center(
-                            child: Text(
+                            Container(
+                              height: height*0.3,
+                              width: width*0.6,
+                              child: Image.asset(
+                                "assets/drawericon/iii.png",
+                                fit: BoxFit.fill,
+                              ),
+                            ),
+                            SizedBox(height:height*0.03),
+                            Text("Piyaza Chicken",
+                              style: Theme.of(context).textTheme.displaySmall?.copyWith(
+                                  color: Colors.black,
+                                  fontSize: 22,
+                                  fontWeight: FontWeight.w500),
+                            ),
+                            SizedBox(height: height*0.01),
+                            Padding(
+                              padding: EdgeInsets.only(right: 20,left:20),
+                              child:  Text(
+                                "Strips of Corn Fed Chicken breast cooked\nin a jalifrasiee style sauce with onion and\ngreen chilies,accompanied with light\nherbed rice.",
+                                textAlign: TextAlign.center,
+                                style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                                    color: Color(0xff9796A1), fontWeight: FontWeight.w300),
+                              ),
+                            ),
+                            SizedBox(height: height*0.03),
+                            Text(
                               "£11.55",
                               style: Theme.of(context).textTheme.displayLarge?.copyWith(
                                   color: Color(0xff911FDA),
                                   fontSize: 22,
                                   fontWeight: FontWeight.w700),
                             ),
-                          )
-                        ],
-                      )),
-                ),
-              ),
-            ],
-          )),
+
+                          ],
+                        )),
+                  ),
+                )
+
+              ],
+            ),
+          )
+
+      ),
 
     );
   }

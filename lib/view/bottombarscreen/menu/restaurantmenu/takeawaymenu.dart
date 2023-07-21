@@ -109,6 +109,7 @@ class _MenuUiState extends State<MenuUi> {
                           ),
                         ),
                       ),
+
                       Padding(
                         padding: EdgeInsets.only(
                             left: MediaQuery.of(context).size.width / 45),
@@ -269,7 +270,8 @@ class _MenuUiState extends State<MenuUi> {
                                 SizedBox(height: height * 0.02),
                                 Center(
                                     child: Image.asset(
-                                        'assets/drawericon/avocado sandwich.png')),
+                                        'assets/drawericon/avocado sandwich.png')
+                                ),
                                 Text(
                                   "Mixed Platter:(ideal\nFor Two People ",
                                   textAlign: TextAlign.center,
@@ -277,7 +279,7 @@ class _MenuUiState extends State<MenuUi> {
                                       .textTheme
                                       .bodySmall
                                       ?.copyWith(
-                                          color: Color(0xff32324D),
+                                          color: Colors.black,
                                           fontWeight: FontWeight.w500),
                                 ),
                                 SizedBox(
@@ -305,7 +307,9 @@ class _MenuUiState extends State<MenuUi> {
                               ],
                             ),
                           );
-                        })),
+                        })
+                ),
+                SizedBox(height: height*0.01),
               ],
             ),
           ),
