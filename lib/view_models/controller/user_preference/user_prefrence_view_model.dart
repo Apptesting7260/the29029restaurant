@@ -19,7 +19,7 @@
 //       SharedPreferences sp = await SharedPreferences.getInstance();
 //       String? status = sp.getString('status');
 //       String? message = sp.getString('message');
-//       bool? userData = sp.getBool('userData');
+//       bool? userData = sp.getBool('user_data');
 //
 //       return LoginModel(
 //           status : status,

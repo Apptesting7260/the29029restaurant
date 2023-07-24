@@ -16,6 +16,9 @@ import 'package:the29029restaurant/models/ResetpassOTP_Model/reserpassotp_model.
 import 'package:the29029restaurant/models/Resetpassword_Model/resetpassword_model.dart';
 import 'package:the29029restaurant/models/Sign_up_Model/sign_up_model.dart';
 import 'package:the29029restaurant/models/Starters_Model/starters_model.dart';
+import 'package:the29029restaurant/models/Takeawaymenu_Model/take_way_menu_model.dart';
+import 'package:the29029restaurant/models/home/user_list_model.dart';
+import 'package:the29029restaurant/models/menu_page_mpdel.dart';
 import 'package:the29029restaurant/res/app_url/app_url.dart';
 
 
@@ -50,6 +53,22 @@ class AuthRepository {
     return CreatepassModel.fromJson(response);
   }
 
+
+  Future<HomeModel> home_api(var data) async{
+    dynamic response = await _apiService.postApi(data, AppUrl.homepage);
+    return HomeModel.fromJson(response);
+  }
+
+
+  Future<MenuPage> menueapi(var data) async{
+    dynamic response = await _apiService.postApi(data, AppUrl.menueapi);
+    return MenuPage.fromJson(response);
+  }
+
+  Future<TakewayModel> takewayapi(var data) async{
+    dynamic response = await _apiService.postApi(data, AppUrl.onlineorderapi);
+    return TakewayModel.fromJson(response);
+  }
 
 
 

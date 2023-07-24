@@ -17,7 +17,6 @@ class _WelcomeState extends State<Welcome> {
     final height= MediaQuery.of(context).size.height;
     final width= MediaQuery.of(context).size.width;
     return Scaffold(
-      //resizeToAvoidBottomInset: false,
       body: Stack(
         children: [
           Container(
@@ -37,11 +36,7 @@ class _WelcomeState extends State<Welcome> {
                     ),
                     GestureDetector(
                       onTap: () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => LoginPage(),
-                            ));
+                        Get.to(LoginPage());
                       },
                       child: Align(
                         alignment: Alignment.centerRight,
@@ -55,7 +50,7 @@ class _WelcomeState extends State<Welcome> {
                             child: Text(
                               "Skip",
                               style: Theme.of(context).textTheme. bodyLarge?.copyWith(
-                                fontSize: 14,color: Color(0xff41004C),fontWeight: FontWeight.w400,
+                                fontSize: 14,color: Color(0xff41004C),fontWeight: FontWeight.w500,
                                 fontFamily: GoogleFonts.outfit().fontFamily
                               ),
                             ),
@@ -86,7 +81,6 @@ class _WelcomeState extends State<Welcome> {
                     ),
                     SizedBox(
                         height: height*0.01,
-                        //height: 10
                        ),
                     Text(
                       "Contemparary indian and\n Nepaless Cuisine",
@@ -99,7 +93,7 @@ class _WelcomeState extends State<Welcome> {
                       ),
                     ),
                     Spacer(),
-                    //SizedBox(height: 160),
+
                     Center(
                       child: ElevatedButton(
                           onPressed: () {

@@ -12,7 +12,9 @@ class AppUrl {
   static const String createpassword = '${baseurl}resetpass_change-api?'; //same password
 
 
-  static const String homescreenapi='${baseurl}home_page-api';
+  static const String homepage='${baseurl}home_page-api';
+  static const String menueapi='${baseurl}menu_bar-api';
+  static const String onlineorderapi='${baseurl}take_away_menu-api';
   static const String partymenuapi='${baseurl}party_menu-api';
   static const String startersapi='${baseurl}party_menu_single-api';
 

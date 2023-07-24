@@ -1,5 +1,7 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
 import 'package:the29029restaurant/view/welcome.dart';
 
 
@@ -14,15 +16,22 @@ class _SplashState extends State<Splash> {
   void initState() {
     super.initState();
     Timer(Duration(seconds:10), () {
-      Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) =>  Welcome(),
-      ));
+      Get.to(Welcome());
+      //Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) =>  Welcome(),
+     // ));
     });
   }
   @override
   Widget build(BuildContext context) {
+    final height= MediaQuery.of(context).size.height;
+    final width= MediaQuery.of(context).size.width;
     return Scaffold(
       backgroundColor: Colors.white,
-      body: Image.asset("assets/images/Splash.jpg",height:800,width: 400,fit:BoxFit.fill),
+      body:
+     Container(
+       height: height,width: width,
+       child: Image.asset("assets/images/Splash.jpg",fit:BoxFit.fill),
+     )
     );
   }
 }
