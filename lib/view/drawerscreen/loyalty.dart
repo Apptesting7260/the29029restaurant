@@ -100,8 +100,8 @@ class _LoyaltyState extends State<Loyalty> {
                        color: Colors.white,
                        fontFamily: GoogleFonts.outfit().fontFamily),
                    onTap: () { },
-                   height: 50,
-                   width: 200),
+                 height: height*.07,
+                 width: width*0.5,),
 
                      ],
                    ),

@@ -20,10 +20,6 @@ class _VerificationCodeState extends State<VerificationCode> {
   ResetpasswordOTP_controller resetpasswordOTP_controller = Get.put(ResetpasswordOTP_controller());
 
 
-  //final pinController = TextEditingController();
-
-
-
   final focusNode = FocusNode();
   final formKey = GlobalKey<FormState>();
 
@@ -179,8 +175,8 @@ class _VerificationCodeState extends State<VerificationCode> {
                         resetpasswordOTP_controller.pinController.value.clear();
                       }
                     },
-                    height: 50,
-                    width: 200),
+                    height: height*.07,
+                    width: width*0.5),
               ],
             ),
           ),

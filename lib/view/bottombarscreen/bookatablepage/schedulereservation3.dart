@@ -242,17 +242,17 @@ class _ScheduleReservation3State extends State<ScheduleReservation3> {
                           if (_formKey.currentState!.validate()) {
                             _formKey.currentState!.save();
                             _submit();
-                            bookatable_controller.fullnameController.value.clear();
-                            bookatable_controller.emailController.value.clear();
-                            bookatable_controller.phonenumberController.value.clear();
-                            bookatable_controller.messageController.value.clear();
-                            bookatable_controller.dateController.value.clear();
+                            // bookatable_controller.fullnameController.value.clear();
+                            // bookatable_controller.emailController.value.clear();
+                            // bookatable_controller.phonenumberController.value.clear();
+                            // bookatable_controller.messageController.value.clear();
+                            // bookatable_controller.dateController.value.clear();
 
                             //   Get.back();
                           }
                         },
-                        height: height * 0.06,
-                        width: width * 0.5),
+                      height: height*.07,
+                      width: width*0.5,),
                   ),
                   // SizedBox(height: height*0.1),
                   SizedBox(height: height * 0.05),

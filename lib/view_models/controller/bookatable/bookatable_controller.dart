@@ -43,14 +43,11 @@ class Bookatable_controller extends GetxController {
       'REMOTE_ADDR' : '49.36.234.97',
 
     };
-    print(data);
+      print(data);
     _api.Bookatableapiusapi(data).then((value){
       loading.value = false ;
-
-      //Get.to(LoginPage());
-
+      print(value);
       Utils.snackBar('Successfully', 'Book the Table');
-
 
     }).onError((error, stackTrace){
       loading.value = false ;

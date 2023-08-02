@@ -5,8 +5,10 @@ import 'package:the29029restaurant/res/components/general_exception.dart';
 import 'package:the29029restaurant/res/components/internet_exceptions_widget.dart';
 import 'package:the29029restaurant/view/bottombarscreen/menu/onlineorder2.dart';
 import 'package:get/get.dart';
+import 'package:the29029restaurant/view/bottombarscreen/menu/ourpartymenu/partymenu.dart';
 import 'package:the29029restaurant/view_models/controller/menu_page_controller.dart';
  int ?categoryid;
+ String ?slug;
 class Menu extends StatefulWidget {
 
   const Menu({super.key});
@@ -51,9 +53,7 @@ class _MenuState extends State<Menu> {
             child: Padding(
                 padding: const EdgeInsets.only(right: 20, left: 20),
                 child:
-                Obx(
-
-                        () {
+                Obx( () {
                       switch (menu_Controller.rxRequestStatus.value) {
                         case Status.LOADING:
                           return const Center(child: CircularProgressIndicator());
@@ -64,13 +64,10 @@ class _MenuState extends State<Menu> {
                             );
                           } else {
                             return GeneralExceptionWidget(onPress: () {});
-                          }
-                        case Status.COMPLETED:
-                          return
-                            Column(
+                          } case Status.COMPLETED:
+                          return Column(
                               crossAxisAlignment: CrossAxisAlignment.center,
-                              children: [
-                                SizedBox(height: height * 0.02),
+                              children: [ SizedBox(height: height * 0.02),
                                 GridView.builder(
                                   physics: const NeverScrollableScrollPhysics(),
                                   shrinkWrap: true,
@@ -85,15 +82,32 @@ class _MenuState extends State<Menu> {
                                   itemBuilder: (context, index) {
                                     return InkWell(
                                       onTap: (){
-                                        setState(() {
-                                          categoryid= menu_Controller.userList.value.
-                                          categoryMainMenu![index].categoryId;
-                                        });
-                                        // print(categoryid);
 
-                                        Get.to(()=> OnlineOrder2());
-                                      },
-                                      child: Container(
+                                        // print(   menu_Controller.userList.value.
+                                        // categoryMainMenu![index].categoryName.toString(),);
+
+
+                                        setState(() {
+                                          categoryid =
+                                              menu_Controller.userList.value.
+                                              categoryMainMenu![index]
+                                                  .categoryId;
+
+                                          slug =
+                                              menu_Controller.userList.value.
+                                              categoryMainMenu![index]
+                                                  .categorySlug;
+                                        });
+
+                                        if(menu_Controller.userList.value.
+                                        categoryMainMenu![index].categoryName.toString()=="Party Menus"){
+
+                                          Get.to(PartyMenu());
+                                        }
+                                        else {
+                                          Get.to(() => OnlineOrder2());
+                                        }
+                      }, child: Container(
                                         height: 100,
                                         width: 235,
                                         decoration: BoxDecoration(
@@ -164,81 +178,6 @@ class _MenuState extends State<Menu> {
                                     );
                                   },
                                 ),
-                                //2 nd party menu
-                                //  SizedBox(height: height * 0.02),
-                                // GridView.builder(
-                                //   physics: const NeverScrollableScrollPhysics(),
-                                //   shrinkWrap: true,
-                                //   gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                                //     crossAxisCount: 2,
-                                //     childAspectRatio: .6,
-                                //     crossAxisSpacing: 12.0,
-                                //     mainAxisSpacing: 12.0,
-                                //     mainAxisExtent: 270,
-                                //   ),
-                                //   itemCount: 2,
-                                //   itemBuilder: (context, index) {
-                                //     return InkWell(
-                                //       onTap: (){
-                                //         Navigator.push(
-                                //             context,
-                                //             MaterialPageRoute(
-                                //               builder: (context) => PartyMenu(),
-                                //             ));
-                                //       },
-                                //       child: Container(
-                                //         height: 100,
-                                //         width: 235,
-                                //         decoration: BoxDecoration(
-                                //             color: Colors.white,
-                                //             borderRadius: BorderRadius.circular(15)),
-                                //         child: Column(
-                                //             crossAxisAlignment: CrossAxisAlignment.start,
-                                //             children: [
-                                //               //SizedBox(height: 5),
-                                //               ClipRRect(
-                                //                 borderRadius: BorderRadius.circular(15),
-                                //                 child: Image.asset(
-                                //                   "assets/images/party.png",
-                                //                   //fit: BoxFit.fill,
-                                //                 ),
-                                //               ),
-                                //               SizedBox(height: height * 0.02),
-                                //               Text(
-                                //                 "Our Party Menu",
-                                //                 style: Theme.of(context).textTheme.bodyLarge,
-                                //               ),
-                                //               SizedBox(height: height * 0.01),
-                                //               Text(
-                                //                 "The 29029 party menu brings a unique culinary extravaganza !",
-                                //                 // style: Theme.of(context).textTheme.
-                                //                 // labelSmall?.copyWith(
-                                //                 //   color: Color(0xff9796A1),
-                                //                 //  // fontFamily: GoogleFonts.outfit().fontFamily,
-                                //                 //   fontWeight: FontWeight.w300
-                                //                 // ),
-                                //                 style: TextStyle(
-                                //                     color: Color(0xff9796A1),
-                                //                     fontSize: 10,
-                                //                     fontFamily: GoogleFonts.outfit().fontFamily,
-                                //                     fontWeight: FontWeight.w300),
-                                //               ),
-                                //               SizedBox(height:height*0.02),
-                                //               Text(
-                                //                 "Go to Menu >",
-                                //                 style: Theme.of(context)
-                                //                     .textTheme
-                                //                     .bodySmall
-                                //                     ?.copyWith(fontWeight: FontWeight.w400,
-                                //                     color: Color(0xff41004C),fontSize: 12,
-                                //                     fontFamily:
-                                //                     GoogleFonts.outfit().fontFamily),
-                                //               )
-                                //             ]),
-                                //       ),
-                                //     );
-                                //   },
-                                // ),
 
                                 SizedBox(height: height*0.01,),
                               ],

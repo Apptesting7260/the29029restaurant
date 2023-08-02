@@ -229,8 +229,8 @@ class _CreatePasswordState extends State<CreatePassword> {
                           createpass_controller.confirmpasswordController.value.clear();
                         }
                       },
-                      height: 50,
-                      width: 200),
+                      height: height*.07,
+                      width: width*0.5),
                 ),
               ],
             ),

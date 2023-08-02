@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:the29029restaurant/view/login.dart';
-import 'package:the29029restaurant/view/verificationcode.dart';
 import 'package:the29029restaurant/view_models/controller/reserpassword/resetpassword_controller.dart';
 import 'package:the29029restaurant/widgets/my_button.dart';
 
@@ -14,8 +13,6 @@ class ResetPassword extends StatefulWidget {
 }
 
 class _ResetPasswordState extends State<ResetPassword> {
-
- // TextEditingController emailController = TextEditingController();
 
   Resetpassword_controller resetpassword_controller = Get.put(Resetpassword_controller());
 
@@ -127,18 +124,13 @@ class _ResetPasswordState extends State<ResetPassword> {
                         if (_formKey.currentState!.validate()) {
                           _formKey.currentState!.save();
                           _submit();
-                          // Navigator.push(
-                          //     context,
-                          //     MaterialPageRoute(
-                          //       builder: (context) => VerificationCode(),
-                          //     ));
 
                           resetpassword_controller .emailController.value.clear();
 
                         }
                       },
-                      height: 50,
-                      width: 200),
+                      height: height*.07,
+                      width: width*0.5),
                 ),
               ],
             ),

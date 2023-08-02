@@ -1,222 +1,229 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:the29029restaurant/view/bottombarscreen/onlineorder/categoriesitems.dart';
+import 'package:the29029restaurant/data/response/status.dart';
+import 'package:the29029restaurant/res/components/general_exception.dart';
+import 'package:the29029restaurant/res/components/internet_exceptions_widget.dart';
+import 'package:the29029restaurant/view/bottombarscreen/onlineorder/itemsforstarters.dart';
 import 'package:the29029restaurant/view/bottombarscreen/onlineorder/card.dart';
+import 'package:the29029restaurant/view_models/controller/categories_controller/singleitemproucted_controller.dart';
 import 'package:the29029restaurant/widgets/my_button.dart';
 
-class DetUi extends StatefulWidget {
-  const DetUi({super.key});
-
+class Detalis extends StatefulWidget {
+  const Detalis({super.key});
   @override
-  State<DetUi> createState() => _DetUiState();
+  State<Detalis> createState() => _DetalisState();
 }
 
-class _DetUiState extends State<DetUi> {
-  var size, height, width;
+class _DetalisState extends State<Detalis> {
+  Singleitemproducted_Controller singleitemproducted_Controller =
+      Get.put(Singleitemproducted_Controller());
+
+  void initState() {
+    singleitemproducted_Controller.singleitemsprouductedapihit();
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
-    size = MediaQuery.of(context).size;
-    height = size.height;
-    width = size.width;
+    final height = MediaQuery.of(context).size.height;
+    final width = MediaQuery.of(context).size.width;
     return Scaffold(
-      backgroundColor: Color(0xffFFFFFF),
-      appBar: PreferredSize(
-        preferredSize: Size.fromHeight(width / 7),
-        child: AppBar(
-          automaticallyImplyLeading: false,
-          // primary: false,
-          //   title
-          backgroundColor: Colors.transparent,
-          elevation: 0,
-          centerTitle: true,
-          title: Padding(
-            padding: EdgeInsets.symmetric(
-              vertical: width / 10,
-            ),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                InkWell(
-                    onTap: () {
-                      Navigator.push(context,
-                          MaterialPageRoute(builder: (context) => StUi()));
-                    },
-                    child: Container(
-                        child:
-                            Image.asset("assets/drawericon/Group 17955.png"))),
-                Center(
-                  child: Container(
-                      // color: Colors.red,
-                      child: Center(
-                          child: Text(
-                    "Details",
-                    style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                        color: Color(0xff323643), fontWeight: FontWeight.w600),
-                  ))),
-                ),
-                Container(
-                  child: GestureDetector(
-                    onTap: (){
-                      Navigator.push(context, MaterialPageRoute(builder: (context)=>DeeUi()));
-                    },
-                    child: Icon(
-                      Icons.shopping_cart_outlined,
-                      color: Color(0xff911FDA),
-                      size: 28,
-                    ),
-                  ),
-                )
-              ],
-            ),
-          ),
+      backgroundColor: Colors.white,
+      appBar: AppBar(
+        elevation: 0,
+        backgroundColor: Colors.white,
+        leading: GestureDetector(
+          onTap: () {
+            Get.to(() => StUi());
+          },
+          child: Image.asset("assets/images/backbutton.png"),
         ),
+        title: Text("Details",
+            style: Theme.of(context)
+                .textTheme
+                .titleLarge
+                ?.copyWith(fontSize: 18, fontWeight: FontWeight.w600)),
+        centerTitle: true,
+        actions: [
+          IconButton(
+              onPressed: () {
+                Get.to(() => Card_Page());
+              },
+              icon: Icon(
+                Icons.shopping_cart_outlined,
+                color: Color(0xff911FDA),
+              ))
+        ],
       ),
       body: SafeArea(
           child: SingleChildScrollView(
+              child: Padding(
+        padding: EdgeInsets.only(
+          right: 20,
+          left: 20,
+        ),
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            SizedBox(
-              height: height / 35,
-            ),
-            Center(
-              child: InkWell(
-                onTap: () {
-                  //   Navigator.push(context, MaterialPageRoute(builder: (Context)=>DeeUi()));
-                },
-                child: Container(
-                    height: height / 1.8,
-                    width: width / 1.2,
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(30),
-                        color: Color(0xffF5F5F5)),
-                    child: Column(
-                      // mainAxisAlignment: MainAxisAlignment.spaceAround,
-                      children: [
-                        SizedBox(
-                          height: height / 40,
-                        ),
-                        Container(
-                          height: height / 4.5,
-                          width: width / 2.3,
-                          // color: Colors.red,
-                          child: Image.asset(
-                            "assets/drawericon/iii.png",
-                            fit: BoxFit.fill,
-                          ),
-                        ),
-                        SizedBox(
-                          height: height / 80,
-                        ),
-                        Center(
-                          child: Center(
-                              child: Text(
-                            "Piyaza Chicken",
-                            style: Theme.of(context)
-                                .textTheme
-                                .displaySmall
-                                ?.copyWith(
-                                    color: Color(
-                                      0xff32324D,
-                                    ),
-                                    fontSize: 22,
-                                    fontWeight: FontWeight.w500),
-                          )),
-                        ),
-                        SizedBox(
-                          height: height / 70,
-                        ),
-                        Padding(
-                          padding: EdgeInsets.symmetric(horizontal: width / 20),
-                          child: Center(
-                              child: Text(
-                            "Strips of Corn Fed Chicken breast cooked \nin a jalifrasiee style sauce with onion and \n    green chilies, accompanied with light\n         "
-                            "                   herbed rice.",
-                            style: Theme.of(context)
-                                .textTheme
-                                .bodyLarge
-                                ?.copyWith(
-                                    color: Color(0xff9796A1),
-                                    fontWeight: FontWeight.w300),
-                          )),
-                        ),
-                        SizedBox(
-                          height: height / 35,
-                        ),
-                        Center(
-                          child: Text(
-                            "£11.55",
-                            style: Theme.of(context)
-                                .textTheme
-                                .displayLarge
-                                ?.copyWith(
-                                    color: Color(0xff911FDA),
-                                    fontSize: 22,
-                                    fontWeight: FontWeight.w700),
-                          ),
-                        )
-                      ],
-                    )),
-              ),
-            ),
+            SizedBox(height: height * 0.03),
+            Obx(() {
+              switch (singleitemproducted_Controller.rxRequestStatus.value) {
+                case Status.LOADING:
+                  return const Center(child: CircularProgressIndicator());
+                case Status.ERROR:
+                  if (singleitemproducted_Controller.error.value ==
+                      'No internet') {
+                    return InterNetExceptionWidget(
+                      onPress: () {},
+                    );
+                  } else {
+                    return GeneralExceptionWidget(onPress: () {});
+                  }
+                case Status.COMPLETED:
+                  return Center(
+                    child: Container(
+                        height: height * 0.6,
+                        width: width * 0.83,
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(30),
+                            color: Color(0xffF5F5F5)),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            SizedBox(height: height * 0.03),
+                            Container(
+                                height: height * 0.3,
+                                width: width * 0.6,
+                                child: Image.network(
+                                  singleitemproducted_Controller.userList.value
+                                      .singleProduct![0].productImg
+                                      .toString(),
+                                )
+                                // Image.asset(
+                                //   "assets/drawericon/iii.png",
+                                //   fit: BoxFit.fill,
+                                // ),
+                                ),
+                            SizedBox(height: height * 0.02),
+                            Text(
+                              singleitemproducted_Controller
+                                  .userList.value.singleProduct![0].menuTitle
+                                  .toString(),
+
+                              //"Piyaza Chicken",
+                              textAlign: TextAlign.center,
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .displaySmall
+                                  ?.copyWith(
+                                      color: Color(
+                                        0xff32324D,
+                                      ),
+                                      fontSize: 22,
+                                      fontWeight: FontWeight.w500),
+                            ),
+                            SizedBox(height: height * 0.02),
+                            Text(
+                              singleitemproducted_Controller.userList.value
+                                  .singleProduct![0].menuDiscription
+                                  .toString(),
+
+                              // "Strips of Corn Fed Chicken breast cooked \n"
+                              // "in a jalifrasiee style sauce with onion and \n"
+                              // "green chilies, accompanied with light\n"
+                              // "herbed rice.",
+                              textAlign: TextAlign.center,
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .bodyLarge
+                                  ?.copyWith(
+                                      color: Color(0xff9796A1),
+                                      fontWeight: FontWeight.w300),
+                            ),
+                            SizedBox(height: height * 0.03),
+                            RichText(
+                                text: TextSpan(children: [
+                                  WidgetSpan(child: Padding(padding: EdgeInsets.only(
+                                    bottom:5
+                                  ),
+                                    child:Text("£ ",style: Theme.of(context)
+                                        .textTheme
+                                        .bodyLarge
+                                        ?.copyWith(
+                                        color: Color(0xff911FDA),
+                                        fontSize: 14,
+                                        fontFamily:
+                                        GoogleFonts.mulish().fontFamily,
+                                        fontWeight: FontWeight.w700) ,) ,
+                                  ),
+                                  ),
+                                  // TextSpan(
+                                  //     text: "£",
+                                  //     style: Theme.of(context)
+                                  //         .textTheme
+                                  //         .bodyLarge
+                                  //         ?.copyWith(
+                                  //         color: Color(0xff911FDA),
+                                  //         fontSize: 14,
+                                  //         fontFamily:
+                                  //         GoogleFonts.mulish().fontFamily,
+                                  //         fontWeight: FontWeight.w700)),
+
+                              TextSpan(
+                                  text: singleitemproducted_Controller.userList
+                                      .value.singleProduct![0].productPrice
+                                      .toString(),
+                                  //"11.55",
+                                  style: Theme.of(context)
+                                      .textTheme
+                                      .displayLarge
+                                      ?.copyWith(
+                                          color: Color(0xff911FDA),
+                                          fontSize: 24,
+                                          fontFamily:
+                                              GoogleFonts.outfit().fontFamily,
+                                          fontWeight: FontWeight.w700))
+                            ]))
+                          ],
+                        )),
+                  );
+              }
+            }),
             SizedBox(height: height / 30),
-            MyButton(bgColor: Color(0xff41004C),
-                side: BorderSide(color:Color(0xff41004C) ),
-                title: "Add to Card", onTap:(){
-                  Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => DeeUi()));
-                  setState(() {});
+            MyButton(
+                bgColor: Color(0xff41004C),
+                side: BorderSide(color: Color(0xff41004C)),
+                title: "Add to Card",
+                txtStyle: Theme.of(context).textTheme.titleMedium?.copyWith(
+                    fontSize: 15,
+                    fontWeight: FontWeight.w600,
+                    color: Colors.white,
+                    fontFamily: GoogleFonts.outfit().fontFamily),
+                onTap: () {
+                  Get.to(() => Card_Page());
                 },
-                height:50, width:200),
-            // InkWell(
-            //   onTap: (){
-            //     Navigator.push(context,
-            //         MaterialPageRoute(builder: (context) => DeeUi()));
-            //     setState(() {});
-            //   },
-            //   child: Container(
-            //     height: height / 12.8,
-            //     width: width / 2,
-            //     child: Center(
-            //         child: Text(
-            //       "Add To Cart",
-            //       style: TextStyle(color: Colors.white),
-            //     )),
-            //     decoration: BoxDecoration(
-            //         borderRadius: BorderRadius.circular(100),
-            //         color: Color(0xff41004C)),
-            //   ),
-            // ),
+                height: height * .07,
+                width: width * 0.5),
             SizedBox(height: height / 59),
-            MyButton(bgColor: Color(0xff911FDA),
-                side: BorderSide(color:Color(0xff911FDA) ),
-                title: "Buy Now", onTap:(){
-              Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => DeeUi()));
-                    setState(() {}); 
-            },
-                height:50, width:200)
-            // InkWell( onTap: (){
-            //   Navigator.push(context,
-            //       MaterialPageRoute(builder: (context) => DeeUi()));
-            //   setState(() {});
-            // },
-            //   child: Container(
-            //     height: height / 12.8,
-            //     width: width / 2,
-            //     child: Center(
-            //         child: Text(
-            //       "Buy Now",
-            //       style: TextStyle(color: Colors.white),
-            //     )),
-            //     decoration: BoxDecoration(
-            //         borderRadius: BorderRadius.circular(100),
-            //         color: Color(0xff911FDA)),
-            //   ),
-            // ),
+            MyButton(
+                bgColor: Color(0xff911FDA),
+                side: BorderSide(color: Color(0xff911FDA)),
+                title: "Buy Now",
+                txtStyle: Theme.of(context).textTheme.titleMedium?.copyWith(
+                    fontSize: 15,
+                    fontWeight: FontWeight.w600,
+                    color: Colors.white,
+                    fontFamily: GoogleFonts.outfit().fontFamily),
+                onTap: () {
+                  Get.to(() => Card_Page());
+                },
+                height: height * .07,
+                width: width * 0.5)
           ],
         ),
-      )),
+      ))),
     );
   }
 }

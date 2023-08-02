@@ -84,7 +84,6 @@ class _PartyMenuState extends State<PartyMenu> {
                                 padding: EdgeInsets.symmetric(
                                     vertical: height * 0.01),
                                 child: Container(
-                                  // height:height*0.3,
                                   width: width,
                                   decoration: BoxDecoration(
                                       borderRadius: BorderRadius.circular(20),
@@ -93,7 +92,6 @@ class _PartyMenuState extends State<PartyMenu> {
                                     crossAxisAlignment:
                                         CrossAxisAlignment.start,
                                     children: [
-                                      // SizedBox(height: height*0.02),
                                       Padding(
                                         padding: EdgeInsets.only(
                                             left: 20,

@@ -81,59 +81,42 @@ class _BookATableState extends State<BookATable> {
                     MaterialPageRoute(
                       builder: (context) =>ScheduleReservation(),
                     ));
-              },     height: 50,
-                  width: 200),
+              },       height: height*.07,
+                  width: width*0.5),
               SizedBox(height: height*0.05),
               Row(
                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  SizedBox(
-                    height: 35,width:100,
-                    child: ElevatedButton(
-                        onPressed: (){
-                          choose = 1;
-                          setState(() {
-                           // click = !click;
-                          });
-                        },
-                        child: Text("Upcoming",
-                          style: TextStyle(
-                       color:  choose == 1 ?  Colors.white : Color(0xff911FDA),
-                            fontFamily: GoogleFonts.outfit().fontFamily,fontSize: 12
-                        ),),
-                      style:
-                      ElevatedButton.styleFrom(backgroundColor: choose == 1 ?Color(0xff911FDA): Colors.white,
-                        shape:  RoundedRectangleBorder(borderRadius: BorderRadius.circular( 25),
-                            side: BorderSide(color:Color(0xff911FDA)
-                            )
-                            )
-                    ),
-                    ),
-                  ),
-                  SizedBox(width: width*0.05),
-                  SizedBox(
-                    height: 35,width: 100,
-                    child: ElevatedButton(
-                      onPressed: (){
-                        choose = 2 ;
+                  MyButton(title:"Upcoming",
+                      txtStyle: TextStyle(
+                          color:  choose == 1 ?  Colors.white : Color(0xff911FDA),
+                          fontFamily: GoogleFonts.outfit().fontFamily,fontSize: 12
+                      ),
+                      bgColor:choose == 1 ?Color(0xff911FDA): Colors.white,
+                      side: BorderSide(color:Color(0xff911FDA),),
+                      onTap:(){
+                        choose = 1;
                         setState(() {
-                          //click1 = !click1;
+                          // click = !click;
                         });
                       },
-                      child: Text("Past",
-                        style: TextStyle(
-                            color:  choose == 2 ?  Colors.white : Color(0xff911FDA),
-                            fontFamily: GoogleFonts.outfit().fontFamily,fontSize: 12
-                        ),),
-                      style:
-                      ElevatedButton.styleFrom(backgroundColor: choose == 2 ?Color(0xff911FDA): Colors.white,
-                          shape:  RoundedRectangleBorder(borderRadius: BorderRadius.circular( 25),
-                              side: BorderSide(color:Color(0xff911FDA)
-                              )
-                          )
+                      height:height*0.041 ,width:width*0.25),
+                  SizedBox(width: width*0.05),
+                  MyButton(title:"Past",
+                      txtStyle: TextStyle(
+                          color:  choose == 2 ?  Colors.white : Color(0xff911FDA),
+                          fontFamily: GoogleFonts.outfit().fontFamily,fontSize: 12
                       ),
-                    ),
-                  ),
+                      bgColor:choose == 2 ?Color(0xff911FDA): Colors.white,
+                      side: BorderSide(color:Color(0xff911FDA),),
+                      onTap:(){
+                        choose = 2;
+                        setState(() {
+                          // click = !click;
+                        });
+                      },
+                    height:height*0.041 ,width:width*0.25 ),
+
                 ],
               )
             ],

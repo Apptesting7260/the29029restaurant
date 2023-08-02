@@ -1,11 +1,10 @@
-
 import 'package:shared_preferences/shared_preferences.dart';
 
 class MySharedPreferences {
   static const userId = "id";
   static const introslieder = "introslieder";
   static const name = "name";
-  static const email = "email";
+  static const username = "email";
   static const password = "password";
   static const mobnumber = "mob_no";
   static const countrycode = "country_code";

@@ -20,12 +20,6 @@ class _ProfileState extends State<Profile> {
 
   Update_controller update_controller = Get.put(Update_controller());
 
-  //
-  // var txtphn = TextEditingController();
-  // var txtemail = TextEditingController();
-  // var txtpassword = TextEditingController();
-  // var txtaddress = TextEditingController();
-
   var _formKey = GlobalKey<FormState>();
   var isLoading = false;
   void _submit() {
@@ -89,8 +83,7 @@ class _ProfileState extends State<Profile> {
                   ),
                   SizedBox(height: MediaQuery.of(context).size.height * 0.001),
                   TextFormField(
-                    controller:
-                    update_controller.phonenumberController.value,
+                    controller: update_controller.phonenumberController.value,
 
                     //txtphn,
                     keyboardType: TextInputType.phone,
@@ -132,8 +125,7 @@ class _ProfileState extends State<Profile> {
                   ),
                   SizedBox(height: MediaQuery.of(context).size.height * 0.001),
                   TextFormField(
-                    controller:
-                    update_controller.emailController.value,
+                    controller: update_controller.emailController.value,
                     //txtemail,
                     keyboardType: TextInputType.emailAddress,
                     decoration: InputDecoration(
@@ -263,20 +255,21 @@ class _ProfileState extends State<Profile> {
                     },
                   ),
                   SizedBox(height: MediaQuery.of(context).size.height * 0.03),
-                  Center(
+                  Obx(() =>Center(
                     child: MyButton(
+                        loading: update_controller.loading.value,
                         bgColor: Color(0xff41004C),
                         title: "Update",
                         onTap: () {
                           setState(() {
-                           // update_controller.emailController.toString();
+                            // update_controller.emailController.toString();
                             Navigator.of(context).pop();
                             _submit();
                           });
                         },
-                        height: 30,
-                        width: 80),
-                  ),
+                        height:height*0.05,
+                        width:width*0.3),
+                  ), ),
 
                 ],
               ),
@@ -296,12 +289,7 @@ class _ProfileState extends State<Profile> {
         backgroundColor: Colors.white,
         leading: GestureDetector(
           onTap: () {
-            // Get.back();
-            // Navigator.push(
-            //     context,
-            //     MaterialPageRoute(
-            //       builder: (context) => BottomNavigation(),
-            //     ));
+
           },
           child: Image.asset("assets/images/backbutton.png"),
         ),
@@ -333,8 +321,8 @@ class _ProfileState extends State<Profile> {
                   children: [
                     SizedBox(height: height * 0.03),
                     Container(
-                      height: 80,
-                      width: 335,
+                      height: height*0.1,
+                      width:width,
                       decoration: BoxDecoration(
                         color: Color(0xff41004C),
                         borderRadius: BorderRadius.circular(10),
@@ -344,7 +332,12 @@ class _ProfileState extends State<Profile> {
                           radius: 25,
                           backgroundImage: AssetImage("assets/images/user.png"),
                         ),
-                        title: Text("Farion Wick",
+                        title: Text(
+                            profile_controller
+                                .userList.value.userDetails![0].userName
+                                .toString(),
+
+                            // "Farion Wick",
                             style: Theme.of(context)
                                 .textTheme
                                 .titleLarge
@@ -354,7 +347,11 @@ class _ProfileState extends State<Profile> {
                                     fontSize: 18,
                                     fontFamily:
                                         GoogleFonts.outfit().fontFamily)),
-                        subtitle: Text("userdemo@gmail.com",
+                        subtitle: Text(
+                            profile_controller
+                                .userList.value.userDetails![0].userEmail
+                                .toString(),
+                          //  "userdemo@gmail.com",
                             style: Theme.of(context)
                                 .textTheme
                                 .labelLarge
@@ -365,7 +362,7 @@ class _ProfileState extends State<Profile> {
                                         GoogleFonts.inter().fontFamily)),
                       ),
                     ),
-                    SizedBox(height: 20),
+                    SizedBox(height:height*0.025),
                     ListTile(
                       //horizontalTitleGap: 1,
                       leading: Image.asset("assets/images/call.png"),
@@ -452,17 +449,26 @@ class _ProfileState extends State<Profile> {
                                     fontFamily: GoogleFonts.outfit().fontFamily,
                                   )),
                     ),
-                    SizedBox(height: 40),
-                    Center(
+                    SizedBox(height: height*0.05),
+                    Obx(() =>Center(
                       child: MyButton(
+                          loading: profile_controller.loading.value,
                           title: "Edit",
+                          txtStyle: Theme.of(context)
+                              .textTheme
+                              .titleMedium
+                              ?.copyWith(
+                              fontSize: 15,
+                              fontWeight: FontWeight.w600,
+                              color: Colors.white,
+                              fontFamily: GoogleFonts.outfit().fontFamily),
                           bgColor: Color(0xff41004C),
                           onTap: () {
                             showOptionsDialog(context);
                           },
-                          height: height * 0.06,
+                          height: height * .07,
                           width: width * 0.5),
-                    ),
+                    ), ),
                     SizedBox(height: height * 0.05)
                   ],
                 );

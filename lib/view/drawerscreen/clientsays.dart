@@ -1,12 +1,10 @@
-
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:the29029restaurant/widgets/my_button.dart';
-import 'package:the29029restaurant/widgets/my_textform_field_widget.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:toggle_switch/toggle_switch.dart';
+
 
 class ClientSays extends StatefulWidget {
   const ClientSays({super.key});
@@ -16,6 +14,9 @@ class ClientSays extends StatefulWidget {
 }
 
 class _ClientSaysState extends State<ClientSays> {
+
+  bool _switchValue = true;
+
 
 
 
@@ -286,33 +287,43 @@ class _ClientSaysState extends State<ClientSays> {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: [
-                        ToggleSwitch(
-                          customWidths: [40,40],
-                          cornerRadius: 25,
-                          activeBgColors: [
-                            [Colors.cyan],
-                            [Colors.redAccent]
-                          ],
-                          activeFgColor: Colors.white,
-                          inactiveBgColor: Colors.grey,
-                          inactiveFgColor: Colors.white,
-                          totalSwitches: 2,
-                          labels: ['Yes', 'No'],
-                          onToggle: (index) {
-                            print('switched to: $index');
+                        // ToggleSwitch(
+                        //   customWidths: [40,40],
+                        //   cornerRadius: 25,
+                        //   activeBgColors: [
+                        //     [Colors.cyan],
+                        //     [Colors.redAccent]
+                        //   ],
+                        //   activeFgColor: Colors.white,
+                        //   inactiveBgColor: Colors.grey,
+                        //   inactiveFgColor: Colors.white,
+                        //   totalSwitches: 2,
+                        //   labels: ['Yes', 'No'],
+                        //   onToggle: (index) {
+                        //     print('switched to: $index');
+                        //   },
+                        // ),
+                        CupertinoSwitch(
+                          activeColor: Color(0xff41004C),
+                          value: _switchValue,
+                          onChanged: (value) {
+                            setState(() {
+                              _switchValue = value;
+                            });
                           },
                         ),
-                        SizedBox(height: width * 0.01),
+
+                        SizedBox(width:width*0.01),
                         Text(
                             'The review is based on my own exprience\n'
                                 'and is my genuine opinion.',
                             style: Theme.of(context)
                                 .textTheme
-                                .bodySmall
+                                .bodyLarge
                                 ?.copyWith(
-                                    fontSize: 12,
+                                    fontSize: 14,
                                     fontWeight: FontWeight.w300,
-                                    color: Color(0xff9796A1),
+                                    color: _switchValue ? Color(0xff41004C):Color(0xff9796A1),
                                     fontFamily: GoogleFonts.outfit().fontFamily)
                             ),
                       ],
@@ -322,11 +333,19 @@ class _ClientSaysState extends State<ClientSays> {
                       child: MyButton(
                         bgColor: Color(0xff41004C),
                         title: 'Submit Your Review',
+                        txtStyle:  Theme.of(context)
+                            .textTheme
+                            .titleMedium
+                            ?.copyWith(
+                            fontSize: 15,
+                            fontWeight: FontWeight.w600,
+                            color: Colors.white,
+                            fontFamily: GoogleFonts.outfit().fontFamily),
                         onTap: () {
                           _submit();
                         },
-                        height: 50,
-                        width: 200,
+                          height: height*.07,
+                          width: width*0.5
                       ),
                     ),
                   ],
@@ -470,12 +489,12 @@ class _ClientSaysState extends State<ClientSays> {
 
                             ],
                           ),
-                          SizedBox(height:height*0.001),
+                          SizedBox(height:height*0.01),
                           Image.asset(
                             'assets/drawericon/map.png',
                           ),
                           SizedBox(height:height*0.03),
-                          SizedBox(height: height*0.03),
+
                         Text(
                           "About Us",
                           style: Theme.of(context)
@@ -502,9 +521,17 @@ class _ClientSaysState extends State<ClientSays> {
                             child: MyButton(
                               bgColor:Color(0xff41004C) ,
                               title: 'Oder Online',
+                              txtStyle:  Theme.of(context)
+                                  .textTheme
+                                  .titleMedium
+                                  ?.copyWith(
+                                  fontSize: 15,
+                                  fontWeight: FontWeight.w600,
+                                  color: Colors.white,
+                                  fontFamily: GoogleFonts.outfit().fontFamily),
                               onTap: () {},
-                              height: 50,
-                              width: 200,
+                                height: height*.07,
+                                width: width*0.5
                             ),
                           ),
                           SizedBox(
@@ -512,9 +539,17 @@ class _ClientSaysState extends State<ClientSays> {
                           Center(
                             child: MyButton(
                               title: "Book A Table",
+                              txtStyle:  Theme.of(context)
+                                  .textTheme
+                                  .titleMedium
+                                  ?.copyWith(
+                                  fontSize: 15,
+                                  fontWeight: FontWeight.w600,
+                                  color: Colors.white,
+                                  fontFamily: GoogleFonts.outfit().fontFamily),
                               onTap: () {},
-                              height: 50,
-                              width: 200,
+                                height: height*.07,
+                                width: width*0.5,
                               bgColor: Color(0xff911FDA),
                               side: BorderSide(color:Color(0xff911FDA) ),
                             ),
@@ -774,7 +809,7 @@ class _ClientSaysState extends State<ClientSays> {
                           ),
                           SizedBox(height: height * 0.03),
                           Text(
-                            "All Rights Reserved Ⓡ The ''29029 Wareham'' Restaurant\nPowered by BUSINESS APPS LONDON",
+                            "All Rights Reserved ® The “29029 Wareham” Restaurant\nPowered by BUSINESS APPS LONDON",
                             textAlign: TextAlign.center,
                             style: Theme.of(context)
                                 .textTheme

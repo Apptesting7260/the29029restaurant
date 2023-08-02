@@ -1,7 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:the29029restaurant/data/response/status.dart';
+import 'package:the29029restaurant/res/components/general_exception.dart';
+import 'package:the29029restaurant/res/components/internet_exceptions_widget.dart';
 import 'package:the29029restaurant/view/bottombarscreen/menu/restaurantmenu/maincourse.dart';
 import 'package:the29029restaurant/view/bottombarscreen/menu/restaurantmenu/starters.dart';
+import 'package:the29029restaurant/view_models/controller/tabling/tabling_controller.dart';
 
+String ? slug;
 class TakeAwayMenu extends StatefulWidget {
   const TakeAwayMenu({super.key});
 
@@ -10,7 +16,15 @@ class TakeAwayMenu extends StatefulWidget {
 }
 
 class _TakeAwayMenuState extends State<TakeAwayMenu> {
-  var choice = 1;
+  tabling_controller tabling_controllers = Get.put(tabling_controller());
+
+  @override
+  void initState() {
+    tabling_controllers.tablingapi();
+    // TODO: implement initState
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     final height = MediaQuery.of(context).size.height;
@@ -33,105 +47,164 @@ class _TakeAwayMenuState extends State<TakeAwayMenu> {
                 ?.copyWith(fontSize: 18, fontWeight: FontWeight.w600)),
         centerTitle: true,
         actions: [
-          Icon(Icons.search,
+          Icon(
+            Icons.search,
             size: height * 0.04,
             weight: width,
             color: Color(0XFF911fda),
           )
         ],
       ),
-      body: DefaultTabController(
-        length: 4,
-        child: Column(
-          children: [
-            SizedBox(height: height * 0.03),
-            Material(
-              child: Container(
-                height: 35,
-                color: Colors.white,
-                child: TabBar(
-                  labelPadding: EdgeInsets.only(right:5,left: 5),
-                  physics: ClampingScrollPhysics(),
-                  unselectedLabelColor:Color(0xff911FDA),
-                  indicatorSize: TabBarIndicatorSize.label,
-                  indicator: BoxDecoration(
-                      borderRadius: BorderRadius.circular(25),
-                      color:Color(0xff911FDA)
-                  ),
-                  tabs: [
-                    Tab(
-                      child:
-                      Container(
-                        decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(25),
-                            border: Border.all(
-                                color:Color(0xff911FDA)
-                              //color:choice==1 ?Color(0xff911FDA):Color(0xff9796A1)
-                            )
-                        ),
-                        child: Align(
-                          alignment: Alignment.center,
-                          child: Text("Starters"),
-                        ),
-                      ),
-                    ),
-                    Tab(
+      body: Obx(
+        () {
+          switch (tabling_controllers.rxRequestStatus.value) {
+            case Status.LOADING:
+              return const Center(child: CircularProgressIndicator());
+            case Status.ERROR:
+              if (tabling_controllers.error.value == 'No internet') {
+                return InterNetExceptionWidget(
+                  onPress: () {},
+                );
+              } else {
+                return GeneralExceptionWidget(onPress: () {});
+              }
+            case Status.COMPLETED:
+              return DefaultTabController(
+                length: tabling_controllers
+                    .userList.value.takeAwayMenuTabing!.length,
+                child: Column(
+                  children: [
+                    SizedBox(height: height * 0.03),
+                    Material(
                       child: Container(
-                        decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(25),
-                            border: Border.all(
-                                color:Color(0xff911FDA)
-                              // color: choice==2 ?Color(0xff911FDA) :Color(0xff9796A1)
+                        height: height * 0.05,
+                        width: width * 1,
+                        color: Colors.white,
+                        child: TabBar(
+                          isScrollable: true,
+                          labelPadding: EdgeInsets.only(right: 5, left: 5),
+                          physics: ClampingScrollPhysics(),
+                          unselectedLabelColor: Color(0xff911FDA),
+                          indicatorSize: TabBarIndicatorSize.label,
+                          indicator: BoxDecoration(
+                              borderRadius: BorderRadius.circular(25),
+                              color: Color(0xff911FDA)),
+                          tabs: [
+                            Tab(
+                              child: Container(
+                                height: height * 0.05,
+                                width: width * 0.3,
+                                decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(25),
+                                    border:
+                                        Border.all(color: Color(0xff911FDA))),
+                                child: Align(
+                                  alignment: Alignment.center,
+                                  child: Text(
+                                      tabling_controllers.userList.value
+                                          .takeAwayMenuTabing![0].categoryName
+                                          .toString(),
+                                      //"Starters"
+                                      overflow: TextOverflow.ellipsis),
+                                ),
+                              ),
+                            ),
+                            Tab(
+                              child: Container(
+                                height: height * 0.05,
+                                width: width * 0.3,
+                                decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(25),
+                                    border:
+                                        Border.all(color: Color(0xff911FDA))),
+                                child: Align(
+                                  alignment: Alignment.center,
+                                  child: Text(
+                                      tabling_controllers.userList.value
+                                          .takeAwayMenuTabing![1].categoryName
+                                          .toString()
+                                      //"Main Course"
+                                      ,
+                                      overflow: TextOverflow.ellipsis),
+                                ),
+                              ),
+                            ),
+                            Tab(
+                              child: Container(
+                                height: height * 0.05,
+                                width: width * 0.3,
+                                decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(25),
+                                    border:
+                                        Border.all(color: Color(0xff911FDA))),
+                                child: Align(
+                                  alignment: Alignment.center,
+                                  child: Text(
+                                      tabling_controllers.userList.value
+                                          .takeAwayMenuTabing![2].categoryName
+                                          .toString(),
+                                      //"Variety Foods"
+                                      overflow: TextOverflow.ellipsis),
+                                ),
+                              ),
+                            ),
+                            Tab(
+                                child: Container(
+                              height: height * 0.05,
+                              width: width * 0.3,
+                              decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(25),
+                                  border: Border.all(color: Color(0xff911FDA))),
+                              child: Align(
+                                alignment: Alignment.center,
+                                child: Text(
+                                    tabling_controllers.userList.value
+                                        .takeAwayMenuTabing![3].categoryName
+                                        .toString(),
+                                    //"Side",
+                                    overflow: TextOverflow.ellipsis),
+                              ),
                             )),
-                        child: Align(
-                          alignment: Alignment.center,
-                          child: Text("Main Course"),
+                            Tab(
+                              child: Container(
+                                height: height * 0.05,
+                                width: width * 0.3,
+                                decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(25),
+                                    border:
+                                        Border.all(color: Color(0xff911FDA))),
+                                child: Align(
+                                  alignment: Alignment.center,
+                                  child: Text(
+                                      tabling_controllers.userList.value
+                                          .takeAwayMenuTabing![4].categoryName
+                                          .toString(),
+                                      //"Starters",
+                                      overflow: TextOverflow.ellipsis),
+                                ),
+                              ),
+                            ),
+                          ],
                         ),
                       ),
                     ),
-                    Tab(
-                      child: Container(
-                        decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(25),
-                            border: Border.all(
-                                color:Color(0xff911FDA)
-                              //color: choice==3 ?Color(0xff911FDA) :Color(0xff9796A1)
-                            )),
-                        child: Align(
-                          alignment: Alignment.center,
-                          child: Text("Variety Foods"),
-                        ),
-                      ),
-                    ),
-                    Tab(
-                      child: Container(
-                        decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(25),
-                            border: Border.all(
-                                color:Color(0xff911FDA)
-                              //color: choice==4 ?Color(0xff911FDA) :Color(0xff9796A1)
-                            )),
-                        child: Align(
-                          alignment: Alignment.center,
-                          child: Text("Side"),
-                        ),
-                      ),
-                    ),
+                    SizedBox(height: height * 0.04),
+                    Expanded(
+                        child: TabBarView(
+                      physics: const NeverScrollableScrollPhysics(),
+                      children: [
+                        Starter(),
+                        Starter(),
+                        MainCourse(),
+                        Starter(),
+                        Starter()
+                      ],
+                    ))
                   ],
                 ),
-              ),
-            ),
-            SizedBox(height: height * 0.04),
-            Expanded(
-                child: TabBarView(
-                  physics: const NeverScrollableScrollPhysics(),
-                  children: [
-                    Starter(),MainCourse(), Starter(),MainCourse()
-
-                  ],
-                ))
-          ],
-        ),
+              );
+          }
+        },
       ),
     );
   }

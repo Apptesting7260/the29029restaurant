@@ -123,40 +123,22 @@ int ?flollowusindex;
                                       decoration: BoxDecoration(
                                           shape: BoxShape.circle,
                                           image: DecorationImage(
-                                              image: NetworkImage(
-                                                  followUS_controller
-                                                      .userList
-                                                      .value
-                                                      .followUs![index]
-                                                      .socialIcon
-                                                      .toString()),
+                                              image: NetworkImage(followUS_controller.userList
+                                                      .value.followUs![index].socialIcon.toString()),
                                               fit: BoxFit.fill)),
                                     ),
-                                    title: Text(
-                                      followUS_controller.userList.value
-                                          .followUs![index].socialName
-                                          .toString(),
+                                    title: Text(followUS_controller.userList.value
+                                          .followUs![index].socialName.toString(),
                                       //"Facebook",
-                                      style: Theme.of(context)
-                                          .textTheme
-                                          .bodySmall
-                                          ?.copyWith(
-                                              color: Color(0xff323643),
-                                              fontSize: 12,
-                                              fontFamily: GoogleFonts.outfit()
-                                                  .fontFamily,
+                                      style: Theme.of(context).textTheme.bodySmall
+                                          ?.copyWith(color: Color(0xff323643), fontSize: 12,
+                                              fontFamily: GoogleFonts.outfit().fontFamily,
                                               fontWeight: FontWeight.w600),
                                     ),
-                                    trailing: Text(
-                                          "Follow >",
+                                    trailing: Text("Follow >",
                                           style:Theme.of(context).textTheme.bodyLarge?.copyWith(
                                             color:  Color(0xff41004C),fontSize: 12,
                                           )
-
-
-                                          // TextStyle(
-                                          //     color:,
-                                          //     fontSize: 12),
                                         ),
                                   ),
                                 ],

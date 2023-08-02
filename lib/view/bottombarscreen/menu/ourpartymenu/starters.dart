@@ -6,6 +6,7 @@ import 'package:the29029restaurant/res/components/general_exception.dart';
 import 'package:the29029restaurant/res/components/internet_exceptions_widget.dart';
 import 'package:the29029restaurant/view/bottombarscreen/menu/ourpartymenu/partymenu.dart';
 import 'package:the29029restaurant/view_models/controller/starters/starters_controller.dart';
+import 'package:the29029restaurant/widgets/my_button.dart';
 
 class Starters extends StatefulWidget {
   const Starters({super.key});
@@ -17,7 +18,7 @@ class Starters extends StatefulWidget {
 class _StartersState extends State<Starters> {
   Starters_controller starters_controller = Get.put(Starters_controller());
 
-  var choose = 2;
+  var choose = 1;
 
   @override
   void initState() {
@@ -72,84 +73,61 @@ class _StartersState extends State<Starters> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             SizedBox(height: height * 0.01),
-                            Padding(
-                              padding:
-                                  const EdgeInsets.only(right: 70, left: 70),
-                              child: Row(
+                            Row(
                                 mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
+                                    MainAxisAlignment.center,
                                 children: [
-                                  SizedBox(
-                                    height: 30,
-                                    width: 100,
-                                    child: ElevatedButton(
-                                      onPressed: () {
+                                  MyButton(
+                                      title:"Description",
+                                      txtStyle:TextStyle(
+                                          color:
+                                          choose == 1
+                                              ? Colors.white
+                                              : Color(0xff911FDA),
+                                          fontSize: 12,
+                                          fontWeight: FontWeight.w500,
+                                          fontFamily: GoogleFonts.outfit()
+                                              .fontFamily),
+                                      onTap:(){
                                         choose = 1;
-                                        setState(() {
-                                          // click = !click;
-                                        });
-                                      },
-                                      child: Text(
-                                        "Description",
-                                        style: TextStyle(
-                                            color: choose == 1
-                                                ? Colors.white
-                                                : Color(0xff911FDA),
-                                            fontSize: 12,
-                                            fontFamily: GoogleFonts.outfit()
-                                                .fontFamily),
-                                      ),
-                                      style: ElevatedButton.styleFrom(
-                                        backgroundColor: choose == 1
-                                            ? Color(0xff911FDA)
-                                            : Colors.white,
-                                        shape: RoundedRectangleBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(30),
-                                          side: BorderSide(
-                                              color: Color(0xff911FDA)),
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                  SizedBox(
-                                    height: 30,
-                                    width: 100,
-                                    child: ElevatedButton(
-                                      onPressed: () {
-                                        choose = 2;
                                         setState(
-                                          () {
+                                              () {
                                             //click1 = !click1;
                                           },
                                         );
                                       },
-                                      child: Text(
-                                        "Comments",
-                                        style: TextStyle(
-                                            color: choose == 2
-                                                ? Colors.white
-                                                : Color(0xff911FDA),
-                                            fontSize: 12,
-                                            fontFamily: GoogleFonts.outfit()
-                                                .fontFamily),
-                                      ),
-                                      style: ElevatedButton.styleFrom(
-                                        backgroundColor: choose == 2
-                                            ? Color(0xff911FDA)
-                                            : Colors.white,
-                                        shape: RoundedRectangleBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(30),
-                                          side: BorderSide(
-                                              color: Color(0xff911FDA)),
-                                        ),
-                                      ),
-                                    ),
+                                      bgColor: choose == 1
+                                          ? Color(0xff911FDA)
+                                          : Colors.white,
+                                      side: BorderSide(color: Color(0xff911FDA)),
+                                      height:35,
+                                      width: 110
                                   ),
+                                  SizedBox(width:Width*0.03),
+                                  MyButton(
+                                  title:"Comments",
+                                  txtStyle:TextStyle(
+                                    color:
+                                    choose == 2
+                                        ? Colors.white
+                                        : Color(0xff911FDA),
+                                      fontSize: 12,
+                                      fontWeight: FontWeight.w500,
+                                      fontFamily: GoogleFonts.outfit()
+                                          .fontFamily),
+                                  onTap:(){
+                                  choose = 2;
+                                  setState(
+                                  () {
+                                  //click1 = !click1;
+                                     },);   },
+                                  bgColor: choose == 2
+                                  ? Color(0xff911FDA) : Colors.white,
+                                  side: BorderSide(color: Color(0xff911FDA)),
+                                  height:35, width: 110 ),
                                 ],
                               ),
-                            ),
+
                             SizedBox(height: height * 0.03),
                             Container(
                               height: height,
@@ -224,7 +202,8 @@ class _StartersState extends State<Starters> {
                                 },
                               ),
                             ),
-                          ]),
+                          ]
+            ),
                     ),
                   ),
                 );

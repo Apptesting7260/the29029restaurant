@@ -1,18 +1,15 @@
-import 'dart:convert';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:http/http.dart';
 import 'package:get/get.dart';
-
-import 'package:the29029restaurant/view/bottomnavigationbar/tab_screen.dart';
 import 'package:the29029restaurant/view/resetpassword.dart';
 import 'package:the29029restaurant/view/signup.dart';
 import 'package:the29029restaurant/view_models/controller/login/login_view_controller.dart';
 import 'package:the29029restaurant/widgets/my_button.dart';
 
-
-
+// String ?userNicename;
+// String ? userDisplayName;
+// String ?token;
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
 
@@ -21,7 +18,6 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
-
 
   Login_controller login_controller=Get.put(Login_controller());
 
@@ -36,6 +32,7 @@ class _LoginPageState extends State<LoginPage> {
     }
     login_controller.Login_apihit();
     _formKey.currentState!.save();
+
   }
 
   bool passwordVisible = true;
@@ -182,41 +179,35 @@ class _LoginPageState extends State<LoginPage> {
                       )),
                 ),
                 SizedBox(height: height * 0.05),
-                Center(
-                  child: MyButton(
-                      bgColor: Color(0xff41004C),
-                      title: "Login",
-                      txtStyle: Theme.of(context)
-                          .textTheme
-                          .titleMedium
-                          ?.copyWith(
-                              fontSize: 15,
-                              fontWeight: FontWeight.w600,
-                              color: Colors.white,
-                              fontFamily: GoogleFonts.outfit().fontFamily),
-                      onTap: () {
-                        if (_formKey.currentState!.validate()) {
-                          _formKey.currentState!.save();
-                          _submit();
-                         // Get.to(()=> TabScreen(index: 0,));
+              Obx(() =>  Center(
+                child: MyButton(
+                  loading: login_controller.loading.value,
+                    bgColor: Color(0xff41004C),
+                    title: "Login",
+                    txtStyle: Theme.of(context)
+                        .textTheme
+                        .titleMedium
+                        ?.copyWith(
+                        fontSize: 15,
+                        fontWeight: FontWeight.w600,
+                        color: Colors.white,
+                        fontFamily: GoogleFonts.outfit().fontFamily),
+                    onTap: () {
+                      if (_formKey.currentState!.validate()) {
+                        _formKey.currentState!.save();
+                        _submit();
+                        login_controller.emailController.value.clear();
+                        login_controller.passwordController.value.clear();
+                      }
+                    },
 
-                          //
-                          // Login(emailController.text.toString(),
-                          //     passwordController.text.toString());
+                    height: height*.07,
+                    width: width*0.5),
+              ),
+              ) ,
 
-                          // Navigator.push(
-                          //     context,
-                          //     MaterialPageRoute(
-                          //       builder: (context) => BottomNavigation(),
-                          //     ));
+                // ElevatedButton(onPressed: (){}, child: signing?CircularProgressIndicator() :Text("Signup")
 
-                          login_controller.emailController.value.clear();
-                          login_controller.passwordController.value.clear();
-                        }
-                      },
-                      height: 50,
-                      width: 200),
-                ),
                 SizedBox(height: height * 0.01),
                 Row(children: <Widget>[
                   Expanded(

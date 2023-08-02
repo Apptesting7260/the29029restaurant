@@ -4,7 +4,6 @@ import 'package:the29029restaurant/view/bottombarscreen/bookatablepage/booksatab
 import 'package:the29029restaurant/view/bottombarscreen/homescreen/homescreen.dart';
 import 'package:the29029restaurant/view/bottombarscreen/menu/menu.dart';
 import 'package:the29029restaurant/view/bottombarscreen/onlineorder/onlineorder.dart';
-import 'dart:convert';
 import 'package:the29029restaurant/view/bottombarscreen/profile/profile.dart';
 import 'package:the29029restaurant/view/bottomnavigationbar/bottomnavigation.dart';
 import 'package:get/get.dart';
@@ -47,8 +46,7 @@ class _TabScreenState extends State<TabScreen> {
             Get.to(()=>OnlineOrder(),);
           },
           child: Image.asset("assets/images/icons/onlineordericon.png",height:25,width:25,)
-          //ImageIcon(AssetImage("assets/images/icons/onlineordericon.png")) ,
-          //Icon(Icons.add, size: 30, color: Color(0xffFE0091),),
+
         ),
         key: drawerKey,
 

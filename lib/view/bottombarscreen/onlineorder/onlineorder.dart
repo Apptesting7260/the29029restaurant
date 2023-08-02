@@ -2,11 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:the29029restaurant/view/bottombarscreen/onlineorder/account.dart';
 import 'package:the29029restaurant/view/bottombarscreen/onlineorder/onlinelocation.dart';
-import 'package:the29029restaurant/view/bottomnavigationbar/bottomnavigation.dart';
 import 'package:the29029restaurant/view/bottomnavigationbar/tab_screen.dart';
 import 'package:the29029restaurant/widgets/my_button.dart';
 import 'package:get/get.dart';
-import '../menu/onlineorder2.dart';
 
 class OnlineOrder extends StatefulWidget {
   const OnlineOrder({super.key});
@@ -29,13 +27,6 @@ class _OnlineOrderState extends State<OnlineOrder> {
         leading: GestureDetector(
           onTap: () {
             Get.to(TabScreen(index:1));
-           // TabScreen(index: 1)
-           // Get.back();
-            // Navigator.push(
-            //     context,
-            //     MaterialPageRoute(
-            //       builder: (context) => BottomNavigation(),
-            //     ));
           },
           child: Image.asset("assets/images/backbutton.png"),
         ),
@@ -46,17 +37,6 @@ class _OnlineOrderState extends State<OnlineOrder> {
                 ?.copyWith(fontSize: 18, fontWeight: FontWeight.w600)),
         centerTitle: true,
         actions: [
-          // Padding(
-          //   padding: const EdgeInsets.symmetric(horizontal: 30),
-          //   child: IconButton( onPressed: (){
-          //         Navigator.push(
-          //             context,
-          //             MaterialPageRoute(
-          //               builder: (context) =>Account(),
-          //             ));
-          //   },
-          //       icon: Icon(Icons.add_circle_outline,color: Colors.black,)),
-          // )
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 30),
             child: InkWell(
@@ -81,20 +61,19 @@ class _OnlineOrderState extends State<OnlineOrder> {
           SizedBox(height: height * 0.02),
           Text(
             "Start Your Order",
-            style: TextStyle(
-                color: Colors.black,
-                fontWeight: FontWeight.w600,
-                fontSize: 20,
-                fontFamily: GoogleFonts.outfit().fontFamily),
+            style:
+              Theme.of(context).textTheme.headlineMedium?.copyWith(
+                color: Colors.black,fontSize: 20,fontWeight: FontWeight.w600,
+                fontFamily: GoogleFonts.outfit().fontFamily)
           ),
-          SizedBox(height: height * 0.02),
+          SizedBox(height: height * 0.01),
           Text(
-            "Lorem Ipsum is simple dummy text of \n the printing and typesetting industry.",
-            style: TextStyle(
+            "Lorem Ipsum is simple dummy text of\nthe printing and typesetting industry.",
+            textAlign: TextAlign.center,
+            style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                fontSize: 12,fontWeight: FontWeight.w300,color:Color(0xff9796A1),
                 fontFamily: GoogleFonts.outfit().fontFamily,
-                fontSize: 12,
-                fontWeight: FontWeight.w300,
-                color: Color(0xff9796A1)),
+              )
           ),
           SizedBox(height: height * 0.03),
           Center(
@@ -107,14 +86,10 @@ class _OnlineOrderState extends State<OnlineOrder> {
                     color: Colors.white,
                     fontFamily: GoogleFonts.outfit().fontFamily),
                 onTap: () {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) =>LocationUi(),
-                      ));
+                  Get.to( LocationUi());
                 },
-                height: height * 0.06,
-                width: width * 0.5),
+                height: height*.07,
+                width: width*0.5),
           ),
         ],
       ),

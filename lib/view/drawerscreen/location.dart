@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:the29029restaurant/widgets/my_button.dart';
 class Location extends StatefulWidget {
   const Location({super.key});
@@ -275,8 +276,18 @@ class _LocationState extends State<Location> {
                 Center(
                   child:
                     MyButton( bgColor: Color(0xff41004C),
-                        title: "Post Comment", onTap:(){},
-                        height:50, width: 200)
+                        title: "Post Comment",
+                      txtStyle: Theme.of(context)
+                          .textTheme
+                          .titleMedium
+                          ?.copyWith(
+                          fontSize: 15,
+                          fontWeight: FontWeight.w600,
+                          color: Colors.white,
+                          fontFamily: GoogleFonts.outfit().fontFamily),
+                      onTap:(){},
+                      height: height*.07,
+                      width: width*0.5,)
                   // InkWell(
                   //   onTap: () {
                   //     // Navigator.push(context,

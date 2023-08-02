@@ -3,19 +3,26 @@ import 'dart:ui';
 import 'package:the29029restaurant/data/network/network_api_services.dart';
 import 'package:the29029restaurant/models/Addreview_Model/addreview_model.dart';
 import 'package:the29029restaurant/models/Bookatable_Model/bookatable_model.dart';
+import 'package:the29029restaurant/models/Categories_Model/categories_model.dart';
+import 'package:the29029restaurant/models/Categories_Model/itemsforcategories_model.dart';
+import 'package:the29029restaurant/models/Categories_Model/singlelitemproucta_model.dart';
+import 'package:the29029restaurant/models/Categories_Model/subcategories_model.dart';
 import 'package:the29029restaurant/models/Createpass_Model/createpass_model.dart';
 import 'package:the29029restaurant/models/Drawer_Models/ContactUs_Model/contactdetals_model.dart';
 import 'package:the29029restaurant/models/Drawer_Models/ContactUs_Model/contactus_model.dart';
 import 'package:the29029restaurant/models/Drawer_Models/FollowUS_Model/followus_model.dart';
 import 'package:the29029restaurant/models/Drawer_Models/PhotoGallery_Model/photogallery_model.dart';
 import 'package:the29029restaurant/models/Login_Model/login_model.dart';
+import 'package:the29029restaurant/models/MainCourse_Model/maincourse.dart';
 import 'package:the29029restaurant/models/Party_Menu_Model/party_menu_model.dart';
 import 'package:the29029restaurant/models/Profile_Model/profile_model.dart';
 import 'package:the29029restaurant/models/Profile_Model/update_model.dart';
 import 'package:the29029restaurant/models/ResetpassOTP_Model/reserpassotp_model.dart';
 import 'package:the29029restaurant/models/Resetpassword_Model/resetpassword_model.dart';
 import 'package:the29029restaurant/models/Sign_up_Model/sign_up_model.dart';
+import 'package:the29029restaurant/models/Single_Model/single_model.dart';
 import 'package:the29029restaurant/models/Starters_Model/starters_model.dart';
+import 'package:the29029restaurant/models/Table_Model/table_model.dart';
 import 'package:the29029restaurant/models/Takeawaymenu_Model/take_way_menu_model.dart';
 import 'package:the29029restaurant/models/home/user_list_model.dart';
 import 'package:the29029restaurant/models/menu_page_mpdel.dart';
@@ -70,6 +77,21 @@ class AuthRepository {
     return TakewayModel.fromJson(response);
   }
 
+  Future<MaincourseModel> maincourseapi(var data) async{
+    dynamic response = await _apiService.postApi(data, AppUrl.maincourseapi);
+    return MaincourseModel.fromJson(response);
+  }
+
+  Future<SingleModel> singleapi(var data) async{
+    dynamic response = await _apiService.postApi(data, AppUrl.singleapi);
+    return SingleModel.fromJson(response);
+  }
+
+  Future<TableModel> tablingapi(var data) async{
+    dynamic response = await _apiService.postApi(data, AppUrl.tablingapi);
+    return TableModel.fromJson(response);
+  }
+
 
 
 
@@ -114,6 +136,31 @@ class AuthRepository {
     dynamic response = await _apiService.postApi(data, AppUrl.bookatableapi);
     return BookatableModel.fromJson(response);
   }
+  //online order in categories page
+
+  Future<CategoriesModel> Categoriesapi(var data) async{
+    dynamic response = await _apiService.postApi(data, AppUrl.categoriesapi);
+    return CategoriesModel.fromJson(response);
+  }
+
+  Future<CategoriessubModel> Subcategoriesapi(var data) async{
+    dynamic response = await _apiService.postApi(data, AppUrl.subcategoriesapi);
+    return CategoriessubModel.fromJson(response);
+  }
+
+  Future<ItemforcategoriesModel> itemforcategoriesapi(var data) async{
+    dynamic response = await _apiService.postApi(data, AppUrl.itemsforstartersapi);
+    return ItemforcategoriesModel.fromJson(response);
+  }
+
+  Future<SingleitemproductModel> singleitemproductedsapi(var data) async{
+    dynamic response = await _apiService.postApi(data, AppUrl.singleitemproductapi);
+    return SingleitemproductModel.fromJson(response);
+  }
+
+
+
+
 
   // Profile/Edit BottomBar
 

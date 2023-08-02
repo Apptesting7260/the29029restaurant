@@ -274,8 +274,9 @@ class _contactusState extends State<contactus> {
                     },
                   ),
                   SizedBox(height: height * 0.05),
-                  Center(
+                  Obx(() =>Center(
                     child: MyButton(
+                      loading:contactus_controller.loading.value,
                         bgColor: Color(0xff41004C),
                         title: "Submit",
                         txtStyle: Theme.of(context)
@@ -295,9 +296,10 @@ class _contactusState extends State<contactus> {
                           contactus_controller.email.value.clear();
                           contactus_controller.message.value.clear();
                         },
-                        height: 50,
-                        width: 200),
-                  ),
+                        height: height*.07,
+                        width: width*0.5),
+                  ), ),
+
                   SizedBox(height: height * 0.05),
                          Obx(
                            () {

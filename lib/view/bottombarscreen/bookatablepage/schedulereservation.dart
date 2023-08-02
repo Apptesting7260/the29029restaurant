@@ -75,13 +75,14 @@ class _ScheduleReservationState extends State<ScheduleReservation> {
                       color: Colors.white,
                       fontFamily: GoogleFonts.outfit().fontFamily),
                   onTap: (){
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) =>ScheduleReservation2(),
-                    ));
-              },    height: height * 0.06,
-                  width: width * 0.5),
+                Get.to(()=> ScheduleReservation2());
+                // Navigator.push(
+                //     context,
+                //     MaterialPageRoute(
+                //       builder: (context) =>ScheduleReservation2(),
+                //     ));
+              },    height: height*.07,
+                  width: width*0.5),
             ],
           ),
         ),

@@ -1,10 +1,7 @@
-import 'dart:convert';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
-import 'package:http/http.dart';
-
 import 'package:the29029restaurant/view/login.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:the29029restaurant/view_models/controller/signup/signup_controller.dart';
@@ -20,30 +17,6 @@ class SignUp extends StatefulWidget {
 class _SignUpState extends State<SignUp> {
 
   Signup_controller signup_controller=Get.put(Signup_controller());
-  // TextEditingController nameController = TextEditingController();
-  // TextEditingController emailController = TextEditingController();
-  // TextEditingController passwordController = TextEditingController();
-  //
-  // SignUps() async {
-  //   final body={
-  //     'username':nameController.text,
-  //     'email':emailController.text,
-  //     'password':passwordController.text
-  //   };
-  //   final response = await post(Uri.parse(registeration), body: body);
-  //   final parse = await jsonDecode(response.body);
-  //
-  //   print(response.statusCode);
-  //   print(parse["message"]);
-  //   if(parse["status"]=="success") {
-  //     setState(() {
-  //           //Get.back();
-  //       Get.off(LoginPage());
-  //
-  //     });
-  //   }
-  //   ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(parse["message"] ??"")));
-  // }
 
   var _formKey = GlobalKey<FormState>();
   var isLoading = false;
@@ -218,28 +191,23 @@ class _SignUpState extends State<SignUp> {
                   textInputAction: TextInputAction.done,
                 ),
                 SizedBox(height: height * 0.05),
-                Center(
+                Obx(() => Center(
                   child: MyButton(
+                    loading: signup_controller.loading.value,
                       bgColor: Color(0xff41004C),
                       title: "Sign Up",
                       txtStyle: Theme.of(context)
                           .textTheme
                           .titleMedium
                           ?.copyWith(
-                              fontSize: 15,
-                              fontWeight: FontWeight.w600,
-                              color: Colors.white,
-                              fontFamily: GoogleFonts.outfit().fontFamily),
+                          fontSize: 15,
+                          fontWeight: FontWeight.w600,
+                          color: Colors.white,
+                          fontFamily: GoogleFonts.outfit().fontFamily),
                       onTap: () {
                         if (_formKey.currentState!.validate()) {
                           _formKey.currentState!.save();
                           _submit();
-                          // Navigator.push(
-                          //     context,
-                          //     MaterialPageRoute(
-                          //       builder: (context) => BottomNavigation(),
-                          //     ));
-
 
 
                           signup_controller.usernameController.value.clear();
@@ -247,9 +215,14 @@ class _SignUpState extends State<SignUp> {
                           signup_controller.passwordController.value.clear();
                         }
                       },
-                      height: 50,
-                      width: 200),
-                ),
+                      height: height*.07,
+                      width: width*0.5),
+                ), ),
+
+
+
+
+
                 SizedBox(height: height * 0.01),
                 Row(children: <Widget>[
                   Expanded(

@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:the29029restaurant/view/bottombarscreen/onlineorder/locationdelivery.dart';
-import 'package:the29029restaurant/view/bottomnavigationbar/bottomnavigation.dart';
-import 'package:the29029restaurant/view/location/location.dart';
+import 'package:the29029restaurant/view/bottombarscreen/onlineorder/onlinelocation.dart';
 import 'package:the29029restaurant/widgets/my_button.dart';
 import 'package:get/get.dart';
 class AddANewAddress extends StatefulWidget {
@@ -54,11 +52,7 @@ class _AddANewAddressState extends State<AddANewAddress> {
         backgroundColor: Colors.white,
         leading: GestureDetector(
           onTap: () {
-            Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) =>LUi(),
-                ));
+            Get.to(()=>LocationUi());
           },
           child: Image.asset("assets/images/backbutton.png"),
         ),
@@ -319,20 +313,20 @@ class _AddANewAddressState extends State<AddANewAddress> {
                     child: MyButton(
                         bgColor: Color(0xff41004C),
                         title:"Submit",
+                        txtStyle:  Theme.of(context).textTheme.titleMedium?.copyWith(
+                            fontSize: 15,
+                            fontWeight: FontWeight.w600,
+                            color: Colors.white,
+                            fontFamily: GoogleFonts.outfit().fontFamily),
                         onTap:(){
                           if (_formKey.currentState!.validate()) {
                             _formKey.currentState!.save();
                             _submit();
                             Get.back();
-                            // Navigator.push(
-                            //     context,
-                            //     MaterialPageRoute(
-                            //       builder: (context) =>BottomNavigation(),
-                            //     ));
                           }
                         },
-                        height:50,
-                        width: 200),
+                        height: height*.07,
+                        width: width*0.5),
                   ),
                   //SizedBox(height: height*0.01)
                 ],

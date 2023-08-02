@@ -191,6 +191,8 @@ class _ScheduleReservation2State extends State<ScheduleReservation2> {
                     return null;
                   },
                   onSaved: (val) => setState(() => _valueSaved1 = val ?? ''),
+
+
                 ),
                 SizedBox(height: height * 0.02),
                 Text(
@@ -310,14 +312,10 @@ class _ScheduleReservation2State extends State<ScheduleReservation2> {
                             _formKey.currentState!.save();
                           //  bookatable_controller.bookatable_apihit();
                             Get.to(  ScheduleReservation3() );
-
-
-
-
                           }
                         },
-                        height: height * 0.06,
-                        width: width * 0.5),
+                        height: height*.07,
+                        width: width*0.5),
                 )
               ],
             ),

@@ -41,8 +41,8 @@ class _WelcomeState extends State<Welcome> {
                       child: Align(
                         alignment: Alignment.centerRight,
                         child: Container(
-                          height: 32,
-                          width: 55,
+                          height: height*0.036,
+                          width: width*0.14,
                           decoration: BoxDecoration(
                               color: Colors.white,
                               borderRadius: BorderRadius.circular(50)),
@@ -83,7 +83,7 @@ class _WelcomeState extends State<Welcome> {
                         height: height*0.01,
                        ),
                     Text(
-                      "Contemparary indian and\n Nepaless Cuisine",
+                      "Contemparary indian and\nNepaless Cuisine",
                       textWidthBasis: TextWidthBasis.parent,
                       textAlign: TextAlign.start,
                       maxLines: 2,
@@ -106,7 +106,8 @@ class _WelcomeState extends State<Welcome> {
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(30),
                             ),
-                            fixedSize: Size(315, 54),
+                           fixedSize: Size(width*0.8, height*0.07,)
+                           // fixedSize: Size(315, 54),
                           ),
                           child: Text(
                             'Start with email or phone',
@@ -142,7 +143,10 @@ class _WelcomeState extends State<Welcome> {
                       children: [
                         Image.asset(
                               "assets/images/facebook.png"),
-                        SizedBox(width: 20),
+                        SizedBox(
+                          width: width*0.038,
+                        //   width: 20
+                        ),
                         Image.asset("assets/images/google.png")
                       ],
                     ),

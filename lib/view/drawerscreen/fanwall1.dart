@@ -23,7 +23,7 @@ class _FanWall1State extends State<FanWall1> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-              Container(height:116, width: width,
+              Container( height: height*0.15, width: width,
             color: Color(0xffF5F5F5),
                 child: Column(
                   children: [
@@ -54,14 +54,18 @@ class _FanWall1State extends State<FanWall1> {
                           bgColor: Color(0xff41004C),
                           title: "Reply",
                           onTap: () { },
-                          height:25,
-                          width: 80),
+                          height:height*0.031 ,
+                          width: width*0.21),
                     ),
                   ],
                 ),
               ),
               SizedBox(height: height*0.02),
-              Container(height:116, width: width,
+              Container(
+                height: height*0.15,
+                //height:116,
+                width: width,
+
                 color: Color(0xffF5F5F5),
                 child: Column(
                   children: [
@@ -92,8 +96,11 @@ class _FanWall1State extends State<FanWall1> {
                           bgColor: Color(0xff41004C),
                           title: "Reply",
                           onTap: () { },
-                          height:25,
-                          width: 80),
+                          height:height*0.031 ,
+                        width: width*0.21,
+                      //    height:25,
+                        //  width: 80
+                      ),
                     ),
                   ],
                 ),
@@ -104,9 +111,17 @@ class _FanWall1State extends State<FanWall1> {
                 child: MyButton(
                     bgColor: Color(0xff41004C),
                     title: "Post Comment",
+                  txtStyle: Theme.of(context)
+                      .textTheme
+                      .titleMedium
+                      ?.copyWith(
+                      fontSize: 15,
+                      fontWeight: FontWeight.w600,
+                      color: Colors.white,
+                      fontFamily: GoogleFonts.outfit().fontFamily),
                     onTap: () { },
-                    height: 50,
-                    width: 200),
+                  height: height*.07,
+                  width: width*0.5,),
               ),
               SizedBox(height: height*0.03)
             ],

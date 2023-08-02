@@ -149,6 +149,8 @@ import 'package:the29029restaurant/view_models/controller/take_way_menu_controll
 
 import '../homescreen/homescreen.dart';
 
+String ?slug;
+
 class OnlineOrder2 extends StatefulWidget {
   const OnlineOrder2({super.key});
 
@@ -227,6 +229,10 @@ class _OnlineOrder2State extends State<OnlineOrder2> {
                                 itemBuilder: (context, index) {
                                   return InkWell(
                                     onTap: (){
+                                      setState(() {
+                                        slug =  take_way_menu_controller.userList.value.takeAwayMenu
+                                        ![index].categorySlug;
+                                      });
                                       Get.to(()=>TakeAwayMenu());
                                     },
                                     child: Container(

@@ -3,7 +3,6 @@ import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:the29029restaurant/view_models/controller/Drawer_Controller/addreview/addreview_controller.dart';
 import 'package:the29029restaurant/widgets/my_button.dart';
-import 'package:the29029restaurant/widgets/my_textform_field_widget.dart';
 
 class AddReview extends StatefulWidget {
   const AddReview({super.key});
@@ -15,14 +14,6 @@ class AddReview extends StatefulWidget {
 class _AddReviewState extends State<AddReview> {
 
   Addreview_controller addreview_controller=Get.put(Addreview_controller());
-
-
-  // TextEditingController firstname = TextEditingController();
-  // TextEditingController lastname = TextEditingController();
-  // TextEditingController email = TextEditingController();
-  // TextEditingController phonenumber = TextEditingController();
-  // TextEditingController review = TextEditingController();
-
 
   var _formKey = GlobalKey<FormState>();
   void _submit() {
@@ -272,8 +263,9 @@ class _AddReviewState extends State<AddReview> {
                     },
                   ),
                   SizedBox(height: height * 0.05),
-                  Center(
+                  Obx(() =>  Center(
                     child: MyButton(
+                      loading:addreview_controller.loading.value,
                         bgColor: Color(0xff41004C),
                         title: "Submit",
                         txtStyle: Theme.of(context)
@@ -293,9 +285,10 @@ class _AddReviewState extends State<AddReview> {
                           addreview_controller.phonenumber.value.clear();
                           addreview_controller.review.value.clear();
                         },
-                        height: 50,
-                        width: 200),
-                  ),
+                        height: height*.07,
+                        width: width*0.5),
+                  ),),
+
         SizedBox(height: height*0.1)
 
                 ],

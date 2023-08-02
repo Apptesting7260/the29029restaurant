@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:the29029restaurant/view/Splash.dart';
-import 'package:the29029restaurant/view/location/location.dart';
 import 'package:the29029restaurant/widgets/shared_prif.dart';
+
 
 
 
@@ -21,9 +21,7 @@ class MyApp extends StatelessWidget {
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
-      home:
-      //Location1(),
-      Splash(),
+      home: Splash(),
     );
   }
 }
