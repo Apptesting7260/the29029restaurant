@@ -1,8 +1,12 @@
 import 'package:get/get.dart';
 import 'package:the29029restaurant/data/response/status.dart';
-import 'package:the29029restaurant/models/MainCourse_Model/maincourse.dart';
 import 'package:the29029restaurant/models/Single_Model/single_model.dart';
 import 'package:the29029restaurant/repository/Auth_Reposetory/auth_reposetory.dart';
+// import 'package:the29029restaurant/view/bottombarscreen/menu/restaurantmenu/maincourse.dart';
+// import 'package:the29029restaurant/view/bottombarscreen/menu/restaurantmenu/takeawayschildpage.dart';
+import 'package:the29029restaurant/view/bottombarscreen/menu/takeawaymenus/takeawayschildpage.dart';
+
+import '../../../view/bottombarscreen/menu/restaurantmenu1/bottomscreenrestarurant.dart';
 
 class Single_controller extends GetxController {
 
@@ -21,8 +25,8 @@ class Single_controller extends GetxController {
   void singleapi(){
     //  setRxRequestStatus(Status.LOADING);
     Map data={
-      "take_away_menu_single":"take_away_menu_single_api",
-      "product_id": "7389"
+      "method":"restaurant_menu_single",
+      "product_id": bottonchilldpageid.toString()
     };
 
     _api.singleapi(data).then((value){

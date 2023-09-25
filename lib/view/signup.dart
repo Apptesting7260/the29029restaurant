@@ -7,6 +7,9 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:the29029restaurant/view_models/controller/signup/signup_controller.dart';
 import 'package:the29029restaurant/widgets/my_button.dart';
 
+
+
+
 class SignUp extends StatefulWidget {
   const SignUp({super.key});
 
@@ -31,6 +34,18 @@ class _SignUpState extends State<SignUp> {
 
   }
   bool passwordVisible = true;
+
+  @override
+  void initState() {
+    signup_controller.usernameController.value.clear();
+    signup_controller.emailController.value.clear();
+    signup_controller.passwordController.value.clear();
+    // TODO: implement initState
+    super.initState();
+  }
+
+
+
   @override
   Widget build(BuildContext context) {
     final height = MediaQuery.of(context).size.height;
@@ -88,6 +103,7 @@ class _SignUpState extends State<SignUp> {
                           borderRadius: BorderRadius.circular(30),
                           borderSide: BorderSide(color: Color(0xffDCDCDC)))),
                   onFieldSubmitted: (value) {},
+                  autovalidateMode: AutovalidateMode.onUserInteraction,
                   validator: (value) {
                     if (value!.isEmpty) {
                       return 'enter the name';
@@ -126,6 +142,7 @@ class _SignUpState extends State<SignUp> {
                           borderRadius: BorderRadius.circular(30),
                           borderSide: BorderSide(color: Color(0xffDCDCDC)))),
                   onFieldSubmitted: (value) {},
+                  autovalidateMode: AutovalidateMode.onUserInteraction,
                   validator: (value) {
                     if (value!.isEmpty ||
                         !RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
@@ -181,6 +198,7 @@ class _SignUpState extends State<SignUp> {
                           borderRadius: BorderRadius.circular(30),
                           borderSide: BorderSide(color: Color(0xffDCDCDC)))),
                   onFieldSubmitted: (value) {},
+                  autovalidateMode: AutovalidateMode.onUserInteraction,
                   validator: (value) {
                     if (value!.isEmpty) {
                       return 'enter the valid password';
@@ -210,9 +228,9 @@ class _SignUpState extends State<SignUp> {
                           _submit();
 
 
-                          signup_controller.usernameController.value.clear();
-                          signup_controller.emailController.value.clear();
-                          signup_controller.passwordController.value.clear();
+                          // signup_controller.usernameController.value.clear();
+                          // signup_controller.emailController.value.clear();
+                          // signup_controller.passwordController.value.clear();
                         }
                       },
                       height: height*.07,
@@ -243,8 +261,6 @@ class _SignUpState extends State<SignUp> {
                     Image.asset("assets/images/google.png"),
                   ],
                 ),
-                //SizedBox(height: 40),
-                // SizedBox(height: height*0.02),
                 Spacer(),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,

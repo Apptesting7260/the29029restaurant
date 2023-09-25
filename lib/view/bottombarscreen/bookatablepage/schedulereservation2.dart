@@ -7,6 +7,8 @@ import 'package:the29029restaurant/view/bottombarscreen/bookatablepage/scheduler
 import 'package:the29029restaurant/view_models/controller/bookatable/bookatable_controller.dart';
 import 'package:the29029restaurant/widgets/my_button.dart';
 
+import '../../../utils/utils.dart';
+
 class ScheduleReservation2 extends StatefulWidget {
   const ScheduleReservation2({super.key});
 
@@ -20,54 +22,54 @@ class _ScheduleReservation2State extends State<ScheduleReservation2> {
 
 
   List<Map<String, String>> time = [
-    {'': '1:00 '},
-    {'': '1:30 '},
-    {'': '2:00 '},
-    {'': '2:30 '},
-    {'': '3:00 '},
-    {'': '3:30 '},
-    {'': '4:00 '},
-    {'': '4:30 '},
-    {'': '5:00 '},
-    {'': '5:30 '},
-    {'': '6:00 '},
-    {'': '6:30 '},
-    {'': '7:00 '},
-    {'': '7:30 '},
-    {'': '8:00 '},
-    {'': '8:30 '},
-    {'': '9:00' },
-    {'': '9:30 '},
-    {'': '10:00 '},
-    {'': '10:30 '},
-    {'': '11:00 '},
-    {'': '11:30 '},
-    {'': '12:00'},
+    {'': '12:00 '},
+    {'': '12:15 '},
     {'': '12:30 '},
+    {'': '12:45 '},
     {'': '13:00 '},
+    {'': '13:15 '},
     {'': '13:30 '},
+    {'': '13:45 '},
     {'': '14:00 '},
-    {'': '14:30 '},
-    {'': '15:00'},
-    {'': '15:30 '},
-    {'': '16:00 '},
-    {'': '16:30 '},
-    {'': '17:00 '},
     {'': '17:30 '},
-    {'': '18:00'},
+    {'': '17:45 '},
+    {'': '18:00 '},
+    {'': '18:15 '},
     {'': '18:30 '},
+    {'': '18:45 '},
     {'': '19:00 '},
+    {'': '19:15' },
     {'': '19:30 '},
+    {'': '19:45 '},
     {'': '20:00 '},
+    {'': '20:15 '},
     {'': '20:30 '},
-    {'': '21:00'},
+    {'': '20:45'},
+    {'': '21:00 '},
+    {'': '21:15 '},
     {'': '21:30 '},
+    {'': '21:45 '},
     {'': '22:00 '},
+    {'': '22:15'},
     {'': '22:30 '},
+    {'': '22:45 '},
     {'': '23:00 '},
-    {'': '23:30 '},
-    {'': '24:00'},
-    {'': '24:30 '},
+    // {'': '23:15 '},
+    // {'': '23:30 '},
+    // {'': '23:45'},
+    // {'': '24:00 '},
+    // {'': '24:15 '},
+    // {'': '24:30 '},
+    // {'': '24:45 '},
+    // {'': '20:30 '},
+    // {'': '21:00'},
+    // {'': '21:30 '},
+    // {'': '22:00 '},
+    // {'': '22:30 '},
+    // {'': '23:00 '},
+    // {'': '23:30 '},
+    // {'': '24:00'},
+    // {'': '24:30 '},
   ];
 
   List<Map<String, String>> people = [
@@ -167,21 +169,22 @@ class _ScheduleReservation2State extends State<ScheduleReservation2> {
                       fontFamily: GoogleFonts.outfit().fontFamily),
                 ),
                 SizedBox(height: height * 0.005),
-                DateTimePicker(
+
+              DateTimePicker(
                   controller: bookatable_controller.dateController.value,
                   type: DateTimePickerType.date,
-                  dateMask: 'dd, MM, yyyy',
+                  dateMask: 'dd/MM/yyyy',
                   decoration: InputDecoration(
                       suffixIcon: Icon(Icons.event, color: Color(0xff911FDA)),
                       contentPadding: EdgeInsets.fromLTRB(20, 15, 20, 15),
                       focusedBorder: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(20),
                           borderSide:
-                              BorderSide(color: Colors.black, width: 1)),
+                              BorderSide(color: Color(0xffDCDCDC), width: 1)),
                       enabledBorder: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(20),
                           borderSide:
-                              BorderSide(color: Colors.black, width: 1))),
+                              BorderSide(color: Color(0xffDCDCDC), width: 1))),
                   firstDate: DateTime(2022),
                   lastDate: DateTime(2100),
                   //dateLabelText: 'Date',
@@ -194,6 +197,7 @@ class _ScheduleReservation2State extends State<ScheduleReservation2> {
 
 
                 ),
+
                 SizedBox(height: height * 0.02),
                 Text(
                   "Time",
@@ -229,13 +233,10 @@ class _ScheduleReservation2State extends State<ScheduleReservation2> {
                                 setState(() {
                                   selected=index;
                                   bookatable_controller.timeController.value.text = time[selected]['']??'' ;
-                                  }
-
-                                );
+                                  });
                               },
                               child: Text(
                                 time[index][''] ?? '',
-
                                 style: TextStyle(
                                     color: selected ==index
                                         ? Colors.white
@@ -311,7 +312,16 @@ class _ScheduleReservation2State extends State<ScheduleReservation2> {
                           if (_formKey.currentState!.validate()) {
                             _formKey.currentState!.save();
                           //  bookatable_controller.bookatable_apihit();
-                            Get.to(  ScheduleReservation3() );
+                            if( bookatable_controller.dateController.value.text.isNotEmpty ||
+                                bookatable_controller.timeController.value.text.isNotEmpty ||
+                                bookatable_controller.peopleController.value.text.isNotEmpty
+                            )
+                            {  Get.to(() => ScheduleReservation3());}
+                            else {
+                              return  Utils.snackBar( 'fill the data', 'enter valid data');
+                            }
+
+                            // Get.to(  ScheduleReservation3() );
                           }
                         },
                         height: height*.07,

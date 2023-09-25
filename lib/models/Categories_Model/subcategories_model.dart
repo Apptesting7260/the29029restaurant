@@ -53,13 +53,14 @@
 // }
 
 
-class CategoriessubModel {
-  CategoriessubModel({
+
+class SubcatetegoriesModel {
+  SubcatetegoriesModel({
      this.productCategory,
   });
     List<ProductCategory> ?productCategory;
 
-  CategoriessubModel.fromJson(Map<String, dynamic> json){
+  SubcatetegoriesModel.fromJson(Map<String, dynamic> json){
     productCategory = List.from(json['product_category']).map((e)=>ProductCategory.fromJson(e)).toList();
   }
 
@@ -76,14 +77,12 @@ class ProductCategory {
      this.categoryImg,
      this.categoryName,
      this.categorySlug,
-     this.categoryDescription,
      this.categoryCount,
   });
     int ?categoryId;
     String ?categoryImg;
     String ?categoryName;
     String ?categorySlug;
-    String ?categoryDescription;
     int ?categoryCount;
 
   ProductCategory.fromJson(Map<String, dynamic> json){
@@ -91,7 +90,6 @@ class ProductCategory {
     categoryImg = json['category_img'];
     categoryName = json['category_name'];
     categorySlug = json['category_slug'];
-    categoryDescription = json['category_description'];
     categoryCount = json['category_count'];
   }
 
@@ -101,7 +99,6 @@ class ProductCategory {
     _data['category_img'] = categoryImg;
     _data['category_name'] = categoryName;
     _data['category_slug'] = categorySlug;
-    _data['category_description'] = categoryDescription;
     _data['category_count'] = categoryCount;
     return _data;
   }

@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:the29029restaurant/repository/Auth_Reposetory/auth_reposetory.dart';
 import 'package:the29029restaurant/res/routes/routes_name.dart';
 import 'package:the29029restaurant/utils/utils.dart';
+import 'package:the29029restaurant/view/bottomnavigationbar/tab_screen.dart';
 import 'package:the29029restaurant/view/login.dart';
 import 'package:the29029restaurant/view_models/controller/user_preference/user_prefrence_view_model.dart';
 
@@ -43,9 +44,10 @@ class Addreview_controller extends GetxController {
       phonenumber.value.clear();
       review.value.clear();
 
-      // Get.to(LoginPage());
+      Utils.snackBar( value.addReviewDetais![0].Status.toString(),
+          value.addReviewDetais![0].Message.toString());
 
-      Utils.snackBar('add review', ' successfully');
+      Get.offAll(() => TabScreen(index:0));
 
 
     }).onError((error, stackTrace){

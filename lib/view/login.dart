@@ -2,14 +2,24 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:get/get.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:the29029restaurant/view/resetpassword.dart';
 import 'package:the29029restaurant/view/signup.dart';
+import 'package:the29029restaurant/view_models/controller/login/login_view_controller.dart';
+import 'package:the29029restaurant/view_models/controller/login/login_view_controller.dart';
 import 'package:the29029restaurant/view_models/controller/login/login_view_controller.dart';
 import 'package:the29029restaurant/widgets/my_button.dart';
 
 // String ?userNicename;
 // String ? userDisplayName;
 // String ?token;
+String? username;
+String? atloginuserid;
+String? loginemail;
+String? loginPassword;
+
+RxBool loginbuttonused = false.obs;
+
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
 
@@ -18,27 +28,38 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
-
-  Login_controller login_controller=Get.put(Login_controller());
-
+  Login_controller login_controller = Get.put(Login_controller());
 
   var _formKey = GlobalKey<FormState>();
   var isLoading = false;
 
-   _submit() {
+  _submit() {
+    // loginbuttonused.value=true;
+
     final isValid = _formKey.currentState!.validate();
     if (!isValid) {
       return;
     }
+    print('login button pressed');
+    loginbuttonused.value = true;
     login_controller.Login_apihit();
     _formKey.currentState!.save();
 
+    loginemail = login_controller.emailController.value.text;
+    loginPassword = login_controller.passwordController.value.text;
   }
 
   bool passwordVisible = true;
 
   @override
+  void initState() {
+    login_controller.emailController.value.clear();
+    login_controller.passwordController.value.clear();
+    // TODO: implement initState
+    super.initState();
+  }
 
+  @override
   Widget build(BuildContext context) {
     final height = MediaQuery.of(context).size.height;
     final width = MediaQuery.of(context).size.width;
@@ -70,6 +91,7 @@ class _LoginPageState extends State<LoginPage> {
                         fontFamily: GoogleFonts.outfit().fontFamily)),
                 SizedBox(height: height * 0.005),
                 TextFormField(
+                  // cursorColor: Colors.black,
                   controller: login_controller.emailController.value,
                   keyboardType: TextInputType.emailAddress,
                   decoration: InputDecoration(
@@ -94,10 +116,12 @@ class _LoginPageState extends State<LoginPage> {
                           borderRadius: BorderRadius.circular(30),
                           borderSide: BorderSide(color: Color(0xffDCDCDC)))),
                   onFieldSubmitted: (value) {},
+                  autovalidateMode: AutovalidateMode.onUserInteraction,
                   validator: (value) {
-                    if (value!.isEmpty ||
+                    if (login_controller.emailController.value.text!.isEmpty ||
                         !RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
-                            .hasMatch(value)) {
+                            .hasMatch(
+                                login_controller.emailController.value.text)) {
                       return 'enter the vaild email';
                     }
                     return null;
@@ -151,8 +175,10 @@ class _LoginPageState extends State<LoginPage> {
                           borderRadius: BorderRadius.circular(30),
                           borderSide: BorderSide(color: Color(0xffDCDCDC)))),
                   onFieldSubmitted: (value) {},
+                  autovalidateMode: AutovalidateMode.onUserInteraction,
                   validator: (value) {
-                    if (value!.isEmpty) {
+                    if (login_controller
+                        .passwordController.value.text!.isEmpty) {
                       return 'enter the valid password';
                     }
                     return null;
@@ -179,32 +205,36 @@ class _LoginPageState extends State<LoginPage> {
                       )),
                 ),
                 SizedBox(height: height * 0.05),
-              Obx(() =>  Center(
-                child: MyButton(
-                  loading: login_controller.loading.value,
-                    bgColor: Color(0xff41004C),
-                    title: "Login",
-                    txtStyle: Theme.of(context)
-                        .textTheme
-                        .titleMedium
-                        ?.copyWith(
-                        fontSize: 15,
-                        fontWeight: FontWeight.w600,
-                        color: Colors.white,
-                        fontFamily: GoogleFonts.outfit().fontFamily),
-                    onTap: () {
-                      if (_formKey.currentState!.validate()) {
-                        _formKey.currentState!.save();
-                        _submit();
-                        login_controller.emailController.value.clear();
-                        login_controller.passwordController.value.clear();
-                      }
-                    },
-
-                    height: height*.07,
-                    width: width*0.5),
-              ),
-              ) ,
+                Obx(
+                  () => Center(
+                    child: MyButton(
+                        loading: login_controller.loading.value,
+                        bgColor: Color(0xff41004C),
+                        title: "Login",
+                        txtStyle: Theme.of(context)
+                            .textTheme
+                            .titleMedium
+                            ?.copyWith(
+                                fontSize: 15,
+                                fontWeight: FontWeight.w600,
+                                color: Colors.white,
+                                fontFamily: GoogleFonts.outfit().fontFamily),
+                        onTap: !loginbuttonused.value == false
+                            ? () {
+                                print('99999999999999999999999999999');
+                              }
+                            : () {
+                                if (_formKey.currentState!.validate()) {
+                                  _formKey.currentState!.save();
+                                  _submit();
+                                  // login_controller.emailController.value.clear();
+                                  // login_controller.passwordController.value.clear();
+                                }
+                              },
+                        height: height * .07,
+                        width: width * 0.5),
+                  ),
+                ),
 
                 // ElevatedButton(onPressed: (){}, child: signing?CircularProgressIndicator() :Text("Signup")
 
@@ -280,4 +310,18 @@ class _LoginPageState extends State<LoginPage> {
       ),
     );
   }
+
+  // Function to retrieve data
+  // Future<Map<String, dynamic>> retrieveData() async {
+  //   final prefs = await SharedPreferences.getInstance();
+  //
+  //   return {
+  //     'token': prefs.getString('token'),
+  //     'user_email': prefs.getString('user_email'),
+  //     'user_nicename': prefs.getString('user_nicename'),
+  //     'user_display_name': prefs.getString('user_display_name'),
+  //     'user_id': prefs.getInt('user_id'),
+  //     // similarly, retrieve username and password if needed
+  //   };
+  // }
 }

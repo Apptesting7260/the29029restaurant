@@ -6,6 +6,8 @@ import 'package:the29029restaurant/utils/utils.dart';
 import 'package:the29029restaurant/view/createpassword.dart';
 import 'package:the29029restaurant/view_models/controller/reserpassword/resetpassword_controller.dart';
 
+import '../../../view/verificationcode.dart';
+
 class ResetpasswordOTP_controller extends GetxController {
 
 
@@ -34,14 +36,19 @@ if(value.status=="success"){
 
 
 }else{
-  Utils.snackBar('Message', value.message.toString());
+  Utils.snackBar('wrong', 're-try');
+  otpbuttonused.value = false;
+
 }
 
 
 
     }).onError((error, stackTrace){
+      Utils.snackBar('incorrect','please retry otp');
       loading.value = false ;
-      Utils.snackBar('incorrect','please retry otp');   // error.toString()
+      otpbuttonused.value = false;
+
+// error.toString()
     });
   }
 }

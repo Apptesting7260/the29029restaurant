@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:the29029restaurant/repository/Auth_Reposetory/auth_reposetory.dart';
 import 'package:the29029restaurant/res/routes/routes_name.dart';
 import 'package:the29029restaurant/utils/utils.dart';
+import 'package:the29029restaurant/view/bottomnavigationbar/tab_screen.dart';
 import 'package:the29029restaurant/view/login.dart';
 import 'package:the29029restaurant/view_models/controller/user_preference/user_prefrence_view_model.dart';
 
@@ -43,9 +44,13 @@ class Contactus_controller extends GetxController {
       phonenumber.value.clear();
       message.value.clear();
 
-     // Get.to(LoginPage());
 
-      Utils.snackBar('contactus', 'contactus successfully');
+      Utils.snackBar(value.contactFormResponse![0].Status.toString(),
+          value.contactFormResponse![0].Message.toString());
+
+
+      Get.offAll(() => TabScreen(index:0));
+
 
 
     }).onError((error, stackTrace){

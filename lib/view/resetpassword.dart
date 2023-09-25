@@ -3,7 +3,10 @@ import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:the29029restaurant/view/login.dart';
 import 'package:the29029restaurant/view_models/controller/reserpassword/resetpassword_controller.dart';
+import 'package:the29029restaurant/view_models/controller/reserpassword/resetpassword_controller.dart';
 import 'package:the29029restaurant/widgets/my_button.dart';
+
+import '../view_models/controller/reserpassword/resetpassword_controller.dart';
 
 class ResetPassword extends StatefulWidget {
   const ResetPassword({super.key});
@@ -18,6 +21,15 @@ class _ResetPasswordState extends State<ResetPassword> {
 
   var _formKey = GlobalKey<FormState>();
   var isLoading = false;
+
+
+
+  @override
+  void initState() {
+    resetpassword_controller .emailController.value.clear();
+    // TODO: implement initState
+    super.initState();
+  }
 
 
 
@@ -98,6 +110,7 @@ class _ResetPasswordState extends State<ResetPassword> {
                           borderSide: BorderSide(color: Color(0xffDCDCDC)))
                   ),
                   onFieldSubmitted: (value) {},
+                  autovalidateMode: AutovalidateMode.onUserInteraction,
                   validator: (value) {
                     if (value!.isEmpty ||
                         !RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
@@ -108,8 +121,10 @@ class _ResetPasswordState extends State<ResetPassword> {
                   },
                 ),
                 SizedBox(height: height * 0.05),
+            Obx(() =>
                 Center(
                   child: MyButton(
+                    loading:  resetpassword_controller.loading.value,
                       bgColor: Color(0xff41004C),
                       title: "Send",
                       txtStyle: Theme.of(context)
@@ -124,14 +139,13 @@ class _ResetPasswordState extends State<ResetPassword> {
                         if (_formKey.currentState!.validate()) {
                           _formKey.currentState!.save();
                           _submit();
-
-                          resetpassword_controller .emailController.value.clear();
-
                         }
                       },
                       height: height*.07,
                       width: width*0.5),
                 ),
+            )
+
               ],
             ),
           ),

@@ -17,6 +17,7 @@ class _WelcomeState extends State<Welcome> {
     final height= MediaQuery.of(context).size.height;
     final width= MediaQuery.of(context).size.width;
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       body: Stack(
         children: [
           Container(

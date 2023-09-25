@@ -35,7 +35,7 @@ class _InterNetExceptionWidgetState extends State<InterNetExceptionWidget> {
               height: 44,
               width: 160,
               decoration: BoxDecoration(
-                color: AppColor.primaryColor ,
+                  color: Color(0xff911FDA),
                 borderRadius: BorderRadius.circular(50)
               ),
               child: Center(child: Text('Retry' , style: Theme.of(context).textTheme.titleMedium!.copyWith(color: Colors.white),)),

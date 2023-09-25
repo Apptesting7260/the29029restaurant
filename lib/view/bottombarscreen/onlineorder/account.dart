@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:the29029restaurant/view/bottombarscreen/onlineorder/onlineorder.dart';
 
@@ -21,19 +23,18 @@ class _AccountState extends State<Account> {
           elevation: 0,
           backgroundColor: Colors.white,
           leading: GestureDetector(onTap: (){
-            Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => OnlineOrder(),
-                ));
+            Get.to(()=>OnlineOrder());
+            // Navigator.push(
+            //     context,
+            //     MaterialPageRoute(
+            //       builder: (context) => OnlineOrder(),
+            //     ));
           },
             child: Image.asset("assets/images/backbutton.png"),
           ),
-          title: Text(
-              "Account",
+          title: Text("Account",
               style:Theme.of(context).
-              textTheme.
-              titleLarge?.copyWith(
+              textTheme.titleLarge?.copyWith(
                   fontSize: 18,fontWeight: FontWeight.w600)
           ),
           centerTitle: true,
@@ -60,8 +61,7 @@ class _AccountState extends State<Account> {
                     ),
                   ),
                   minLeadingWidth :35,
-                  title: Text(
-                    "Past Orders",
+                  title: Text("Past Orders",
                     style: Theme.of(context).textTheme.bodySmall?.copyWith(
                         color: Colors.black,fontWeight: FontWeight.w600,fontSize: 12,
                         fontFamily: GoogleFonts.outfit().fontFamily
@@ -77,7 +77,9 @@ class _AccountState extends State<Account> {
                 ),
                 child: ListTile(
                   horizontalTitleGap:0,
-                  onTap: () {},
+                  onTap: () {
+
+                  },
                   leading:ClipRRect(
                     borderRadius: BorderRadius.circular(20.0),
                     child: Image.asset('assets/images/loco.png',
@@ -97,9 +99,7 @@ class _AccountState extends State<Account> {
             ],
           ),
         ),
-
-
-      )
+      ),
     );
   }
 }

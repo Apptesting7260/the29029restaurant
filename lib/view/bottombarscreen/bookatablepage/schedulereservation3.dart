@@ -1,10 +1,14 @@
+import 'package:country_code_picker/country_code_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:the29029restaurant/view/bottombarscreen/bookatablepage/schedulereservation2.dart';
 import 'package:the29029restaurant/view/bottomnavigationbar/bottomnavigation.dart';
+import 'package:the29029restaurant/view/bottomnavigationbar/tab_screen.dart';
 import 'package:the29029restaurant/view_models/controller/bookatable/bookatable_controller.dart';
 import 'package:the29029restaurant/widgets/my_button.dart';
 import 'package:get/get.dart';
+
+import '../profile/profile.dart';
 
 class ScheduleReservation3 extends StatefulWidget {
   const ScheduleReservation3({super.key});
@@ -156,37 +160,66 @@ class _ScheduleReservation3State extends State<ScheduleReservation3> {
                           .titleMedium
                           ?.copyWith(fontWeight: FontWeight.w500)),
                   SizedBox(height: height * 0.005),
-                  TextFormField(
-                    controller:
-                        bookatable_controller.phonenumberController.value,
-                    keyboardType: TextInputType.phone,
-                    decoration: InputDecoration(
-                        filled: true,
-                        fillColor: Colors.white,
-                        hintText: "Enter phone number",
-                        hintStyle: TextStyle(
-                            color: Color(0xff9796A1),
-                            fontSize: 14,
-                            fontWeight: FontWeight.w300,
-                            fontFamily: GoogleFonts.outfit().fontFamily),
-                        contentPadding: EdgeInsets.fromLTRB(20, 10, 20, 10),
-                        enabledBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(30),
-                            borderSide: BorderSide(color: Color(0xffDCDCDC))),
-                        focusedBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(30),
-                            borderSide: BorderSide(color: Color(0xffDCDCDC))),
-                        border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(30),
-                            borderSide: BorderSide(color: Color(0xffDCDCDC)))),
-                    onFieldSubmitted: (value) {},
-                    validator: (value) {
-                      if (value!.isEmpty) {
-                        return 'enter the phone number';
-                      }
-                      return null;
-                    },
+                  Row(
+                    children: [
+                      CountryCodePicker(
+                        dialogSize: Size(Get.width * 0.6, Get.height * 0.6),
+                        onChanged: (_) {
+                          countryCode.value = _.toString();
+                        },
+                        // Initial selection and favorite can be one of code ('IT') OR dial_code('+39')
+                        initialSelection: 'ca',
+                        // favorite: ['+39', 'FR'],
+                        // optional. Shows only country name and flag
+                        showCountryOnly: false,
+                        // optional. Shows only country name and flag when popup is closed.
+                        showOnlyCountryWhenClosed: false,
+                        // optional. aligns the flag and the Text left
+                        alignLeft: false,
+                        // dialogTextStyle: ,
+                      ),
+                      Expanded(
+                        child: TextFormField(
+                          controller:  bookatable_controller.phonenumberController.value,
+                          //txtphn,
+                          keyboardType: TextInputType.phone,
+                          decoration: InputDecoration(
+                              filled: true,
+                              fillColor: Colors.white,
+                              hintText: "Enter phone number",
+                              hintStyle: TextStyle(
+                                fontWeight: FontWeight.w300,
+                                color: Color(0xff9796A1),
+                                fontSize: 14,
+                                fontFamily: GoogleFonts.outfit().fontFamily,
+                              ),
+                              contentPadding:
+                              EdgeInsets.fromLTRB(20, 10, 20, 10),
+                              enabledBorder: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(30),
+                                  borderSide:
+                                  BorderSide(color: Color(0xffDCDCDC))),
+                              focusedBorder: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(30),
+                                  borderSide:
+                                  BorderSide(color: Color(0xffDCDCDC))),
+                              border: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(30),
+                                  borderSide:
+                                  BorderSide(color:Color(0xffDCDCDC)))),
+                          onFieldSubmitted: (value) {},
+                          autovalidateMode: AutovalidateMode.onUserInteraction,
+                          validator: (value) {
+                            if (value!.isEmpty || value.length > 12) {
+                              return 'enter the valid phone number';
+                            }
+                            return null;
+                          },
+                        ),
+                      ),
+                    ],
                   ),
+
                   SizedBox(height: height * 0.03),
                   Text("Message",
                       style: Theme.of(context)
@@ -226,8 +259,12 @@ class _ScheduleReservation3State extends State<ScheduleReservation3> {
                     },
                   ),
                   SizedBox(height: height * 0.05),
+            Obx(
+                  () => Center(
+                child:
                   Center(
                     child: MyButton(
+                      loading:bookatable_controller.loading.value,
                         bgColor: Color(0xff41004C),
                         title: "Request Booking",
                         txtStyle: Theme.of(context)
@@ -242,19 +279,16 @@ class _ScheduleReservation3State extends State<ScheduleReservation3> {
                           if (_formKey.currentState!.validate()) {
                             _formKey.currentState!.save();
                             _submit();
-                            // bookatable_controller.fullnameController.value.clear();
-                            // bookatable_controller.emailController.value.clear();
-                            // bookatable_controller.phonenumberController.value.clear();
-                            // bookatable_controller.messageController.value.clear();
-                            // bookatable_controller.dateController.value.clear();
-
-                            //   Get.back();
+                            Get.offAll(() => TabScreen(index: 0));
                           }
                         },
                       height: height*.07,
                       width: width*0.5,),
                   ),
-                  // SizedBox(height: height*0.1),
+                  )
+            ),
+
+
                   SizedBox(height: height * 0.05),
                   Center(
                     child: Text(

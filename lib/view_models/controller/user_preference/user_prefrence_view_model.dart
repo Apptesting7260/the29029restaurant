@@ -1,4 +1,3 @@
-//
 // import 'package:get/get_state_manager/get_state_manager.dart';
 // import 'package:shared_preferences/shared_preferences.dart';
 // import 'package:the29029restaurant/models/Login_Model/login_model.dart';
@@ -8,17 +7,17 @@
 //
 //     Future<bool> saveUser(LoginModel responseModel)async{
 //       SharedPreferences sp = await SharedPreferences.getInstance();
-//       sp.setString('status', responseModel.status.toString());
-//       sp.setString('message', responseModel.message.toString());
-//       sp.setBool('user_data', responseModel.userData! as bool);
+//       sp.setString('token', responseModel.token.toString());
+//      // sp.setString('message', responseModel.message.toString());
+//       sp.setBool('isLogin', responseModel.isLogin! as bool);
 //
 //       return true ;
 //     }
 //
 //     Future<LoginModel> getUser()async{
 //       SharedPreferences sp = await SharedPreferences.getInstance();
-//       String? status = sp.getString('status');
-//       String? message = sp.getString('message');
+//       String? token = sp.getString('token');
+//      // String? message = sp.getString('message');
 //       bool? userData = sp.getBool('user_data');
 //
 //       return LoginModel(

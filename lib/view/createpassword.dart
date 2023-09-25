@@ -33,6 +33,16 @@ class _CreatePasswordState extends State<CreatePassword> {
   bool passwordVisible = true;
   bool confirmpasswordVisible = true;
 
+
+  @override
+  void initState() {
+    createpass_controller.passwordController.value.clear();
+    createpass_controller.confirmpasswordController.value.clear();
+    // TODO: implement initState
+    super.initState();
+  }
+
+
   @override
   Widget build(BuildContext context) {
     final height = MediaQuery.of(context).size.height;
@@ -129,6 +139,7 @@ class _CreatePasswordState extends State<CreatePassword> {
                           borderSide: BorderSide(color: Color(0xff9796A1)))
                   ),
                   onFieldSubmitted: (value) {},
+                  autovalidateMode: AutovalidateMode.onUserInteraction,
                   validator: (value) {
                     if (value!.isEmpty) {
                       return 'enter the valid password';
@@ -189,6 +200,7 @@ class _CreatePasswordState extends State<CreatePassword> {
                           borderSide: BorderSide(color: Color(0xff9796A1)))
                   ),
                   onFieldSubmitted: (value) {},
+                  autovalidateMode: AutovalidateMode.onUserInteraction,
                   validator: (value) {
                     if (value!.isEmpty) {
                       return 'enter the confirm valid password';
@@ -225,8 +237,8 @@ class _CreatePasswordState extends State<CreatePassword> {
                           //       builder: (context) => LoginPage(),
                           //     ));
 
-                          createpass_controller.passwordController.value.clear();
-                          createpass_controller.confirmpasswordController.value.clear();
+                          // createpass_controller.passwordController.value.clear();
+                          // createpass_controller.confirmpasswordController.value.clear();
                         }
                       },
                       height: height*.07,

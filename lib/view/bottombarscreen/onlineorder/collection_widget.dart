@@ -3,8 +3,16 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:the29029restaurant/utils/utils.dart';
 import 'package:the29029restaurant/view/bottombarscreen/onlineorder/categories.dart';
+import 'package:the29029restaurant/view/bottombarscreen/onlineorder/checkout.dart';
 import 'package:the29029restaurant/widgets/my_button.dart';
+
+TextEditingController dateInput = TextEditingController();
+final dateTwo =TextEditingController().obs;
+
+final time_Controller = TextEditingController().obs;
+
 
 class CollectionWidget extends StatefulWidget {
   const CollectionWidget({super.key});
@@ -107,7 +115,10 @@ class _CollectionWidgetState extends State<CollectionWidget> {
           lastDate: DateTime(2100),
           // dateLabelText: 'Date',style: TextStyle(color: Colors.black,fontSize: 15),
           // dateHintText: 'Date',
-          onChanged: (val) => setState(() => _valueChanged1 = val),
+          onChanged: (val){
+    setState(() => _valueChanged1 = val);
+    dateTwo.value.text = val;
+    } ,
           validator: (val) {
             setState(() => _valueToValidate1 = val ?? '');
             return null;
@@ -148,25 +159,34 @@ class _CollectionWidgetState extends State<CollectionWidget> {
                         onTap: () {
                           setState(() {
                             selected = index;
+                            time_Controller.value.text = time[index][''].toString();
                             // bookatable_controller.timeController.value.text = time[selected]['']??'' ;
                           });
                         },
                         height: height * 0.001,
-                        width: Width * 0.17));
+                        width: Width * 0.2));
               }),
         ),
         SizedBox(height: height * 0.06),
         Center(
           child: MyButton(
               bgColor: Color(0xff41004C),
-              title: "Choose Items",
+              title: "Make Payment",
               txtStyle: Theme.of(context).textTheme.titleMedium?.copyWith(
                   fontSize: 15,
                   fontWeight: FontWeight.w600,
                   color: Colors.white,
                   fontFamily: GoogleFonts.outfit().fontFamily),
               onTap: () {
-                Get.to(() => Categories());
+                if(dateInput.text.isNotEmpty)
+                {  Get.to(() => Check_Out());}
+                else {
+                  return  Utils.snackBar( 'fill the data', 'enter valid data');
+                }
+
+
+
+              // Get.to(() => Check_Out());
               },
               height: height * .07,
               width: Width * 0.5),

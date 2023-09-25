@@ -5,7 +5,9 @@ class SingleModel {
     List<SingleProduct> ?singleProduct;
 
   SingleModel.fromJson(Map<String, dynamic> json){
-    singleProduct = List.from(json['single_product']).map((e)=>SingleProduct.fromJson(e)).toList();
+    singleProduct =
+    json['single_product'] == null? []:
+        List.from(json['single_product']).map((e)=>SingleProduct.fromJson(e)).toList();
   }
 
   Map<String, dynamic> toJson() {

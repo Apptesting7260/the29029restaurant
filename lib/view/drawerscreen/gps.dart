@@ -35,8 +35,8 @@ class _GPSState extends State<GPS> {
          // crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Center(
-              child: Text("Not Found",style:
-                Theme.of(context).textTheme.displayMedium?.copyWith(
+              child: Text("Not Found",
+                style: Theme.of(context).textTheme.displayMedium?.copyWith(
                   fontWeight: FontWeight.w600,fontSize: 22,color:Colors.black,
                   fontFamily: GoogleFonts.outfit().fontFamily
                 ),),

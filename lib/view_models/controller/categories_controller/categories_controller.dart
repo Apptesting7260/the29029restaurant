@@ -5,6 +5,7 @@ import 'package:the29029restaurant/models/Categories_Model/categories_model.dart
 
 import 'package:the29029restaurant/repository/Auth_Reposetory/auth_reposetory.dart';
 
+RxBool categpryDone = false.obs;
 class Categories_Controller extends GetxController {
 
 
@@ -26,10 +27,15 @@ class Categories_Controller extends GetxController {
     _api.Categoriesapi(data).then((value){
       setRxRequestStatus(Status.COMPLETED);
       setUserList(value);
-      print(value);
+      // print(value);
+      print("*****************************************************");
+      print(userList.value);
 
-    }).onError((error, stackTrace){
+    })
+        .onError((error, stackTrace){
       setError(error.toString());
+      
+      print("error");
       setRxRequestStatus(Status.ERROR);
 
     });

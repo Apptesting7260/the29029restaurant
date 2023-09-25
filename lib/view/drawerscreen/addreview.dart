@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:the29029restaurant/view/bottomnavigationbar/tab_screen.dart';
 import 'package:the29029restaurant/view_models/controller/Drawer_Controller/addreview/addreview_controller.dart';
 import 'package:the29029restaurant/widgets/my_button.dart';
 
@@ -28,7 +29,10 @@ class _AddReviewState extends State<AddReview> {
   Widget build(BuildContext context) {
     final height = MediaQuery.of(context).size.height;
     final width = MediaQuery.of(context).size.width;
-    return Scaffold(
+    return
+
+
+      Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
         elevation: 0,
@@ -278,12 +282,12 @@ class _AddReviewState extends State<AddReview> {
                             fontFamily: GoogleFonts.outfit().fontFamily),
                         onTap: () {
                           _submit();
-
                           addreview_controller.firstname.value.clear();
                           addreview_controller.lastname.value.clear();
                           addreview_controller.email.value.clear();
                           addreview_controller.phonenumber.value.clear();
                           addreview_controller.review.value.clear();
+                         // Get.offAll(() => TabScreen(index:0));
                         },
                         height: height*.07,
                         width: width*0.5),

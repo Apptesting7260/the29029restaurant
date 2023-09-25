@@ -48,6 +48,22 @@ dependencies:
   fluttertoast: ^8.2.2
   url_launcher: ^6.1.12
   loading_animation_widget: ^1.2.0+4
+  expansion_tile_card: ^3.0.0
+  stripe_sdk: ^5.0.0
+  flutter_keyboard_visibility: ^5.4.1
+  badges: ^3.1.1
+  country_code_picker: ^3.0.0
+  country_list_picker: ^1.0.2
+  flutter_html: any
+  pull_to_refresh: ^2.0.0
+  image_picker: ^1.0.4
+  dropdown_button2: ^2.3.9
+
+
+
+
+
+
 
 
 
@@ -82,6 +98,7 @@ flutter:
     - assets/images/
     - assets/images/icons/
     - assets/drawericon/
+    - assets/applogo/
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see

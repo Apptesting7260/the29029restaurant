@@ -168,19 +168,7 @@ class _SingleitemfromtakeawayState extends State<Singleitemfromtakeaway> {
                                                   .fontFamily,
                                               fontWeight: FontWeight.w700))
                                 ])),
-                              // Text(
-                              //   single_controller.userList.value
-                              //       .singleProduct![0].productPrice
-                              //       .toString(),
-                              //   textAlign: TextAlign.center,
-                              //   style: Theme.of(context)
-                              //       .textTheme
-                              //       .displayLarge
-                              //       ?.copyWith(
-                              //           color: Color(0xff911FDA),
-                              //           fontSize: 22,
-                              //           fontWeight: FontWeight.w700),
-                              // ),
+
                             ],
                           )),
                     ),

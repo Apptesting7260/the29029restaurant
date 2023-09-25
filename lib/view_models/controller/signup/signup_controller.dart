@@ -38,12 +38,16 @@ class Signup_controller extends GetxController {
 
       Get.to(LoginPage());
 
-      Utils.snackBar('Signup', 'Signup successfully');
+      Utils.snackBar( 'Signup',value.message.toString()
+          // 'Signup successfully'
+      );
 
 
     }).onError((error, stackTrace){
       loading.value = false ;
-      Utils.snackBar('already exit account','please check because already sign up');  // error.toString()
+      Utils.snackBar('already exit account',error.toString()
+          // 'please check because already sign up'
+      );  // error.toString()
     });
   }
 }

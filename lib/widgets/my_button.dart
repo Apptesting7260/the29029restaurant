@@ -32,15 +32,13 @@ class MyButton extends StatelessWidget {
       height: height,
       child: ElevatedButton(
           style: ElevatedButton.styleFrom(
-
+            elevation: 0,
               backgroundColor: bgColor ?? Theme.of(context).primaryColor,
               shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(radius ?? 25),
                   side: side ?? BorderSide())),
           onPressed: onTap,
           child:
-
-
               Center(child: loading==false? Text(
                 title,
                 style: txtStyle,

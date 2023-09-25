@@ -25,17 +25,17 @@ class _GeneralExceptionWidgetState extends State<GeneralExceptionWidget> {
           SizedBox(height: height * .15 ,),
           Icon(Icons.cloud_off , color: AppColor.redColor,size: 50,),
           Padding(
-            padding: const EdgeInsets.only(top: 30),
-            child: Center(child: Text('general_exception'.tr , textAlign: TextAlign.center,)),
+            padding: const EdgeInsets.only(top: 20),
+            child: Center(child: Text('No More Data '.tr , textAlign: TextAlign.center,)),
           ),
-          SizedBox(height: height * .15 ,),
+          SizedBox(height: height *.1 ,),
           InkWell(
             onTap: widget.onPress,
             child: Container(
               height: 44,
               width: 160,
               decoration: BoxDecoration(
-                  color: AppColor.primaryColor ,
+                  color: Color(0xff911FDA),
                   borderRadius: BorderRadius.circular(50)
               ),
               child: Center(child: Text('Retry' , style: Theme.of(context).textTheme.titleMedium!.copyWith(color: Colors.white),)),

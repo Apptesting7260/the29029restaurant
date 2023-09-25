@@ -2,6 +2,9 @@ import 'package:get/get.dart';
 import 'package:the29029restaurant/data/response/status.dart';
 import 'package:the29029restaurant/models/Categories_Model/itemsforcategories_model.dart';
 import 'package:the29029restaurant/repository/Auth_Reposetory/auth_reposetory.dart';
+import 'package:the29029restaurant/view/bottombarscreen/onlineorder/categories2.dart';
+import 'package:the29029restaurant/view/bottombarscreen/onlineorder/itemsforstarters.dart';
+
 
 class Itemforcategories_Controller extends GetxController {
 
@@ -19,18 +22,20 @@ class Itemforcategories_Controller extends GetxController {
 
   void itemsforcategiorsapihit(){
     Map data={
-      'method':'product_listing_api',
-      'category_id':'356',
+      'category_id':subcategoryid,
+       'per_page':'10',
+       'page':  currentPage.toString()
     };
     _api.itemforcategoriesapi(data).then((value){
       setRxRequestStatus(Status.COMPLETED);
       setUserList(value);
       print(value);
+      print("yessssssssssssssssssssssssssssssssssssssss");
 
     }).onError((error, stackTrace){
       setError(error.toString());
       setRxRequestStatus(Status.ERROR);
-
+print("noooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo");
     });
   }
 

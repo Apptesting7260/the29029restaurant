@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:get/get.dart';
 import 'package:the29029restaurant/view/bottombarscreen/bookatablepage/booksatable.dart';
 import 'package:the29029restaurant/view/bottombarscreen/homescreen/homescreen.dart';
 import 'package:the29029restaurant/view/bottombarscreen/menu/menu.dart';
 import 'package:the29029restaurant/view/bottombarscreen/onlineorder/onlineorder.dart';
 import 'package:the29029restaurant/view/bottombarscreen/profile/profile.dart';
 import 'package:the29029restaurant/view/bottomnavigationbar/bottomnavigation.dart';
-import 'package:get/get.dart';
+
 
 class TabScreen extends StatefulWidget {
   int index;
@@ -32,45 +33,72 @@ class _TabScreenState extends State<TabScreen> {
     pageController = PageController(initialPage: widget.index, keepPage: true);
     super.initState();
   }
+
+  void openThirdTab() {
+    pageController!.jumpToPage(2); // Index 2 represents the third tab (OnlineOrder)
+  }
+
   Widget build(BuildContext context) {
     return WillPopScope(
       onWillPop: _onWillPop,
-      child: Scaffold(
-        floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-        floatingActionButton: FloatingActionButton(
-          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(50),
-              side: BorderSide(color:Color(0xff41004C),width: 2)
-          ),
-          backgroundColor: Colors.white,
-          onPressed: () {
-            Get.to(()=>OnlineOrder(),);
-          },
-          child: Image.asset("assets/images/icons/onlineordericon.png",height:25,width:25,)
+      child:
 
-        ),
-        key: drawerKey,
+          Scaffold(
+            resizeToAvoidBottomInset: false,
+            floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+            floatingActionButton:
+                Container(child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    FloatingActionButton(elevation: 0,
+                        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(50),
+                            side: BorderSide(color:Color(0xff41004C),width: 2)
+                        ),
+                        backgroundColor: Colors.white,
+                        onPressed: () {
+                          openThirdTab();
+                        },
+                        child:
+                        Image.asset("assets/images/icons/onlineordericon.png",height:25,width:25,)
 
-        body: SafeArea(
-          child: GestureDetector(
-            onTap: () => FocusScope.of(context).requestFocus(FocusNode()),
-            child: PageView(
-              controller: pageController,
-              physics: const NeverScrollableScrollPhysics(),
-              onPageChanged: (index) => pageChanged(index),
-              children: [
-                HomeScreen(),
-                Menu(),
-                BookATable(),
-                Profile(),
-              ],
+                    ),
+                    SizedBox(height: Get.height*0.005,),
+                    Text("Online Order",style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                      color: Color(0xff41004C),fontSize: 12,fontWeight: FontWeight.w500
+                    ),)
+
+                  ],
+                ),),
+
+            key: drawerKey,
+
+            body: SafeArea(
+              child: GestureDetector(
+
+                onTap: () => FocusScope.of(context).requestFocus(FocusNode()),
+                child: PageView(
+                  controller: pageController,
+                  physics: const NeverScrollableScrollPhysics(),
+                  onPageChanged: (index) => pageChanged(index),
+                  children: [
+                    HomeScreen(),
+                    Menu(),
+                    OnlineOrder(),
+                    BookATable(),
+                    Profile(),
+                  ],
+                ),
+              ),
+            ),
+            bottomNavigationBar: BottomNavigation(
+              bottomSelectedIndex: bottomSelectedIndex!,
+              bottomTapped: bottomTapped,
             ),
           ),
-        ),
-        bottomNavigationBar: BottomNavigation(
-          bottomSelectedIndex: bottomSelectedIndex!,
-          bottomTapped: bottomTapped,
-        ),
-      ),
+
+
+
+
     );
   }
   void bottomTapped(int index) {

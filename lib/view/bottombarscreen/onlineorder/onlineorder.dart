@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:the29029restaurant/view/bottombarscreen/onlineorder/account.dart';
+import 'package:the29029restaurant/view/bottombarscreen/onlineorder/categories.dart';
 import 'package:the29029restaurant/view/bottombarscreen/onlineorder/onlinelocation.dart';
 import 'package:the29029restaurant/view/bottomnavigationbar/tab_screen.dart';
 import 'package:the29029restaurant/widgets/my_button.dart';
 import 'package:get/get.dart';
+
+import '../../animation_screen.dart';
 
 class OnlineOrder extends StatefulWidget {
   const OnlineOrder({super.key});
@@ -14,6 +17,12 @@ class OnlineOrder extends StatefulWidget {
 }
 
 class _OnlineOrderState extends State<OnlineOrder> {
+  @override
+  void initState() {
+    super.initState();
+    fetchCartItemCount();
+  }
+
   @override
   Widget build(BuildContext context) {
     final height = MediaQuery.of(context).size.height;
@@ -26,7 +35,7 @@ class _OnlineOrderState extends State<OnlineOrder> {
         backgroundColor: Colors.white,
         leading: GestureDetector(
           onTap: () {
-            Get.to(TabScreen(index:1));
+            Get.offAll(() => TabScreen(index: 0));
           },
           child: Image.asset("assets/images/backbutton.png"),
         ),
@@ -41,15 +50,16 @@ class _OnlineOrderState extends State<OnlineOrder> {
             padding: const EdgeInsets.symmetric(horizontal: 30),
             child: InkWell(
                 onTap: () {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => Account(),
-                      ));
+                  Get.to(() => Account());
+
+                  // Navigator.push(
+                  //     context,
+                  //     MaterialPageRoute(
+                  //       builder: (context) => Account(),
+                  //     ));
                 },
-                 child: Image.asset("assets/images/onlineaccount.png",
-                     height: 25, width: 25)
-            ),
+                child: Image.asset("assets/images/onlineaccount.png",
+                    height: 25, width: 25)),
           )
         ],
       ),
@@ -59,22 +69,22 @@ class _OnlineOrderState extends State<OnlineOrder> {
           SizedBox(height: height * 0.06),
           Image.asset("assets/images/Orderfood.png"),
           SizedBox(height: height * 0.02),
-          Text(
-            "Start Your Order",
-            style:
-              Theme.of(context).textTheme.headlineMedium?.copyWith(
-                color: Colors.black,fontSize: 20,fontWeight: FontWeight.w600,
-                fontFamily: GoogleFonts.outfit().fontFamily)
-          ),
+          Text("Start Your Order",
+              style: Theme.of(context).textTheme.headlineMedium?.copyWith(
+                  color: Colors.black,
+                  fontSize: 20,
+                  fontWeight: FontWeight.w600,
+                  fontFamily: GoogleFonts.outfit().fontFamily)),
           SizedBox(height: height * 0.01),
           Text(
-            "Lorem Ipsum is simple dummy text of\nthe printing and typesetting industry.",
-            textAlign: TextAlign.center,
-            style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                fontSize: 12,fontWeight: FontWeight.w300,color:Color(0xff9796A1),
-                fontFamily: GoogleFonts.outfit().fontFamily,
-              )
-          ),
+              "Lorem Ipsum is simple dummy text of\nthe printing and typesetting industry.",
+              textAlign: TextAlign.center,
+              style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                    fontSize: 12,
+                    fontWeight: FontWeight.w300,
+                    color: Color(0xff9796A1),
+                    fontFamily: GoogleFonts.outfit().fontFamily,
+                  )),
           SizedBox(height: height * 0.03),
           Center(
             child: MyButton(
@@ -86,10 +96,11 @@ class _OnlineOrderState extends State<OnlineOrder> {
                     color: Colors.white,
                     fontFamily: GoogleFonts.outfit().fontFamily),
                 onTap: () {
-                  Get.to( LocationUi());
+                  // Get.to( LocationUi());
+                  Get.to(() => Categories());
                 },
-                height: height*.07,
-                width: width*0.5),
+                height: height * .07,
+                width: width * 0.5),
           ),
         ],
       ),

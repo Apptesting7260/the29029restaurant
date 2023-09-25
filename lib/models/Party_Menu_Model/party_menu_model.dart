@@ -2,7 +2,7 @@ class PartyMenuModel {
   PartyMenuModel({
      this.partyMenu,
   });
-   List<PartyMenu> ?partyMenu;
+    List<PartyMenu> ?partyMenu;
 
   PartyMenuModel.fromJson(Map<String, dynamic> json){
     partyMenu = List.from(json['party_menu']).map((e)=>PartyMenu.fromJson(e)).toList();
@@ -21,9 +21,9 @@ class PartyMenu {
      this.categorySlug,
      this.categoryMainMenuChild,
   });
-   String ?categoryName;
-   String ?categorySlug;
-   List<CategoryMainMenuChild> ?categoryMainMenuChild;
+    String ?categoryName;
+    String ?categorySlug;
+    List<CategoryMainMenuChild> ?categoryMainMenuChild;
 
   PartyMenu.fromJson(Map<String, dynamic> json){
     categoryName = json['category_name'];
@@ -45,8 +45,8 @@ class CategoryMainMenuChild {
      this.categoryChildMenu,
      this.categoryChildSlug,
   });
-   String ?categoryChildMenu;
-   String ?categoryChildSlug;
+    String ?categoryChildMenu;
+    String ?categoryChildSlug;
 
   CategoryMainMenuChild.fromJson(Map<String, dynamic> json){
     categoryChildMenu = json['category_child_menu'];

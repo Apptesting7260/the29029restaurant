@@ -1,17 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
+import 'package:badges/badges.dart' as b;
 import 'package:google_fonts/google_fonts.dart';
 import 'package:the29029restaurant/data/response/status.dart';
 import 'package:the29029restaurant/res/components/general_exception.dart';
 import 'package:the29029restaurant/res/components/internet_exceptions_widget.dart';
-import 'package:the29029restaurant/view/bottombarscreen/onlineorder/card.dart';
+import 'package:the29029restaurant/view/animation_screen.dart';
+import 'package:the29029restaurant/view/bottombarscreen/onlineorder/cart2.dart';
 import 'package:the29029restaurant/view/bottombarscreen/onlineorder/categories2.dart';
-import 'package:the29029restaurant/view/bottombarscreen/onlineorder/onlinelocation.dart';
+import 'package:the29029restaurant/view/bottomnavigationbar/tab_screen.dart';
 import 'package:the29029restaurant/view_models/controller/categories_controller/categories_controller.dart';
+import '../../../models/Categories_Model/categories_model.dart';
 
-int? categoryid;
-String? slug;
+String? categoryitemid;
+String? slugcategories;
 
 class Categories extends StatefulWidget {
   const Categories({super.key});
@@ -26,9 +29,14 @@ class _CategoriesState extends State<Categories> {
 
   final FieldTextController = TextEditingController();
 
+  RxBool Searchingcategories=false.obs;
+  RxList Searchingitem=[].obs;
+
+
   void initState() {
     categories_Controller.categoriespihit();
     super.initState();
+    fetchCartItemCount();
   }
 
   @override
@@ -42,7 +50,8 @@ class _CategoriesState extends State<Categories> {
         backgroundColor: Colors.white,
         leading: GestureDetector(
           onTap: () {
-            Get.to(() => LocationUi());
+            Get.offAll(() => TabScreen(index: 2));
+            // Get.to(()=>OnlineOrder());
           },
           child: Image.asset("assets/images/backbutton.png"),
         ),
@@ -53,25 +62,49 @@ class _CategoriesState extends State<Categories> {
                 ?.copyWith(fontSize: 18, fontWeight: FontWeight.w600)),
         centerTitle: true,
         actions: [
-          IconButton(
-              onPressed: () {
-                Get.to(() => Card_Page());
-              },
-              icon: Icon(
-                Icons.shopping_cart_outlined,
-                color: Color(0xff911FDA),
-              ))
+          Obx(
+            () => GestureDetector(
+                onTap: () {
+                  Get.to(() => Card2());
+                },
+                child: Padding(
+                  padding: EdgeInsets.only(right: 15, top: 5),
+                  child: b.Badge(
+                      onTap: () {
+                        Get.to(() => Card2());
+                      },
+                      badgeContent: Text(
+                        iconcount.value.toString(),
+                        // "10",
+                        style: Theme.of(context).textTheme.labelSmall?.copyWith(
+                            color: Colors.white,
+                            fontSize: 7,
+                            fontFamily: GoogleFonts.outfit().fontFamily),
+                      ),
+                      badgeStyle: b.BadgeStyle(badgeColor: Colors.black),
+                      // position: b.BadgePosition.topEnd(top),
+                      child: Icon(
+                        size: 28,
+                        Icons.shopping_cart_outlined,
+                        color: Color(0xff911FDA),
+                      )),
+                )),
+          )
         ],
       ),
       body: SafeArea(
           child: SingleChildScrollView(
         child: Padding(
           padding: EdgeInsets.only(right: 20, left: 20), // error
-          child: Column(
+          child:
+          Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               SizedBox(height: height * 0.02),
               TextFormField(
+                onFieldSubmitted:(x){
+                  searchCategoriesByName(x);
+                },
                 controller: FieldTextController,
                 keyboardType: TextInputType.emailAddress,
                 decoration: InputDecoration(
@@ -93,6 +126,7 @@ class _CategoriesState extends State<Categories> {
                       onPressed: () {
                         FieldTextController.clear();
                       },
+
                     ),
                     contentPadding: EdgeInsets.fromLTRB(20, 10, 20, 10),
                     enabledBorder: OutlineInputBorder(
@@ -109,7 +143,10 @@ class _CategoriesState extends State<Categories> {
               Obx(() {
                 switch (categories_Controller.rxRequestStatus.value) {
                   case Status.LOADING:
-                    return const Center(child: CircularProgressIndicator());
+                    return  Container(
+                      height: Get.height,
+                      alignment: Alignment.center,
+                      child: Center(child: CircularProgressIndicator()),);
                   case Status.ERROR:
                     if (categories_Controller.error.value == 'No internet') {
                       return InterNetExceptionWidget(
@@ -119,7 +156,8 @@ class _CategoriesState extends State<Categories> {
                       return GeneralExceptionWidget(onPress: () {});
                     }
                   case Status.COMPLETED:
-                    return GridView.builder(
+                    return
+                      GridView.builder(
                       physics: const NeverScrollableScrollPhysics(),
                       shrinkWrap: true,
                       gridDelegate:
@@ -130,21 +168,25 @@ class _CategoriesState extends State<Categories> {
                         mainAxisSpacing: 12,
                         mainAxisExtent: 215,
                       ),
-                      itemCount: categories_Controller
-                          .userList.value.productCategory!.length,
+                      itemCount:
+                      Searchingcategories.value?Searchingitem.length:
+
+                      categories_Controller
+                              .userList.value.productCategory!.length ??
+                          0,
                       itemBuilder: (context, index) {
+                        print(categories_Controller
+                            .userList.value.productCategory!.length);
                         return InkWell(
                           onTap: () {
                             setState(() {
-                              categoryid = categories_Controller.userList.value
-                                  .productCategory![index].categoryId;
-                              slug = categories_Controller.userList.value
-                                  .productCategory![index].categorySlug;
+                              categoryitemid =    Searchingcategories.value?Searchingitem[index].categoryId.toString() :  categories_Controller.userList
+                                  .value.productCategory![index].categoryId.toString();
+                              slugcategories =Searchingcategories.value?Searchingitem[index].categorySlug : categories_Controller.userList
+                                  .value.productCategory![index].categorySlug;
                             });
 
-
                             Get.to(() => Categories2());
-
                           },
                           child: Container(
                             decoration: BoxDecoration(
@@ -159,8 +201,8 @@ class _CategoriesState extends State<Categories> {
                                     child:
                                         // Image.asset(
                                         //     "assets/drawericon/image 14.png")
-                                        Image.network(
-                                      categories_Controller.userList.value
+                                        Image.network(Searchingcategories.value?Searchingitem[index].categoryImg.toString():
+                                        categories_Controller.userList.value
                                           .productCategory![index].categoryImg
                                           .toString(),
                                       //fit: BoxFit.fill,
@@ -170,7 +212,9 @@ class _CategoriesState extends State<Categories> {
                                   RichText(
                                       text: TextSpan(children: [
                                     TextSpan(
-                                      text: categories_Controller.userList.value
+                                      text: Searchingcategories.value?Searchingitem[index].categoryName.toString():
+
+                                      categories_Controller.userList.value
                                           .productCategory![index].categoryName
                                           .toString(),
                                       //"Starters",
@@ -178,16 +222,6 @@ class _CategoriesState extends State<Categories> {
                                           Theme.of(context).textTheme.bodyLarge,
                                     ),
                                     TextSpan(text: " "),
-                                    TextSpan(
-                                      text: categories_Controller.userList.value
-                                          .productCategory![index].categoryCount
-                                          .toString(),
-                                      //"(23)",
-                                      style: Theme.of(context)
-                                          .textTheme
-                                          .bodyLarge
-                                          ?.copyWith(color: Color(0xff911FDA)),
-                                    )
                                   ])),
                                   SizedBox(height: height * 0.01),
                                   InkWell(
@@ -221,4 +255,27 @@ class _CategoriesState extends State<Categories> {
       )),
     );
   }
+
+
+
+  //searching static app
+
+  List<ProductCategory> searchCategoriesByName(String searchTerm) {
+    final List<ProductCategory> matchingCategories = [];
+
+    for (final category in categories_Controller.userList.value
+        .productCategory!) {
+      if (category.categoryName != null &&
+          category.categoryName!.toLowerCase().contains(searchTerm.toLowerCase())) {
+        matchingCategories.add(category);
+      }
+    }
+    Searchingcategories.value=true;
+    Searchingitem.value=matchingCategories;
+
+    return matchingCategories;
+  }
+
 }
+
+

@@ -6,19 +6,21 @@ import 'package:the29029restaurant/res/components/general_exception.dart';
 import 'package:the29029restaurant/res/components/internet_exceptions_widget.dart';
 import 'package:the29029restaurant/view_models/controller/single/single_controller.dart';
 
-class Singleitemfromtakeaway extends StatefulWidget {
-  const Singleitemfromtakeaway({super.key});
+import '../../../../view_models/controller/Menu_Controller/restaurant_controller/singleitemfromrestaurantmenu_controller.dart';
+
+class Singleitemfromresturantmenu extends StatefulWidget {
+  const Singleitemfromresturantmenu({super.key});
 
   @override
-  State<Singleitemfromtakeaway> createState() => _SingleitemfromtakeawayState();
+  State<Singleitemfromresturantmenu> createState() => _SingleitemfromresturantmenuState();
 }
 
-class _SingleitemfromtakeawayState extends State<Singleitemfromtakeaway> {
-  Single_controller single_controller = Get.put(Single_controller());
+class _SingleitemfromresturantmenuState extends State<Singleitemfromresturantmenu> {
+  Singlerestaurant_controller singlerestaurant_controller = Get.put(Singlerestaurant_controller());
 
   @override
   void initState() {
-    single_controller.singleapi();
+    singlerestaurant_controller.singleapi();
     // TODO: implement initState
     super.initState();
   }
@@ -28,21 +30,23 @@ class _SingleitemfromtakeawayState extends State<Singleitemfromtakeaway> {
     final height = MediaQuery.of(context).size.height;
     final width = MediaQuery.of(context).size.width;
     return Obx(() {
-      switch (single_controller.rxRequestStatus.value) {
+      switch (
+      singlerestaurant_controller.rxRequestStatus.value) {
         case Status.LOADING:
           return Scaffold(
             body: Center(child: CircularProgressIndicator()),
           );
         case Status.ERROR:
-          if (single_controller.error.value == 'No internet') {
-            return InterNetExceptionWidget(
+          if (singlerestaurant_controller.error.value == 'No internet') {
+            return  Scaffold(body: Center(child:InterNetExceptionWidget(
               onPress: () {},
-            );
+            ) ),);
           } else {
-            return GeneralExceptionWidget(onPress: () {});
+            return Scaffold(body: Center(child:GeneralExceptionWidget(onPress: () {}) ),);
           }
         case Status.COMPLETED:
-          return Scaffold(
+          return
+            Scaffold(
             backgroundColor: Color(0xffFFFFFF),
             appBar: AppBar(
               elevation: 0,
@@ -63,7 +67,13 @@ class _SingleitemfromtakeawayState extends State<Singleitemfromtakeaway> {
             ),
             body: SafeArea(
                 child: Center(
-              child: Column(
+              child:
+      singlerestaurant_controller.userList.value
+          .singleProduct!.isEmpty ?  Text('No Item',style: Theme.of(context).textTheme.bodySmall?.copyWith(
+        fontSize: 20,fontWeight: FontWeight.w700,
+      ),)  :
+
+              Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   SizedBox(height: height * 0.05),
@@ -88,19 +98,41 @@ class _SingleitemfromtakeawayState extends State<Singleitemfromtakeaway> {
                               Container(
                                   height: height * 0.3,
                                   width: width * 0.6,
-                                  child: Image.network(
-                                    single_controller.userList.value
-                                        .singleProduct![0].productImg
-                                        .toString(),
-                                  )),
-                              SizedBox(height: height * 0.03),
+                                  // color: Colors.red,
+                                  child:
+                                  Stack(
+                                    alignment: Alignment.center,
+                                    children: [
+                                      Image.asset(
+                                        "assets/images/plateblanck.png",
+                                        height: 200,
+                                        width: 200,
+                                      ),
+                                      CircleAvatar(
+                                          radius: 80,
+                                          backgroundImage: NetworkImage(
+                                            singlerestaurant_controller.userList.value
+                                                .singleProduct![0].productImg
+                                                .toString(),
+                                          )),
+                                    ],
+                                  ),
+
+                                  // Image.network(
+                                  //   singlerestaurant_controller.userList.value
+                                  //       .singleProduct![0].productImg
+                                  //       .toString(),
+                                  // )
+
+
+                              ),
+                              SizedBox(height: height * 0.02),
                               Padding(
                                 padding: EdgeInsets.only(right: 30, left: 30),
                                 child: Text(
-                                  single_controller.userList.value
+                                  singlerestaurant_controller.userList.value
                                       .singleProduct![0].menuTitle
                                       .toString(),
-
                                   //"Piyaza Chicken",
                                   textAlign: TextAlign.center,
                                   style: Theme.of(context)
@@ -116,22 +148,21 @@ class _SingleitemfromtakeawayState extends State<Singleitemfromtakeaway> {
                               Padding(
                                 padding: EdgeInsets.only(right: 30, left: 30),
                                 child: Text(
-                                  single_controller.userList.value
+                                  singlerestaurant_controller.userList.value
                                       .singleProduct![0].menuDiscription
                                       .toString(),
-
-                                  //"Strips of Corn Fed Chicken breast cooked\nin a jalifrasiee style sauce with onion and\ngreen chilies,accompanied with light\nherbed rice.",
+                                  //"Strips of Corn Fed Chicken breast cooked\nin a j
+                                  // alifrasiee style sauce with onion and\ngreen chilies,acco
+                                  // mpanied with light\nherbed rice.",
                                   textAlign: TextAlign.center,
                                   style: Theme.of(context)
                                       .textTheme
                                       .bodyLarge
-                                      ?.copyWith(
-                                          color: Color(0xff9796A1),
-                                          fontWeight: FontWeight.w300),
+                                      ?.copyWith(color: Color(0xff9796A1), fontWeight: FontWeight.w300),
                                 ),
                               ),
                               SizedBox(height: height * 0.03),
-                              if (single_controller.userList.value
+                              if (singlerestaurant_controller.userList.value
                                       .singleProduct![0].productPrice !=
                                   "")
                                 RichText(
@@ -154,7 +185,7 @@ class _SingleitemfromtakeawayState extends State<Singleitemfromtakeaway> {
                                     ),
                                   ),
                                   TextSpan(
-                                      text: single_controller.userList.value
+                                      text: singlerestaurant_controller.userList.value
                                           .singleProduct![0].productPrice
                                           .toString(),
                                       //"11.55",
